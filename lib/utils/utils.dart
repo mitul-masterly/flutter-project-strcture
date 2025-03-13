@@ -36,18 +36,16 @@ class Utils {
             dismissible: false, color: Colors.black.withValues(alpha: 0.4)),
       );
 
-  static Center loaderWid() => Platform.isIOS
-      ? Center(
-          child: CupertinoActivityIndicator(
-            radius: 16.0,
-            color: AppColors.color003366,
-          ),
-        )
-      : Center(
-          child: CircularProgressIndicator(
-            color: AppColors.color003366,
-          ),
-        );
+  static Center loaderWid() => Center(
+        child: Platform.isIOS
+            ? CupertinoActivityIndicator(
+                radius: 16.0,
+                color: AppColors.color003366,
+              )
+            : CircularProgressIndicator(
+                color: AppColors.color003366,
+              ),
+      );
 
   static Future<DeviceInfoModel> getDeviceInfo() async {
     final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();

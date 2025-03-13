@@ -39,12 +39,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     on<OnTapLogout>(
         (final OnTapLogout event, final Emitter<ProfileState> emit) async {
-          emit(state.copyWith(showLogoutSheet: true));
-          await Future.delayed(Duration(milliseconds: 200)); // Small delay to ensure UI responds
-          emit(state.copyWith(showLogoutSheet: false));
+      emit(state.copyWith(showLogoutSheet: true));
+      await Future.delayed(
+          Duration(milliseconds: 200)); // Small delay to ensure UI responds
+      emit(state.copyWith(showLogoutSheet: false));
     });
 
-    on<CallLogoutApi>((final CallLogoutApi event, final Emitter<ProfileState> emit) async {
+    on<CallLogoutApi>(
+        (final CallLogoutApi event, final Emitter<ProfileState> emit) async {
       emit(state.copyWith(isLoading: true, isLoggedOut: false));
       try {
         final Map<String, dynamic> params = <String, dynamic>{
@@ -52,6 +54,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           'userRegistrationId': sharedPreferenceHelper.user?.userRegistrationId,
         };
         final int? statusCode = await authRepo.apiLogout(requestParams: params);
+        sharedPreferenceHelper.clear();
         emit(state.copyWith(isLoading: false, isLoggedOut: statusCode == 200));
       } catch (e) {
         debugPrint('error message $e');
@@ -92,9 +95,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         ProfileOptionsModel(
             icon: Assets.svg.icLogout.svg(),
             title: 'Log Out',
-            onTap: (final BuildContext context)  {
+            onTap: (final BuildContext context) {
               context.read<ProfileBloc>().add(OnTapLogout());
-
             }),
       ];
 }

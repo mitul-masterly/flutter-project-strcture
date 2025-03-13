@@ -36,4 +36,5 @@ final Map<String, String> enUs = <String, String>{
       'Are you sure you want to Logout this\naccount?',
   'Yes, Logout': 'Yes, Logout',
   'Cancel': 'Cancel',
+  'Remember me': 'Remember me',
 };

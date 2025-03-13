@@ -69,7 +69,7 @@ class AppTextField extends StatelessWidget with Validator {
                   return null;
                 },
                 onTap: () {
-                  Scrollable.ensureVisible(buildContext);
+                  // Scrollable.ensureVisible(buildContext);
                 },
                 onTapOutside: (final PointerDownEvent v) {
                   FocusScope.of(buildContext).unfocus();

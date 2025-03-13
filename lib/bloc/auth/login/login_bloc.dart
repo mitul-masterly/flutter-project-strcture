@@ -5,7 +5,9 @@ import 'package:flutter_project_structure/data/models/request_model/login_reques
 import 'package:flutter_project_structure/data/models/response_model/auth/user_data_model.dart';
 import 'package:flutter_project_structure/data/models/response_model/device_info_model.dart';
 import 'package:flutter_project_structure/data/repository/auth_repo.dart';
+import 'package:flutter_project_structure/helper/pref_helper/pref_keys.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
+import 'package:flutter_project_structure/utils/constants.dart';
 import 'package:flutter_project_structure/utils/utils.dart';
 import 'package:flutter_project_structure/views/tab_navigation_view.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -42,6 +44,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             await authRepo.apiLogin(requestParams: request);
         SharedPreferenceHelper().saveIsLoggedIn(true);
         await SharedPreferenceHelper().saveUser(user);
+        if (state.isRememberMe) {
+          sharedPreferenceHelper.setRememberEmail(request.emailId ?? '');
+          sharedPreferenceHelper.setUserPassword(request.userPassword ?? '');
+        } else {
+          sharedPreferenceHelper.removeString(PrefKeys.rememberEmail);
+          sharedPreferenceHelper.removeString(PrefKeys.rememberPassword);
+        }
         emit(state.copyWith(
             isLoading: false, errorMessage: null, user: user, isSuccess: true));
       } catch (e) {
@@ -55,12 +64,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             isSuccess: false));
       }
     });
+
+    on<OnChangeRememberMe>(
+        (final OnChangeRememberMe event, final Emitter<LoginState> emit) {
+      sharedPreferenceHelper.saveIsRememberMe(event.isRememberMe);
+      emit(state.copyWith(isRememberMe: event.isRememberMe));
+    });
   }
 
   void navigateToDashboard(final BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (final context) => const TabNavigationView()),
+      MaterialPageRoute(
+          builder: (final BuildContext context) => const TabNavigationView()),
       (final Route<dynamic> route) => false, // Remove all previous routes
     );
   }

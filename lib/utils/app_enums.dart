@@ -25,7 +25,7 @@ enum AppMessages {
 
 enum SupportedLangCode {
   english('en', 'US'),
-  arabic('ar', 'AE');
+  arabic('ar', 'IN');
 
   const SupportedLangCode(this.langCode, this.countryCode);
 

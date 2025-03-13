@@ -56,12 +56,78 @@ class OnButtonClickEvent implements LoginEvent {
 }
 
 /// @nodoc
+
+class OnChangeRememberMe implements LoginEvent {
+  const OnChangeRememberMe({required this.isRememberMe});
+
+  final bool isRememberMe;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangeRememberMeCopyWith<OnChangeRememberMe> get copyWith =>
+      _$OnChangeRememberMeCopyWithImpl<OnChangeRememberMe>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangeRememberMe &&
+            (identical(other.isRememberMe, isRememberMe) ||
+                other.isRememberMe == isRememberMe));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isRememberMe);
+
+  @override
+  String toString() {
+    return 'LoginEvent.onChangeRememberMe(isRememberMe: $isRememberMe)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangeRememberMeCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $OnChangeRememberMeCopyWith(
+          OnChangeRememberMe value, $Res Function(OnChangeRememberMe) _then) =
+      _$OnChangeRememberMeCopyWithImpl;
+  @useResult
+  $Res call({bool isRememberMe});
+}
+
+/// @nodoc
+class _$OnChangeRememberMeCopyWithImpl<$Res>
+    implements $OnChangeRememberMeCopyWith<$Res> {
+  _$OnChangeRememberMeCopyWithImpl(this._self, this._then);
+
+  final OnChangeRememberMe _self;
+  final $Res Function(OnChangeRememberMe) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isRememberMe = null,
+  }) {
+    return _then(OnChangeRememberMe(
+      isRememberMe: null == isRememberMe
+          ? _self.isRememberMe
+          : isRememberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$LoginState {
   bool get isLoading;
   TextEditingController get emailController;
   TextEditingController get passwordController;
   String? get errorMessage;
   bool get isSuccess;
+  bool get isRememberMe;
   UserDataModel? get user;
 
   /// Create a copy of LoginState
@@ -86,16 +152,18 @@ mixin _$LoginState {
                 other.errorMessage == errorMessage) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.isRememberMe, isRememberMe) ||
+                other.isRememberMe == isRememberMe) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, emailController,
-      passwordController, errorMessage, isSuccess, user);
+      passwordController, errorMessage, isSuccess, isRememberMe, user);
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, emailController: $emailController, passwordController: $passwordController, errorMessage: $errorMessage, isSuccess: $isSuccess, user: $user)';
+    return 'LoginState(isLoading: $isLoading, emailController: $emailController, passwordController: $passwordController, errorMessage: $errorMessage, isSuccess: $isSuccess, isRememberMe: $isRememberMe, user: $user)';
   }
 }
 
@@ -111,6 +179,7 @@ abstract mixin class $LoginStateCopyWith<$Res> {
       TextEditingController passwordController,
       String? errorMessage,
       bool isSuccess,
+      bool isRememberMe,
       UserDataModel? user});
 }
 
@@ -131,6 +200,7 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
     Object? passwordController = null,
     Object? errorMessage = freezed,
     Object? isSuccess = null,
+    Object? isRememberMe = null,
     Object? user = freezed,
   }) {
     return _then(_self.copyWith(
@@ -154,6 +224,10 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      isRememberMe: null == isRememberMe
+          ? _self.isRememberMe
+          : isRememberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
       user: freezed == user
           ? _self.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -171,6 +245,7 @@ class _LoginState implements LoginState {
       required this.passwordController,
       required this.errorMessage,
       required this.isSuccess,
+      required this.isRememberMe,
       required this.user});
 
   @override
@@ -183,6 +258,8 @@ class _LoginState implements LoginState {
   final String? errorMessage;
   @override
   final bool isSuccess;
+  @override
+  final bool isRememberMe;
   @override
   final UserDataModel? user;
 
@@ -209,16 +286,18 @@ class _LoginState implements LoginState {
                 other.errorMessage == errorMessage) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.isRememberMe, isRememberMe) ||
+                other.isRememberMe == isRememberMe) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, emailController,
-      passwordController, errorMessage, isSuccess, user);
+      passwordController, errorMessage, isSuccess, isRememberMe, user);
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, emailController: $emailController, passwordController: $passwordController, errorMessage: $errorMessage, isSuccess: $isSuccess, user: $user)';
+    return 'LoginState(isLoading: $isLoading, emailController: $emailController, passwordController: $passwordController, errorMessage: $errorMessage, isSuccess: $isSuccess, isRememberMe: $isRememberMe, user: $user)';
   }
 }
 
@@ -236,6 +315,7 @@ abstract mixin class _$LoginStateCopyWith<$Res>
       TextEditingController passwordController,
       String? errorMessage,
       bool isSuccess,
+      bool isRememberMe,
       UserDataModel? user});
 }
 
@@ -256,6 +336,7 @@ class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
     Object? passwordController = null,
     Object? errorMessage = freezed,
     Object? isSuccess = null,
+    Object? isRememberMe = null,
     Object? user = freezed,
   }) {
     return _then(_LoginState(
@@ -278,6 +359,10 @@ class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
       isSuccess: null == isSuccess
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRememberMe: null == isRememberMe
+          ? _self.isRememberMe
+          : isRememberMe // ignore: cast_nullable_to_non_nullable
               as bool,
       user: freezed == user
           ? _self.user

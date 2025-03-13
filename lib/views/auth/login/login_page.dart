@@ -59,7 +59,8 @@ class LoginScreen extends StatelessWidget {
                         type: AppButtonType.primary,
                       ),
                       20.height,
-                      LoginFooterWidget()
+                      LoginFooterWidget(),
+                      30.height
                     ],
                   ),
                 ),

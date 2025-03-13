@@ -1,4 +1,4 @@
-final Map<String, String> ar = <String, String>{
+final Map<String, String> arIN = <String, String>{
   'No Internet Connection':
       'لا يوجد اتصال بالإنترنت. يُرجى التحقق من اتصالك بالإنترنت.',
   'Login': 'تسجيل الدخول',
@@ -36,4 +36,5 @@ final Map<String, String> ar = <String, String>{
       'هل أنت متأكد أنك تريد تسجيل الخروج من هذا الحساب؟',
   'Yes, Logout': 'نعم، تسجيل الخروج',
   'Cancel': 'يلغي',
+  'Remember me': 'تذكرنى',
 };
