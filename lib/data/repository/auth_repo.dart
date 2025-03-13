@@ -11,6 +11,8 @@ abstract class AuthRepo {
       {required final LoginRequestModel requestParams});
 
   Future<int?> apiSignUp({required final SignupRequest requestParams});
+
+  Future<int?> apiLogout({required final Map<String, dynamic> requestParams});
 }
 
 class AuthRepoImp implements AuthRepo {
@@ -39,6 +41,22 @@ class AuthRepoImp implements AuthRepo {
     try {
       final Response<dynamic> response = await _dioClient
           .post(AppEndPoints.registration, data: requestParams.toJson());
+      return response.statusCode;
+    } on DioException catch (e) {
+      debugPrint(e.message);
+      rethrow;
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<int?> apiLogout(
+      {required final Map<String, dynamic> requestParams}) async {
+    try {
+      final Response<dynamic> response =
+          await _dioClient.post(AppEndPoints.logout, data: requestParams);
       return response.statusCode;
     } on DioException catch (e) {
       debugPrint(e.message);

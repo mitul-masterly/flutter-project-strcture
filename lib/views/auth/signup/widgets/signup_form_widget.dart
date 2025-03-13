@@ -59,35 +59,6 @@ class SignUpFormWidget extends StatelessWidget with Validator {
             },
           ),
           20.height,
-          // IntlPhoneField(
-          //   controller: state.txtMobileNumber,
-          //   style: rubikW400,
-          //   keyboardType: const TextInputType.numberWithOptions(
-          //       signed: true, decimal: false),
-          //   inputFormatters: <TextInputFormatter>[
-          //     FilteringTextInputFormatter.allow(RegexHelper.mobileNumberRegex),
-          //   ],
-          //   decoration: InputDecoration(
-          //     contentPadding:
-          //         const EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 0),
-          //     hintText: 'Enter Mobile Number'.tr(context),
-          //     hintStyle: rubikW400,
-          //     focusedBorder: Utils.inputBorder(AppColors.color003366),
-          //     focusedErrorBorder: Utils.inputBorder(AppColors.colorF92814),
-          //     errorBorder: Utils.inputBorder(AppColors.colorF92814),
-          //     enabledBorder: Utils.inputBorder(AppColors.color808080),
-          //   ),
-          //   flagsButtonPadding: const EdgeInsets.all(10),
-          //   initialValue: state.countryCode,
-          //   initialCountryCode: state.countryCodeISO2,
-          //   onCountryChanged: (final Country country) {
-          //     // controller.countryCode.value = '+${country.dialCode}';
-          //     // controller.countryCodeISO2.value = country.code;
-          //     context
-          //         .read<SignUpBloc>()
-          //         .add(OnChangeCountry(selectedCountry: country));
-          //   },
-          // )
           CommonPhoneFieldWidget(
             strHeaderTitle: '${AppStrings.mobileNumber.tr(context)}*',
             textEditController: state.txtMobileNumber,

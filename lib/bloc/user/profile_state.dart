@@ -4,12 +4,16 @@ part of 'profile_bloc.dart';
 abstract class ProfileState with _$ProfileState {
   factory ProfileState({
     required final bool isLoading,
+    required final bool isLoggedOut,
+    required final bool showLogoutSheet,
     final UserDataModel? userData,
   }) = _ProfileState;
 
   factory ProfileState.initial() {
     return ProfileState(
       isLoading: false,
+      isLoggedOut: false,
+      showLogoutSheet: false,
       userData: null,
     );
   }

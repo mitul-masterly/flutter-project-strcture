@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/bloc/tab_navigation_cubit.dart';
+import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/views/history/history_screen.dart';
 import 'package:flutter_project_structure/views/home/home_screen.dart';
 import 'package:flutter_project_structure/views/profile/profile_screen.dart';
@@ -42,10 +43,13 @@ class TabNavigationView extends StatelessWidget {
     return Scaffold(
       body: _pages[state], // Dynamic page based on state
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home), label: 'Home'.tr(context)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.history), label: 'History'.tr(context)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: 'Profile'.tr(context)),
         ],
         currentIndex: state,
         selectedItemColor: Colors.blue,
@@ -61,18 +65,18 @@ class TabNavigationView extends StatelessWidget {
         currentIndex: state,
         onTap: (final int index) =>
             context.read<TabNavigationCubit>().updateTab(index),
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
-            label: 'Home',
+            label: 'Home'.tr(context),
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.time),
-            label: 'History',
+            label: 'History'.tr(context),
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.person),
-            label: 'Profile',
+            label: 'Profile'.tr(context),
           ),
         ],
       ),

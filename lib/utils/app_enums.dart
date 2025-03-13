@@ -12,9 +12,11 @@ enum AppMessages {
   confirmPasswordRequired('Confirm password is required'),
   confirmPasswordNotMatch('Confirm password does not match'),
   firstNameRequired('First Name is required'),
-  mobileNumberRequired('Contact is required'),
+  mobileNumberRequired('Mobile Number is required'),
   invalidMobile('Enter Valid Mobile Number'),
-  registrationSuccess('User registered successfully.');
+  registrationSuccess('User registered successfully.'),
+  networkError(
+      'No internet connection. Please check your internet connection.');
 
   const AppMessages(this.message);
 

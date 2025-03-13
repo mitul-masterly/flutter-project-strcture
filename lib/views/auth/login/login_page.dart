@@ -31,61 +31,40 @@ class LoginScreen extends StatelessWidget {
         },
         builder: (final BuildContext context, final LoginState state) {
           final LoginBloc bloc = context.read<LoginBloc>();
-          return Stack(
-            children: <Widget>[
-              Scaffold(
-                body: Form(
-                  key: loginFormKey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        LoginHeaderWidget(),
-                        70.height,
-                        LoginFormWidget(),
-                        40.height,
-                        AppButton(
-                          title: AppStrings.login.tr(buildContext),
-                          width: double.maxFinite,
-                          isLoading: state.isLoading,
-                          icon: null,
-                          onPressed: () {
-                            if (loginFormKey.currentState!.validate()) {
-                              bloc.add(const OnButtonClickEvent());
-                            }
-
-                            // Will Use for localization
-                            // if (context
-                            //         .read<LocalisationBloc>()
-                            //         .state
-                            //         .language ==
-                            //     Locale(SupportedLangCode.english.langCode,
-                            //         SupportedLangCode.english.countryCode)) {
-                            //   context.read<LocalisationBloc>().add(
-                            //       LocalisationEvent.onChangeLanguage(Locale(
-                            //           SupportedLangCode.arabic.langCode,
-                            //           SupportedLangCode.arabic.countryCode)));
-                            // } else {
-                            //   context.read<LocalisationBloc>().add(
-                            //       LocalisationEvent.onChangeLanguage(Locale(
-                            //           SupportedLangCode.english.langCode,
-                            //           SupportedLangCode.english.countryCode)));
-                            // }
-                          },
-                          type: AppButtonType.primary,
-                        ),
-                        20.height,
-                        LoginFooterWidget()
-                      ],
-                    ),
+          return Scaffold(
+            body: Form(
+              key: loginFormKey,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      70.height,
+                      LoginHeaderWidget(),
+                      70.height,
+                      LoginFormWidget(),
+                      40.height,
+                      AppButton(
+                        title: AppStrings.login.tr(buildContext),
+                        width: double.maxFinite,
+                        isLoading: state.isLoading,
+                        icon: null,
+                        onPressed: () {
+                          if (loginFormKey.currentState!.validate()) {
+                            bloc.add(const OnButtonClickEvent());
+                          }
+                        },
+                        type: AppButtonType.primary,
+                      ),
+                      20.height,
+                      LoginFooterWidget()
+                    ],
                   ),
                 ),
               ),
-              if (state.isLoading) Utils.loaderBrier(),
-              if (state.isLoading) Utils.loaderWid(),
-            ],
+            ),
           );
         },
       ),

@@ -22,6 +22,7 @@ List<BlocProvider<StateStreamableSource<Object?>>> getAppProviders() {
     BlocProvider(create: (final BuildContext context) => TabNavigationCubit()),
     BlocProvider(
       create: (final BuildContext context) => ProfileBloc(
+        context.read<AuthRepo>(),
         userRepo: context.read<UserRepo>(),
       ),
     ),

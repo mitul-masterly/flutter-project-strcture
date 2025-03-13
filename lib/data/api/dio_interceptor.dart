@@ -4,6 +4,7 @@ import 'package:flutter_project_structure/Utils/connection.dart';
 import 'package:flutter_project_structure/components/common_snack_bar.dart';
 import 'package:flutter_project_structure/data/api/dio_exception.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
 
 class DioInterceptor extends InterceptorsWrapper {
   DioInterceptor({
@@ -16,12 +17,15 @@ class DioInterceptor extends InterceptorsWrapper {
   void onRequest(final RequestOptions options,
       final RequestInterceptorHandler handler) async {
     if (!await ConnectionUtils.isNetworkConnected()) {
-      // showCustomSnackBar(message: MessageConstant.networkError.tr);
-      // handler.reject(DioException(
-      //     error: null,
-      //     requestOptions: options,
-      //     message: MessageConstant.networkError.tr,
-      //     type: DioExceptionType.connectionError));
+      showErrorSnackBar(
+        AppMessages.networkError.message,
+      );
+      handler.reject(DioException(
+          error: null,
+          requestOptions: options,
+          message: AppMessages.networkError.message,
+          type: DioExceptionType.connectionError));
+
       return;
     }
 

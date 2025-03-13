@@ -8,12 +8,14 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.strTitle = '',
       this.onBack,
       this.actions,
-      this.height = 50});
+      this.height = 50,
+      this.titleStyle});
 
   final bool isBack;
   final String strTitle;
   final VoidCallback? onBack;
   final List<Widget>? actions;
+  final TextStyle? titleStyle;
 
   final double height;
 
@@ -40,7 +42,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           : const SizedBox(),
       title: Text(
         strTitle,
-        style: rubikW700.copyWith(color: AppColors.white, fontSize: 20),
+        style: titleStyle ??
+            rubikW700.copyWith(color: AppColors.black, fontSize: 20),
       ),
       actions: actions,
     );

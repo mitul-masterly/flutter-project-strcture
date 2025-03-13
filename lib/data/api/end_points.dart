@@ -4,4 +4,5 @@ class AppEndPoints {
   static String registration = 'auth/userRegistration';
   static String getAllCountryCurrency = 'auth/getAllCountryCurrency';
   static String getUserProfile = 'auth/getUserProfile';
+  static String logout = 'auth/logout';
 }

@@ -28,7 +28,6 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
 
   @override
   Widget build(final BuildContext context) {
-    // TODO: implement build
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

@@ -52,3 +52,4 @@ app.*.map.json
 # Gen
 /lib/gen/
 /.fvmrc
+/android/app/.cxx/

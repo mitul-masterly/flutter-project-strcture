@@ -17,10 +17,23 @@ final Map<String, String> enUs = <String, String>{
       'Password must be at least 6 characters',
   'Confirm password is required': 'Confirm password is required',
   'Confirm password does not match': 'Confirm password does not match',
-  'Name is required': 'Name is required',
-  'Contact is required': 'Contact is required',
-  'Contact must be at least 14 characters':
-      'Contact must be at least 14 characters',
   'New account?': 'New account?',
-  'Signup Here': 'Signup Here'
+  'Signup Here': 'Signup Here',
+  'Change Language': 'Change Language',
+  'Address Details': 'Address Details',
+  'My Profile': 'My Profile',
+  'Log Out': 'Log Out',
+  'Profile': 'Profile',
+  'History': 'History',
+  'Home': 'Home',
+  'Mobile Number': 'Mobile Number',
+  'Enter Valid Mobile Number': 'Enter Valid Mobile Number',
+  'Mobile Number is required': 'Mobile Number is required',
+  'First Name is required': 'First Name is required',
+  'Last Name is required': 'Last Name is required',
+  'Logout': 'Logout',
+  'Are you sure you want to Logout this\naccount?':
+      'Are you sure you want to Logout this\naccount?',
+  'Yes, Logout': 'Yes, Logout',
+  'Cancel': 'Cancel',
 };

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
@@ -55,7 +58,9 @@ class AppButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: isLoading
-            ? const CircularProgressIndicator()
+            ? Platform.isIOS
+                ? CupertinoActivityIndicator()
+                : CircularProgressIndicator()
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
