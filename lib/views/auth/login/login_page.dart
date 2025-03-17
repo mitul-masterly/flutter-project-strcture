@@ -66,6 +66,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+            bottomNavigationBar: SizedBox.shrink(),
           );
         },
       ),

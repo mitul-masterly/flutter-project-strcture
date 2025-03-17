@@ -78,27 +78,70 @@ class OnTapLogout implements ProfileEvent {
 /// @nodoc
 
 class CallLogoutApi implements ProfileEvent {
-  const CallLogoutApi();
+  const CallLogoutApi({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CallLogoutApiCopyWith<CallLogoutApi> get copyWith =>
+      _$CallLogoutApiCopyWithImpl<CallLogoutApi>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is CallLogoutApi);
+        (other.runtimeType == runtimeType &&
+            other is CallLogoutApi &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, context);
 
   @override
   String toString() {
-    return 'ProfileEvent.callLogoutApi()';
+    return 'ProfileEvent.callLogoutApi(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $CallLogoutApiCopyWith<$Res>
+    implements $ProfileEventCopyWith<$Res> {
+  factory $CallLogoutApiCopyWith(
+          CallLogoutApi value, $Res Function(CallLogoutApi) _then) =
+      _$CallLogoutApiCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$CallLogoutApiCopyWithImpl<$Res>
+    implements $CallLogoutApiCopyWith<$Res> {
+  _$CallLogoutApiCopyWithImpl(this._self, this._then);
+
+  final CallLogoutApi _self;
+  final $Res Function(CallLogoutApi) _then;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(CallLogoutApi(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
   }
 }
 
 /// @nodoc
 mixin _$ProfileState {
   bool get isLoading;
-  bool get isLoggedOut;
   bool get showLogoutSheet;
   UserDataModel? get userData;
 
@@ -117,8 +160,6 @@ mixin _$ProfileState {
             other is ProfileState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isLoggedOut, isLoggedOut) ||
-                other.isLoggedOut == isLoggedOut) &&
             (identical(other.showLogoutSheet, showLogoutSheet) ||
                 other.showLogoutSheet == showLogoutSheet) &&
             (identical(other.userData, userData) ||
@@ -126,12 +167,12 @@ mixin _$ProfileState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, isLoggedOut, showLogoutSheet, userData);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, showLogoutSheet, userData);
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, isLoggedOut: $isLoggedOut, showLogoutSheet: $showLogoutSheet, userData: $userData)';
+    return 'ProfileState(isLoading: $isLoading, showLogoutSheet: $showLogoutSheet, userData: $userData)';
   }
 }
 
@@ -141,11 +182,7 @@ abstract mixin class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) _then) =
       _$ProfileStateCopyWithImpl;
   @useResult
-  $Res call(
-      {bool isLoading,
-      bool isLoggedOut,
-      bool showLogoutSheet,
-      UserDataModel? userData});
+  $Res call({bool isLoading, bool showLogoutSheet, UserDataModel? userData});
 }
 
 /// @nodoc
@@ -161,7 +198,6 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   @override
   $Res call({
     Object? isLoading = null,
-    Object? isLoggedOut = null,
     Object? showLogoutSheet = null,
     Object? userData = freezed,
   }) {
@@ -169,10 +205,6 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoggedOut: null == isLoggedOut
-          ? _self.isLoggedOut
-          : isLoggedOut // ignore: cast_nullable_to_non_nullable
               as bool,
       showLogoutSheet: null == showLogoutSheet
           ? _self.showLogoutSheet
@@ -190,15 +222,10 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
 
 class _ProfileState implements ProfileState {
   _ProfileState(
-      {required this.isLoading,
-      required this.isLoggedOut,
-      required this.showLogoutSheet,
-      this.userData});
+      {required this.isLoading, required this.showLogoutSheet, this.userData});
 
   @override
   final bool isLoading;
-  @override
-  final bool isLoggedOut;
   @override
   final bool showLogoutSheet;
   @override
@@ -219,8 +246,6 @@ class _ProfileState implements ProfileState {
             other is _ProfileState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isLoggedOut, isLoggedOut) ||
-                other.isLoggedOut == isLoggedOut) &&
             (identical(other.showLogoutSheet, showLogoutSheet) ||
                 other.showLogoutSheet == showLogoutSheet) &&
             (identical(other.userData, userData) ||
@@ -228,12 +253,12 @@ class _ProfileState implements ProfileState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, isLoggedOut, showLogoutSheet, userData);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, showLogoutSheet, userData);
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, isLoggedOut: $isLoggedOut, showLogoutSheet: $showLogoutSheet, userData: $userData)';
+    return 'ProfileState(isLoading: $isLoading, showLogoutSheet: $showLogoutSheet, userData: $userData)';
   }
 }
 
@@ -245,11 +270,7 @@ abstract mixin class _$ProfileStateCopyWith<$Res>
       __$ProfileStateCopyWithImpl;
   @override
   @useResult
-  $Res call(
-      {bool isLoading,
-      bool isLoggedOut,
-      bool showLogoutSheet,
-      UserDataModel? userData});
+  $Res call({bool isLoading, bool showLogoutSheet, UserDataModel? userData});
 }
 
 /// @nodoc
@@ -266,7 +287,6 @@ class __$ProfileStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? isLoading = null,
-    Object? isLoggedOut = null,
     Object? showLogoutSheet = null,
     Object? userData = freezed,
   }) {
@@ -274,10 +294,6 @@ class __$ProfileStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoggedOut: null == isLoggedOut
-          ? _self.isLoggedOut
-          : isLoggedOut // ignore: cast_nullable_to_non_nullable
               as bool,
       showLogoutSheet: null == showLogoutSheet
           ? _self.showLogoutSheet

@@ -37,4 +37,7 @@ final Map<String, String> enUs = <String, String>{
   'Yes, Logout': 'Yes, Logout',
   'Cancel': 'Cancel',
   'Remember me': 'Remember me',
+  'Sign Up': 'Sign Up',
+  'Create your account': 'Create your account',
+  'Submit': 'Submit',
 };

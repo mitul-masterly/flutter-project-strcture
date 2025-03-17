@@ -7,6 +7,7 @@ import 'package:flutter_project_structure/data/models/response_model/auth/user_d
 import 'package:flutter_project_structure/data/repository/auth_repo.dart';
 import 'package:flutter_project_structure/data/repository/user_repo.dart';
 import 'package:flutter_project_structure/gen/assets.gen.dart';
+import 'package:flutter_project_structure/routes/routes_name.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -47,18 +48,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     on<CallLogoutApi>(
         (final CallLogoutApi event, final Emitter<ProfileState> emit) async {
-      emit(state.copyWith(isLoading: true, isLoggedOut: false));
+      emit(state.copyWith(isLoading: true));
       try {
         final Map<String, dynamic> params = <String, dynamic>{
           'authToken': sharedPreferenceHelper.user?.authToken,
           'userRegistrationId': sharedPreferenceHelper.user?.userRegistrationId,
         };
-        final int? statusCode = await authRepo.apiLogout(requestParams: params);
+        await authRepo.apiLogout(requestParams: params);
+        emit(state.copyWith(isLoading: false));
         sharedPreferenceHelper.clear();
-        emit(state.copyWith(isLoading: false, isLoggedOut: statusCode == 200));
+        await Navigator.of(event.context, rootNavigator: true)
+            .pushNamedAndRemoveUntil(
+                RouteName.loginScreen, (final Route route) => false);
       } catch (e) {
         debugPrint('error message $e');
-        emit(state.copyWith(isLoading: false, isLoggedOut: false));
+        emit(state.copyWith(isLoading: false));
       }
     });
   }

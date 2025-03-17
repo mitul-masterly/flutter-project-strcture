@@ -37,4 +37,7 @@ final Map<String, String> arIN = <String, String>{
   'Yes, Logout': 'نعم، تسجيل الخروج',
   'Cancel': 'يلغي',
   'Remember me': 'تذكرنى',
+  'Sign Up': 'اشتراك',
+  'Create your account': 'أنشئ حسابك',
+  'Submit': 'يُقدِّم',
 };
