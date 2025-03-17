@@ -68,9 +68,8 @@ class SignUpScreen extends StatelessWidget {
                           isLoading: state.isSubmitting,
                           icon: null,
                           onPressed: () {
-                            if (signUpFormKey.currentState!.validate()) {
-                              bloc.add(const OnTapSubmit());
-                            }
+                            FocusScope.of(context).unfocus();
+                            bloc.add(OnTapSubmit(formKey: signUpFormKey));
                           },
                           type: AppButtonType.primary,
                         ),

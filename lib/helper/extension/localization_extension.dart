@@ -20,7 +20,7 @@ extension LocalizationExtension on String {
     final Map<String, String>? namedArgs,
     final List<String>? args,
   }) {
-    final Locale locale = context.watch<LocalisationBloc>().state.language;
+    final Locale locale = context.read<LocalisationBloc>().state.language;
     return AppTranslation.translate(
       this,
       locale,

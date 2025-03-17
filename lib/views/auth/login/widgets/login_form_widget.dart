@@ -25,6 +25,7 @@ class LoginFormWidget extends StatelessWidget {
             title: AppStrings.email,
             textEditingController: state.emailController,
             strHeaderTitle: '${AppStrings.email.tr(buildContext)}*',
+            textInputAction: TextInputAction.next,
           ),
           20.height,
           AppTextField(
@@ -32,28 +33,54 @@ class LoginFormWidget extends StatelessWidget {
             title: AppStrings.password,
             textEditingController: state.passwordController,
             strHeaderTitle: '${AppStrings.password.tr(buildContext)}*',
+            textInputAction: TextInputAction.done,
           ),
           12.height,
-          InkWell(
-            splashColor: Colors.transparent,
-            onTap: () {
-              context
-                  .read<LoginBloc>()
-                  .add(OnChangeRememberMe(isRememberMe: !state.isRememberMe));
-            },
-            child: Row(
-              children: [
-                Icon(state.isRememberMe
-                    ? Icons.check_box_rounded
-                    : Icons.check_box_outline_blank_rounded),
-                5.width,
-                Text(
-                  'Remember me'.tr(context),
-                  style: rubikW400.copyWith(
-                      color: AppColors.color808080, fontSize: 13),
-                )
-              ],
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  onTap: () {
+                    context.read<LoginBloc>().add(
+                        OnChangeRememberMe(isRememberMe: !state.isRememberMe));
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        state.isRememberMe
+                            ? Icons.check_box_rounded
+                            : Icons.check_box_outline_blank_rounded,
+                        color: AppColors.color003366,
+                      ),
+                      5.width,
+                      Text(
+                        'Remember me'.tr(context),
+                        style: rubikW400.copyWith(
+                            color: AppColors.color808080, fontSize: 14),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              8.width,
+              Expanded(
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  onTap: () {
+                    context
+                        .read<LoginBloc>()
+                        .add(LoginEvent.onTapForgotPassword(context: context));
+                  },
+                  child: Text(
+                    textAlign: TextAlign.end,
+                    'Forgot Password?'.tr(context),
+                    style: rubikW700.copyWith(
+                        color: AppColors.color003366, fontSize: 14),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       );

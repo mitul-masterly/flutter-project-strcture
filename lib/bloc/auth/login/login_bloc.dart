@@ -21,47 +21,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepo authRepo;
 
   LoginBloc({required this.authRepo}) : super(LoginState.initial()) {
-    on<OnButtonClickEvent>(
-        (final OnButtonClickEvent event, final Emitter<LoginState> emit) async {
-      emit(state.copyWith(
-          isLoading: true, errorMessage: null, isSuccess: false, user: null));
-
-      try {
-        final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-        final String? fcmToken = await SharedPreferenceHelper().fcmToken;
-        final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
-
-        final LoginRequestModel request = LoginRequestModel(
-            emailId: state.emailController.text,
-            userPassword: state.passwordController.text,
-            appVersion: packageInfo.version,
-            deviceToken: fcmToken,
-            deviceType: deviceData.deviceType,
-            deviceId: deviceData.deviceId,
-            deviceName: deviceData.userDeviceName);
-
-        final UserDataModel user =
-            await authRepo.apiLogin(requestParams: request);
-        SharedPreferenceHelper().saveIsLoggedIn(true);
-        await SharedPreferenceHelper().saveUser(user);
-        if (state.isRememberMe) {
-          sharedPreferenceHelper.setRememberEmail(request.emailId ?? '');
-          sharedPreferenceHelper.setUserPassword(request.userPassword ?? '');
-        } else {
-          sharedPreferenceHelper.removeString(PrefKeys.rememberEmail);
-          sharedPreferenceHelper.removeString(PrefKeys.rememberPassword);
-        }
-        emit(state.copyWith(
-            isLoading: false, errorMessage: null, user: user, isSuccess: true));
-      } catch (e) {
-        debugPrint('error message $e');
-
-        final DioException error = e as DioException;
-        emit(state.copyWith(
-            isLoading: false,
-            errorMessage: error.message,
-            user: null,
-            isSuccess: false));
+    on<OnValidateForm>(
+        (final OnValidateForm event, final Emitter<LoginState> emit) async {
+      if (event.formKEy.currentState!.validate()) {
+        await callLoginAPI(emit);
       }
     });
 
@@ -72,6 +35,49 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
   }
 
+  Future<void> callLoginAPI(final Emitter<LoginState> emit) async {
+    emit(state.copyWith(
+        isLoading: true, errorMessage: null, isSuccess: false, user: null));
+
+    try {
+      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      final String? fcmToken = await SharedPreferenceHelper().fcmToken;
+      final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
+
+      final LoginRequestModel request = LoginRequestModel(
+          emailId: state.emailController.text,
+          userPassword: state.passwordController.text,
+          appVersion: packageInfo.version,
+          deviceToken: fcmToken,
+          deviceType: deviceData.deviceType,
+          deviceId: deviceData.deviceId,
+          deviceName: deviceData.userDeviceName);
+
+      final UserDataModel user =
+          await authRepo.apiLogin(requestParams: request);
+      SharedPreferenceHelper().saveIsLoggedIn(true);
+      await SharedPreferenceHelper().saveUser(user);
+      if (state.isRememberMe) {
+        sharedPreferenceHelper.setRememberEmail(request.emailId ?? '');
+        sharedPreferenceHelper.setUserPassword(request.userPassword ?? '');
+      } else {
+        sharedPreferenceHelper.removeString(PrefKeys.rememberEmail);
+        sharedPreferenceHelper.removeString(PrefKeys.rememberPassword);
+      }
+      emit(state.copyWith(
+          isLoading: false, errorMessage: null, user: user, isSuccess: true));
+    } catch (e) {
+      debugPrint('error message $e');
+
+      final DioException error = e as DioException;
+      emit(state.copyWith(
+          isLoading: false,
+          errorMessage: error.message,
+          user: null,
+          isSuccess: false));
+    }
+  }
+
   void navigateToDashboard(final BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
@@ -80,4 +86,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       (final Route<dynamic> route) => false, // Remove all previous routes
     );
   }
+
+  void navigateToForgotPassword(final BuildContext context) {}
 }

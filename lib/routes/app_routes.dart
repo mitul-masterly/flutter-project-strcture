@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_structure/Routes/routes_name.dart';
-import 'package:flutter_project_structure/Views/Auth/sign_up_page.dart';
 import 'package:flutter_project_structure/views/auth/login/login_page.dart';
-import 'package:flutter_project_structure/views/auth/splash.dart';
+import 'package:flutter_project_structure/views/auth/signup/sign_up_page.dart';
+import 'package:flutter_project_structure/views/auth/splash/splash_page.dart';
 import 'package:flutter_project_structure/views/history/history_screen.dart';
 import 'package:flutter_project_structure/views/home/home_screen.dart';
 import 'package:flutter_project_structure/views/profile/profile_screen.dart';

@@ -17,6 +17,7 @@ class SignUpFormWidget extends StatelessWidget with Validator {
   Widget build(final BuildContext buildContext) {
     return BlocBuilder<SignUpBloc, SignUpState>(
         builder: (final BuildContext context, final SignUpState state) {
+      final bloc = context.read<SignUpBloc>();
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,6 +27,9 @@ class SignUpFormWidget extends StatelessWidget with Validator {
             title: AppStrings.firstName,
             textEditingController: state.txtFirstName,
             strHeaderTitle: '${AppStrings.firstName.tr(buildContext)}*',
+            textInputAction: TextInputAction.next,
+            nextFocusNode: bloc.lNameFocus,
+            focusNode: bloc.fNameFocus,
           ),
           20.height,
           AppTextField(
@@ -33,6 +37,9 @@ class SignUpFormWidget extends StatelessWidget with Validator {
             title: AppStrings.lastName,
             textEditingController: state.txtLastName,
             strHeaderTitle: '${AppStrings.lastName.tr(buildContext)}*',
+            textInputAction: TextInputAction.next,
+            nextFocusNode: bloc.emailFocus,
+            focusNode: bloc.lNameFocus,
           ),
           20.height,
           AppTextField(
@@ -40,6 +47,9 @@ class SignUpFormWidget extends StatelessWidget with Validator {
             title: AppStrings.email,
             textEditingController: state.txtEmail,
             strHeaderTitle: '${AppStrings.email.tr(buildContext)}*',
+            textInputAction: TextInputAction.next,
+            nextFocusNode: bloc.passwordFocus,
+            focusNode: bloc.emailFocus,
           ),
           20.height,
           AppTextField(
@@ -47,9 +57,13 @@ class SignUpFormWidget extends StatelessWidget with Validator {
             title: AppStrings.password,
             textEditingController: state.txtPassword,
             strHeaderTitle: '${AppStrings.password.tr(buildContext)}*',
+            textInputAction: TextInputAction.next,
+            nextFocusNode: bloc.cPasswordFocus,
+            focusNode: bloc.passwordFocus,
           ),
           20.height,
           AppTextField(
+            focusNode: bloc.cPasswordFocus,
             type: TextFieldTypes.password,
             title: AppStrings.confirmPassword,
             textEditingController: state.txtConfirmPassword,
@@ -57,13 +71,17 @@ class SignUpFormWidget extends StatelessWidget with Validator {
             validator: (final String? value) {
               return validateConfirmPassword(value, state.txtPassword.text);
             },
+            textInputAction: TextInputAction.next,
+            nextFocusNode: bloc.mobileFocus,
           ),
           20.height,
           CommonPhoneFieldWidget(
-            strHeaderTitle: '${AppStrings.mobileNumber.tr(context)}*',
+            focusNode: bloc.mobileFocus,
+            strHeaderTitle: AppStrings.mobileNumber,
             textEditController: state.txtMobileNumber,
             initialValue: state.countryCode,
             countryCode: state.countryCodeISO2,
+            textInputAction: TextInputAction.done,
             onCountryChanged: (final Country country) {
               context
                   .read<SignUpBloc>()

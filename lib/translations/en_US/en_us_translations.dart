@@ -4,7 +4,6 @@ final Map<String, String> enUs = <String, String>{
   'Password': 'Password',
   'Confirm Password': 'Confirm Password',
   'Enter your': 'Enter your {field_name}',
-  'is Required': '{field_name} is Required',
   'Please enter a valid email address.': 'Please enter a valid email address.',
   'No Internet Connection':
       'No internet connection. Please check your internet connection.',
@@ -28,9 +27,6 @@ final Map<String, String> enUs = <String, String>{
   'Home': 'Home',
   'Mobile Number': 'Mobile Number',
   'Enter Valid Mobile Number': 'Enter Valid Mobile Number',
-  'Mobile Number is required': 'Mobile Number is required',
-  'First Name is required': 'First Name is required',
-  'Last Name is required': 'Last Name is required',
   'Logout': 'Logout',
   'Are you sure you want to Logout this\naccount?':
       'Are you sure you want to Logout this\naccount?',
@@ -40,4 +36,15 @@ final Map<String, String> enUs = <String, String>{
   'Sign Up': 'Sign Up',
   'Create your account': 'Create your account',
   'Submit': 'Submit',
+  'First Name': 'First Name',
+  'Last Name': 'Last Name',
+  'Confirm Password:': 'Confirm Password:',
+  'Mobile Number is Required': 'Mobile Number is Required',
+  'First Name is Required': 'First Name is Required',
+  'Last Name is Required': 'Last Name is Required',
+  'Email is Required': 'Email is Required',
+  'Confirm password is Required': 'Confirm password is Required',
+  'Enter your mobile number': 'Enter your mobile number',
+  'Invalid Mobile Number': 'Invalid Mobile Number',
+  'Forgot Password?': 'Forgot Password?',
 };

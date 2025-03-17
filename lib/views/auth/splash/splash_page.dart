@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/Bloc/splash/splash_bloc.dart';
-import 'package:flutter_project_structure/Routes/routes_name.dart';
+import 'package:flutter_project_structure/gen/assets.gen.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
+import 'package:flutter_project_structure/routes/routes_name.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -26,8 +27,8 @@ class SplashScreen extends StatelessWidget {
             }
           }
         },
-        child: const Scaffold(
-          backgroundColor: Colors.amber,
+        child: Scaffold(
+          body: Center(child: Assets.svg.icLogo.svg()),
         ),
       ),
     );

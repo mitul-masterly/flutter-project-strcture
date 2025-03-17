@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project_structure/Views/Auth/sign_up_page.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
+import 'package:flutter_project_structure/theme/app_colors.dart';
+import 'package:flutter_project_structure/theme/font_styles.dart';
+import 'package:flutter_project_structure/views/auth/signup/sign_up_page.dart';
 
 class LoginFooterWidget extends StatelessWidget {
   const LoginFooterWidget({super.key});
@@ -20,11 +22,10 @@ class LoginFooterWidget extends StatelessWidget {
           children: <InlineSpan>[
             TextSpan(
               text: 'Signup Here'.tr(context),
-              style: TextStyle(
+              style: rubikW700.copyWith(
                 fontSize: 14,
-                color: Theme.of(context).primaryColor, // App primary color
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline, // Optional underline
+                color: AppColors.color003366,
+                decoration: TextDecoration.underline,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {

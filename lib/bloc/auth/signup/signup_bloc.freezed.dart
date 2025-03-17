@@ -38,20 +38,63 @@ class $SignUpEventCopyWith<$Res> {
 /// @nodoc
 
 class OnTapSubmit implements SignUpEvent {
-  const OnTapSubmit();
+  const OnTapSubmit({required this.formKey});
+
+  final GlobalKey<FormState> formKey;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnTapSubmitCopyWith<OnTapSubmit> get copyWith =>
+      _$OnTapSubmitCopyWithImpl<OnTapSubmit>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is OnTapSubmit);
+        (other.runtimeType == runtimeType &&
+            other is OnTapSubmit &&
+            (identical(other.formKey, formKey) || other.formKey == formKey));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, formKey);
 
   @override
   String toString() {
-    return 'SignUpEvent.onTapSubmit()';
+    return 'SignUpEvent.onTapSubmit(formKey: $formKey)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnTapSubmitCopyWith<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  factory $OnTapSubmitCopyWith(
+          OnTapSubmit value, $Res Function(OnTapSubmit) _then) =
+      _$OnTapSubmitCopyWithImpl;
+  @useResult
+  $Res call({GlobalKey<FormState> formKey});
+}
+
+/// @nodoc
+class _$OnTapSubmitCopyWithImpl<$Res> implements $OnTapSubmitCopyWith<$Res> {
+  _$OnTapSubmitCopyWithImpl(this._self, this._then);
+
+  final OnTapSubmit _self;
+  final $Res Function(OnTapSubmit) _then;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? formKey = null,
+  }) {
+    return _then(OnTapSubmit(
+      formKey: null == formKey
+          ? _self.formKey
+          : formKey // ignore: cast_nullable_to_non_nullable
+              as GlobalKey<FormState>,
+    ));
   }
 }
 

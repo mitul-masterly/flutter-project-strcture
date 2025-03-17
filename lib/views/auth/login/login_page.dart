@@ -52,9 +52,7 @@ class LoginScreen extends StatelessWidget {
                         isLoading: state.isLoading,
                         icon: null,
                         onPressed: () {
-                          if (loginFormKey.currentState!.validate()) {
-                            bloc.add(const OnButtonClickEvent());
-                          }
+                          bloc.add(OnValidateForm(formKEy: loginFormKey));
                         },
                         type: AppButtonType.primary,
                       ),
@@ -66,7 +64,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            bottomNavigationBar: SizedBox.shrink(),
           );
         },
       ),

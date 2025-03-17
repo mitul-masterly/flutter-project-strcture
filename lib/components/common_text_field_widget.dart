@@ -8,6 +8,7 @@ import 'package:flutter_project_structure/helper/validator.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/theme/font_styles.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 class AppTextField extends StatelessWidget with Validator {
   final TextFieldTypes type;
@@ -19,6 +20,9 @@ class AppTextField extends StatelessWidget with Validator {
   final bool? showHeaderTitle;
   final String? strHeaderTitle;
   final Function(String?)? validator;
+  final TextInputAction textInputAction;
+  final FocusNode? nextFocusNode;
+  final FocusNode? focusNode;
 
   const AppTextField(
       {super.key,
@@ -30,7 +34,10 @@ class AppTextField extends StatelessWidget with Validator {
       this.hintText,
       this.showHeaderTitle = true,
       this.strHeaderTitle = '',
-      this.validator});
+      this.validator,
+      required this.textInputAction,
+      this.nextFocusNode,
+      this.focusNode});
 
   @override
   Widget build(final BuildContext buildContext) {
@@ -51,12 +58,14 @@ class AppTextField extends StatelessWidget with Validator {
             builder: (final BuildContext context, final bool value,
                 final Widget? child) {
               return TextFormField(
+                focusNode: this.focusNode,
                 style: rubikW400.copyWith(fontSize: 14),
                 controller: textEditingController,
                 obscureText: type == TextFieldTypes.password && !isShow.value,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 maxLines: type == TextFieldTypes.multiline ? 5 : 1,
                 inputFormatters: inputFormatters,
+                textInputAction: textInputAction,
                 keyboardType: (type == TextFieldTypes.number
                     ? TextInputType.number
                     : (type == TextFieldTypes.email
@@ -74,11 +83,16 @@ class AppTextField extends StatelessWidget with Validator {
                 onTapOutside: (final PointerDownEvent v) {
                   FocusScope.of(buildContext).unfocus();
                 },
+                onFieldSubmitted: (final value) {
+                  if (nextFocusNode != null) {
+                    FocusScope.of(context).requestFocus(nextFocusNode);
+                  }
+                },
                 validator: (final String? value) {
                   if (validator != null) {
                     return validator?.call(value);
                   }
-                  return _validateTextField(type, value, title, buildContext);
+                  return _validateTextField(type, value, title, context, null);
                 },
                 decoration: InputDecoration(
                   errorStyle: TextStyle(color: AppColors.colorF92814),
@@ -139,24 +153,23 @@ class AppTextField extends StatelessWidget with Validator {
     );
   }
 
-  String? _validateTextField(final TextFieldTypes type, final String? strValue,
-      final String title, final BuildContext context) {
+  String? _validateTextField(
+      final TextFieldTypes type,
+      final String? strValue,
+      final String title,
+      final BuildContext context,
+      final PhoneNumber? phoneNumber) {
     switch (type) {
       case TextFieldTypes.email:
         return validateEmail(strValue!)?.tr(context);
       case TextFieldTypes.password:
         return validatePassword(strValue!)?.tr(context);
       case TextFieldTypes.number:
-        if (strValue!.length != 14) {
-          // return AppStrings.requiredValidContactNumber;
-        }
         break;
 
       default:
         if (!strValue.isNotNullAndEmpty()) {
-          final String strTitle = title.tr(context); //.toLowerCase();
-          return AppStrings.isRequired.tr(context,
-              namedArgs: <String, String>{'field_name': '$strTitle'});
+          return title + ' is Required'.tr(context); //.toLowerCase();
         }
     }
 

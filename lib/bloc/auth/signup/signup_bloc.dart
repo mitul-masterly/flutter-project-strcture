@@ -16,38 +16,18 @@ part 'signup_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthRepo authRepo;
+  final FocusNode fNameFocus = FocusNode();
+  final FocusNode lNameFocus = FocusNode();
+  final FocusNode emailFocus = FocusNode();
+  final FocusNode mobileFocus = FocusNode();
+  final FocusNode passwordFocus = FocusNode();
+  final FocusNode cPasswordFocus = FocusNode();
 
   SignUpBloc({required this.authRepo}) : super(SignUpState.initial()) {
     on<OnTapSubmit>(
         (final OnTapSubmit event, final Emitter<SignUpState> emit) async {
-      emit(state.copyWith(isSubmitting: true));
-      final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
-
-      try {
-        final SignupRequest request = SignupRequest(
-            firstName: state.txtFirstName.text,
-            lastName: state.txtLastName.text,
-            emailId: state.txtEmail.text,
-            contactNo: state.txtMobileNumber.text,
-            isdCode: state.countryCode,
-            userPassword: state.txtPassword.text,
-            countryCodeISO2: state.countryCodeISO2,
-            CreatedByDeviceName: deviceData.userDeviceName,
-            CreatedByDeviceTypeId: deviceData.deviceTypeID);
-
-        final int? statusCode =
-            await authRepo.apiSignUp(requestParams: request);
-        if (statusCode == 200) {
-          emit(state.copyWith(isSubmitting: false, isSuccess: true));
-        } else {
-          emit(state.copyWith(isSubmitting: false, isSuccess: false));
-        }
-      } catch (e) {
-        final DioException error = e as DioException;
-        emit(state.copyWith(
-            isSubmitting: false,
-            errorMessage: error.message,
-            isSuccess: false));
+      if (event.formKey.currentState!.validate()) {
+        await callSignUpApi(emit);
       }
     });
 
@@ -57,5 +37,34 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           countryCode: event.selectedCountry.dialCode,
           countryCodeISO2: event.selectedCountry.code));
     });
+  }
+
+  Future<void> callSignUpApi(final Emitter<SignUpState> emit) async {
+    emit(state.copyWith(isSubmitting: true));
+    final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
+
+    try {
+      final SignupRequest request = SignupRequest(
+          firstName: state.txtFirstName.text,
+          lastName: state.txtLastName.text,
+          emailId: state.txtEmail.text,
+          contactNo: state.txtMobileNumber.text,
+          isdCode: state.countryCode,
+          userPassword: state.txtPassword.text,
+          countryCodeISO2: state.countryCodeISO2,
+          CreatedByDeviceName: deviceData.userDeviceName,
+          CreatedByDeviceTypeId: deviceData.deviceTypeID);
+
+      final int? statusCode = await authRepo.apiSignUp(requestParams: request);
+      if (statusCode == 200) {
+        emit(state.copyWith(isSubmitting: false, isSuccess: true));
+      } else {
+        emit(state.copyWith(isSubmitting: false, isSuccess: false));
+      }
+    } catch (e) {
+      final DioException error = e as DioException;
+      emit(state.copyWith(
+          isSubmitting: false, errorMessage: error.message, isSuccess: false));
+    }
   }
 }

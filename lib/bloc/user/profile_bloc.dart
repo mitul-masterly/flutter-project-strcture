@@ -34,7 +34,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       } catch (e) {
         debugPrint('error message $e');
         emit(state.copyWith(isLoading: false, userData: null));
-        emit(state.copyWith(isLoading: false, userData: null));
       }
     });
 

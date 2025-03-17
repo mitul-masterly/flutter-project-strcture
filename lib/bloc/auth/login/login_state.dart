@@ -13,14 +13,15 @@ abstract class LoginState with _$LoginState {
 
   factory LoginState.initial() {
     return LoginState(
-        isLoading: false,
-        emailController: TextEditingController(
-            text: sharedPreferenceHelper.getRememberEmail),
-        passwordController: TextEditingController(
-            text: sharedPreferenceHelper.getSavedPassword),
-        errorMessage: null,
-        isSuccess: false,
-        user: null,
-        isRememberMe: sharedPreferenceHelper.isRememberMe ?? false);
+      isLoading: false,
+      emailController:
+          TextEditingController(text: sharedPreferenceHelper.getRememberEmail),
+      passwordController:
+          TextEditingController(text: sharedPreferenceHelper.getSavedPassword),
+      errorMessage: null,
+      isSuccess: false,
+      user: null,
+      isRememberMe: sharedPreferenceHelper.isRememberMe ?? false,
+    );
   }
 }

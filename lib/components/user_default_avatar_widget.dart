@@ -16,7 +16,7 @@ class UserDefaultAvatar extends StatelessWidget {
       height: size ?? 56,
       decoration: BoxDecoration(
         border:
-        border ?? Border.all(color: AppColors.white.withOpacity(0.5)),
+        border ?? Border.all(color: AppColors.white.withValues(alpha: 0.5)),
         borderRadius: BorderRadius.circular(borderRadius ?? 28),
       ),
       child: UserDefaultIcon(

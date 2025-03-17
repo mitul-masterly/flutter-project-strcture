@@ -37,26 +37,6 @@ class $LoginEventCopyWith<$Res> {
 
 /// @nodoc
 
-class OnButtonClickEvent implements LoginEvent {
-  const OnButtonClickEvent();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is OnButtonClickEvent);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'LoginEvent.onButtonClickEvent()';
-  }
-}
-
-/// @nodoc
-
 class OnChangeRememberMe implements LoginEvent {
   const OnChangeRememberMe({required this.isRememberMe});
 
@@ -116,6 +96,134 @@ class _$OnChangeRememberMeCopyWithImpl<$Res>
           ? _self.isRememberMe
           : isRememberMe // ignore: cast_nullable_to_non_nullable
               as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnValidateForm implements LoginEvent {
+  const OnValidateForm({required this.formKEy});
+
+  final GlobalKey<FormState> formKEy;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnValidateFormCopyWith<OnValidateForm> get copyWith =>
+      _$OnValidateFormCopyWithImpl<OnValidateForm>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnValidateForm &&
+            (identical(other.formKEy, formKEy) || other.formKEy == formKEy));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, formKEy);
+
+  @override
+  String toString() {
+    return 'LoginEvent.onValidateForm(formKEy: $formKEy)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnValidateFormCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $OnValidateFormCopyWith(
+          OnValidateForm value, $Res Function(OnValidateForm) _then) =
+      _$OnValidateFormCopyWithImpl;
+  @useResult
+  $Res call({GlobalKey<FormState> formKEy});
+}
+
+/// @nodoc
+class _$OnValidateFormCopyWithImpl<$Res>
+    implements $OnValidateFormCopyWith<$Res> {
+  _$OnValidateFormCopyWithImpl(this._self, this._then);
+
+  final OnValidateForm _self;
+  final $Res Function(OnValidateForm) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? formKEy = null,
+  }) {
+    return _then(OnValidateForm(
+      formKEy: null == formKEy
+          ? _self.formKEy
+          : formKEy // ignore: cast_nullable_to_non_nullable
+              as GlobalKey<FormState>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnTapForgotPassword implements LoginEvent {
+  const OnTapForgotPassword({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnTapForgotPasswordCopyWith<OnTapForgotPassword> get copyWith =>
+      _$OnTapForgotPasswordCopyWithImpl<OnTapForgotPassword>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnTapForgotPassword &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @override
+  String toString() {
+    return 'LoginEvent.onTapForgotPassword(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnTapForgotPasswordCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $OnTapForgotPasswordCopyWith(
+          OnTapForgotPassword value, $Res Function(OnTapForgotPassword) _then) =
+      _$OnTapForgotPasswordCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$OnTapForgotPasswordCopyWithImpl<$Res>
+    implements $OnTapForgotPasswordCopyWith<$Res> {
+  _$OnTapForgotPasswordCopyWithImpl(this._self, this._then);
+
+  final OnTapForgotPassword _self;
+  final $Res Function(OnTapForgotPassword) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(OnTapForgotPassword(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
