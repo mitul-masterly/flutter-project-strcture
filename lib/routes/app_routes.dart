@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_structure/Routes/routes_name.dart';
+import 'package:flutter_project_structure/views/auth/forgot_password/forgot_password_page.dart';
 import 'package:flutter_project_structure/views/auth/login/login_page.dart';
 import 'package:flutter_project_structure/views/auth/signup/sign_up_page.dart';
 import 'package:flutter_project_structure/views/auth/splash/splash_page.dart';
@@ -21,6 +22,8 @@ class AppRoutes {
       RouteName.profileScreen: (final BuildContext context) => ProfileScreen(),
       RouteName.tabNavigationView: (final BuildContext context) =>
           TabNavigationView(),
+      RouteName.forgotPasswordScreen: (final BuildContext context) =>
+          ForgotPasswordScreen(),
     };
   }
 }

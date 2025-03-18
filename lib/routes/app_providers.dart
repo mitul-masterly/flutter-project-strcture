@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project_structure/bloc/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:flutter_project_structure/bloc/auth/login/login_bloc.dart';
 import 'package:flutter_project_structure/bloc/auth/signup/signup_bloc.dart';
 import 'package:flutter_project_structure/bloc/my_app/localisation_bloc.dart';
@@ -25,6 +26,9 @@ List<BlocProvider<StateStreamableSource<Object?>>> getAppProviders() {
         context.read<AuthRepo>(),
         userRepo: context.read<UserRepo>(),
       ),
+    ),
+    BlocProvider(
+      create: (final BuildContext context) => ForgotPasswordBloc(),
     ),
   ];
 }
