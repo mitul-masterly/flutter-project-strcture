@@ -141,7 +141,7 @@ class _$CallLogoutApiCopyWithImpl<$Res>
 
 /// @nodoc
 mixin _$ProfileState {
-  bool get isLoading;
+  CommonScreenState get status;
   bool get showLogoutSheet;
   UserDataModel? get userData;
 
@@ -158,8 +158,7 @@ mixin _$ProfileState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ProfileState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.showLogoutSheet, showLogoutSheet) ||
                 other.showLogoutSheet == showLogoutSheet) &&
             (identical(other.userData, userData) ||
@@ -168,11 +167,11 @@ mixin _$ProfileState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, isLoading, showLogoutSheet, userData);
+      Object.hash(runtimeType, status, showLogoutSheet, userData);
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, showLogoutSheet: $showLogoutSheet, userData: $userData)';
+    return 'ProfileState(status: $status, showLogoutSheet: $showLogoutSheet, userData: $userData)';
   }
 }
 
@@ -182,7 +181,10 @@ abstract mixin class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) _then) =
       _$ProfileStateCopyWithImpl;
   @useResult
-  $Res call({bool isLoading, bool showLogoutSheet, UserDataModel? userData});
+  $Res call(
+      {CommonScreenState status,
+      bool showLogoutSheet,
+      UserDataModel? userData});
 }
 
 /// @nodoc
@@ -197,15 +199,15 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
+    Object? status = null,
     Object? showLogoutSheet = null,
     Object? userData = freezed,
   }) {
     return _then(_self.copyWith(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
       showLogoutSheet: null == showLogoutSheet
           ? _self.showLogoutSheet
           : showLogoutSheet // ignore: cast_nullable_to_non_nullable
@@ -222,10 +224,10 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
 
 class _ProfileState implements ProfileState {
   _ProfileState(
-      {required this.isLoading, required this.showLogoutSheet, this.userData});
+      {required this.status, required this.showLogoutSheet, this.userData});
 
   @override
-  final bool isLoading;
+  final CommonScreenState status;
   @override
   final bool showLogoutSheet;
   @override
@@ -244,8 +246,7 @@ class _ProfileState implements ProfileState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ProfileState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.showLogoutSheet, showLogoutSheet) ||
                 other.showLogoutSheet == showLogoutSheet) &&
             (identical(other.userData, userData) ||
@@ -254,11 +255,11 @@ class _ProfileState implements ProfileState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, isLoading, showLogoutSheet, userData);
+      Object.hash(runtimeType, status, showLogoutSheet, userData);
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, showLogoutSheet: $showLogoutSheet, userData: $userData)';
+    return 'ProfileState(status: $status, showLogoutSheet: $showLogoutSheet, userData: $userData)';
   }
 }
 
@@ -270,7 +271,10 @@ abstract mixin class _$ProfileStateCopyWith<$Res>
       __$ProfileStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool isLoading, bool showLogoutSheet, UserDataModel? userData});
+  $Res call(
+      {CommonScreenState status,
+      bool showLogoutSheet,
+      UserDataModel? userData});
 }
 
 /// @nodoc
@@ -286,15 +290,15 @@ class __$ProfileStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = null,
+    Object? status = null,
     Object? showLogoutSheet = null,
     Object? userData = freezed,
   }) {
     return _then(_ProfileState(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
       showLogoutSheet: null == showLogoutSheet
           ? _self.showLogoutSheet
           : showLogoutSheet // ignore: cast_nullable_to_non_nullable

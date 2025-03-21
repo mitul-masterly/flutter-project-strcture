@@ -17,3 +17,10 @@
 8. Google service file (for Android and iOS)
 9. keystore.properties (Android)
 10. Generate new jks file(Android)
+
+### Test Cases Coverage
+
+1. brew install lcov (mac OS) //a tool for generating code coverage reports
+2. flutter test --coverage // to generate code coverage file.
+3. genhtml coverage/lcov.info -o coverage/html // You can generate a human-readable HTML report
+4. open coverage/html/index.html // Open the report for mac OS
