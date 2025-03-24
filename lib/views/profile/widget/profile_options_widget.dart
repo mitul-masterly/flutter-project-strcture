@@ -9,16 +9,17 @@ class ProfileOptionsWidget extends StatelessWidget {
   Widget build(final BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
         builder: (final BuildContext context, final ProfileState state) {
-          final bloc = context.read<ProfileBloc>();
-          return ListView.separated(
-            shrinkWrap: true,
-            // physics: NeverScrollableScrollPhysics(),
-            itemCount: bloc.arrProfileOptions.length,
-            itemBuilder: (final BuildContext context, final int index) {
-              return ProfileCell(item: bloc.arrProfileOptions[index]);
-            }, separatorBuilder: (final BuildContext context, final int index) {
-            return 16.height;
-          },);
-        });
+      final bloc = context.read<ProfileBloc>();
+      return ListView.separated(
+        shrinkWrap: true,
+        itemCount: bloc.arrProfileOptions.length,
+        itemBuilder: (final BuildContext context, final int index) {
+          return ProfileCell(item: bloc.arrProfileOptions[index]);
+        },
+        separatorBuilder: (final BuildContext context, final int index) {
+          return 16.height;
+        },
+      );
+    });
   }
 }

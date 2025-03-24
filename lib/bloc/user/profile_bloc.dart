@@ -64,13 +64,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         debugPrint('error message ${error.message}');
         emit(state.copyWith(status: CommonScreenState.error));
       }, (final int? statusCode) async {
-        emit(state.copyWith(status: CommonScreenState.success));
         sharedPreferenceHelper.clear();
-        await Navigator.of(event.context, rootNavigator: true)
-            .pushNamedAndRemoveUntil(
-                RouteName.loginScreen, (final Route route) => false);
+        emit(state.copyWith(
+            status: CommonScreenState.success, navigateToLogin: true));
       });
     });
+  }
+
+  Future<void> navigateToLoginScreen(final BuildContext context) async {
+    await Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
+        RouteName.loginScreen, (final Route route) => false);
   }
 
   List<ProfileOptionsModel> get arrProfileOptions => <ProfileOptionsModel>[

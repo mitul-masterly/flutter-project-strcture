@@ -39,12 +39,13 @@ class ProfileScreen extends StatelessWidget {
                   useRootNavigator: true,
                   builder: (final BuildContext contextt) => LogoutBottomSheet(
                     onTapLogout: () {
-                      context
-                          .read<ProfileBloc>()
-                          .add(CallLogoutApi(context: context));
+                      context.read<ProfileBloc>().add(CallLogoutApi());
                     },
                   ),
                 );
+              }
+              if (state.navigateToLogin == true) {
+                context.read<ProfileBloc>().navigateToLoginScreen(context);
               }
             },
             builder: (final BuildContext context, final ProfileState state) {

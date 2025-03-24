@@ -6,13 +6,14 @@ abstract class ProfileState with _$ProfileState {
     required final CommonScreenState status,
     required final bool showLogoutSheet,
     final UserDataModel? userData,
+    final bool? navigateToLogin,
   }) = _ProfileState;
 
   factory ProfileState.initial() {
     return ProfileState(
-      status: CommonScreenState.loading,
-      showLogoutSheet: false,
-      userData: null,
-    );
+        status: CommonScreenState.loading,
+        showLogoutSheet: false,
+        userData: null,
+        navigateToLogin: false);
   }
 }
