@@ -1,33 +1,35 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project_structure/Routes/app_routes.dart';
-import 'package:flutter_project_structure/Utils/app_colors.dart';
-import 'package:flutter_project_structure/Views/Auth/login.dart';
-import 'package:flutter_project_structure/Views/Auth/registration.dart';
-import 'package:flutter_project_structure/Views/Auth/spash.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project_structure/app/my_app.dart';
+import 'package:flutter_project_structure/helper/firebase_options.dart';
+import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
+import 'package:flutter_project_structure/helper/push_notification/notification_service.dart';
+import 'package:flutter_project_structure/routes/app_providers.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferenceHelper().init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: navigatorKey,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
-          useMaterial3: true,
-        ),
-        initialRoute: '/',
-        routes: {
-          "/": (context) => const SplashScreen(),
-          RouteName.loginScreen: (context) => LoginScreen(),
-          RouteName.registrationScreen: (context) => const RegistrationScreen(),
-        });
+  await NotificationService.shared.initNotification();
+  if (kReleaseMode) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   }
+  runApp(
+    MultiRepositoryProvider(
+      providers: getRepoProviders(),
+      child: MultiBlocProvider(
+        providers: getAppProviders(),
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
