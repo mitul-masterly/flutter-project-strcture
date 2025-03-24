@@ -1,0 +1,73 @@
+name: Flutter Build & Upload to App Stores
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+      - feature/*
+
+jobs:
+  build-android:
+    name: Build and Upload Android
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Build AAB (Android App Bundle)
+        run: flutter build appbundle --release
+
+  #      - name: Install Fastlane
+  #        run: |
+  #          sudo gem install fastlane
+  #
+  #      - name: Upload to Google Play
+  #        env:
+  #          ANDROID_JSON_KEY: ${{ secrets.ANDROID_JSON_KEY }}
+  #        run: |
+  #          echo $ANDROID_JSON_KEY > android/google_play_key.json
+  #          cd android
+  #          fastlane upload_to_play_store
+
+  build-ios:
+    name: Build and Upload iOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS
+        run: flutter build ipa --release
+
+#      - name: Install Fastlane
+#        run: gem install fastlane
+
+#      - name: Upload to TestFlight
+#        env:
+#          APP_STORE_API_KEY_ID: ${{ secrets.APP_STORE_API_KEY_ID }}
+#          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+#          APP_STORE_API_KEY: ${{ secrets.APP_STORE_API_KEY }}
+#          FASTLANE_APPLE_ID: ${{ secrets.FASTLANE_APPLE_ID }}
+#        run: |
+#          cd ios
+#          fastlane upload_testflight
