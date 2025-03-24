@@ -36,6 +36,7 @@ dependencies:
   firebase_crashlytics: ^4.3.4
   cached_network_image: ^3.4.1
   equatable: ^2.0.7
+  flutter_native_splash: ^2.4.5
   firebase_auth: ^5.5.1
   google_sign_in: ^6.3.0
 
@@ -116,3 +117,16 @@ flutter:
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "assets/png/img_splash_logo.png"
+  android: true
+  ios: false
+  android_gravity: center # Align the logo in the center for Android
+  fullscreen: true
+
+  android_12:
+    image: "assets/png/img_android_12_splash_logo.png"
