@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Generate code
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
       - name: Build APK
         run: flutter build apk --release
 
@@ -43,24 +46,27 @@ jobs:
   #          cd android
   #          fastlane upload_to_play_store
 
-  build-ios:
-    name: Build and Upload iOS
-    runs-on: macos-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.29.0'
-          architecture: x64
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build iOS
-        run: flutter build ipa --release
+#  build-ios:
+#    name: Build and Upload iOS
+#    runs-on: macos-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Setup Flutter
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.29.0'
+#          architecture: x64
+#
+#      - name: Install dependencies
+#        run: flutter pub get
+#
+#      - name: Generate code
+#        run: flutter pub run build_runner build --delete-conflicting-outputs
+#
+#      - name: Build iOS
+#        run: flutter build ipa --release
 
 #      - name: Install Fastlane
 #        run: gem install fastlane
