@@ -43,7 +43,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         strTitle,
         style: titleStyle ??
-            rubikW700.copyWith(color: AppColors.black, fontSize: 20),
+            dMSansW700.copyWith(color: AppColors.black, fontSize: 20),
       ),
       actions: actions,
     );

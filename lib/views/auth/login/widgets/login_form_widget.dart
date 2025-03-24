@@ -25,7 +25,7 @@ class LoginFormWidget extends StatelessWidget {
             initialValue: state.email,
             type: TextFieldTypes.email,
             title: AppStrings.email,
-            strHeaderTitle: '${AppStrings.email.tr(buildContext)}*',
+            strHeaderTitle: '${AppStrings.email.tr(buildContext)} ',
             textInputAction: TextInputAction.next,
             onChange: (final String value) {
               context.read<LoginBloc>().add(OnChangeEmail(email: value));
@@ -37,7 +37,7 @@ class LoginFormWidget extends StatelessWidget {
             initialValue: state.password,
             type: TextFieldTypes.password,
             title: AppStrings.password,
-            strHeaderTitle: '${AppStrings.password.tr(buildContext)}*',
+            strHeaderTitle: '${AppStrings.password.tr(buildContext)} ',
             textInputAction: TextInputAction.done,
             onChange: (final String value) {
               context.read<LoginBloc>().add(OnChangePassword(password: value));
@@ -59,13 +59,13 @@ class LoginFormWidget extends StatelessWidget {
                         state.isRememberMe
                             ? Icons.check_box_rounded
                             : Icons.check_box_outline_blank_rounded,
-                        color: AppColors.color003366,
+                        color: AppColors.colorPrimary500,
                       ),
                       5.width,
                       Text(
                         'Remember me'.tr(context),
-                        style: rubikW400.copyWith(
-                            color: AppColors.color808080, fontSize: 14),
+                        style: dMSansW400.copyWith(
+                            color: AppColors.baseColorWhite45, fontSize: 14),
                       )
                     ],
                   ),
@@ -83,8 +83,8 @@ class LoginFormWidget extends StatelessWidget {
                   child: Text(
                     textAlign: TextAlign.end,
                     'Forgot Password?'.tr(context),
-                    style: rubikW700.copyWith(
-                        color: AppColors.color003366, fontSize: 14),
+                    style: dMSansW700.copyWith(
+                        color: AppColors.colorPrimary500, fontSize: 14),
                   ),
                 ),
               ),

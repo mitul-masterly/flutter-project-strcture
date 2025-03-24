@@ -28,7 +28,7 @@ class SplashScreen extends StatelessWidget {
           }
         },
         child: Scaffold(
-          body: Center(child: Assets.svg.icLogo.svg()),
+          body: Center(child: Assets.svg.icSplashBg.svg()),
         ),
       ),
     );

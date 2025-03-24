@@ -36,6 +36,8 @@ dependencies:
   firebase_crashlytics: ^4.3.4
   cached_network_image: ^3.4.1
   equatable: ^2.0.7
+  firebase_auth: ^5.5.1
+  google_sign_in: ^6.3.0
 
 
 flutter_gen:
@@ -103,8 +105,14 @@ flutter:
   #         weight: 700
   #
   fonts:
-    - family: Rubik
+    - family: DMSans
       fonts:
-        - asset: assets/fonts/Rubik-Regular.ttf
+        - asset: assets/fonts/DMSans-Regular.ttf
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_18pt-Regular.ttf
+        - asset: assets/fonts/Inter_24pt-Bold.ttf
+        - asset: assets/fonts/Inter_28pt-Bold.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

@@ -14,17 +14,17 @@ class LoginFooterWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 16.0), // Add spacing
       child: RichText(
         text: TextSpan(
-          text: '${'New account?'.tr(context)} ',
+          text: 'Don’t have any account?'.tr(context),
           style: TextStyle(
             fontSize: 14,
             color: Colors.grey[600], // Normal text color
           ),
           children: <InlineSpan>[
             TextSpan(
-              text: 'Signup Here'.tr(context),
-              style: rubikW700.copyWith(
+              text: 'Sign up'.tr(context),
+              style: dMSansW700.copyWith(
                 fontSize: 14,
-                color: AppColors.color003366,
+                color: AppColors.colorPrimary500,
                 decoration: TextDecoration.underline,
               ),
               recognizer: TapGestureRecognizer()

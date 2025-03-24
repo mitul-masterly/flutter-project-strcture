@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "477121729769",
-    "project_id": "flutter-base-45674",
-    "storage_bucket": "flutter-base-45674.firebasestorage.app"
+    "project_number": "545061596433",
+    "project_id": "masterly-flutterbasecode",
+    "storage_bucket": "masterly-flutterbasecode.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:477121729769:android:4878d69c6711f1bce2cc78",
+        "mobilesdk_app_id": "1:545061596433:android:0ac49de3b14a9d69df70b0",
         "android_client_info": {
           "package_name": "com.masterly.flutterbase"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA0VPM3UQNkqqs9JEXVGMHTYWueAEDcnXY"
+          "current_key": "AIzaSyCARi30S-QEuWy7iVKQYrlrrPvL5OcGJPo"
         }
       ],
       "services": {
