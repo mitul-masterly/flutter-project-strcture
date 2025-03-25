@@ -52,12 +52,11 @@ class LoginScreen extends StatelessWidget {
                         isLoading: state.status == CommonScreenState.loading,
                         icon: null,
                         onPressed: () {
-                         throw Exception();
-                          // if (bloc.loginFormKey.currentState?.validate() ==
-                          //     true) {
-                          //   debugPrint('Login Button Pressed');
-                          //   bloc.add(OnSubmit());
-                          // }
+                          if (bloc.loginFormKey.currentState?.validate() ==
+                              true) {
+                            debugPrint('Login Button Pressed');
+                            bloc.add(OnSubmit());
+                          }
                         },
                         type: AppButtonType.primary,
                       ),
