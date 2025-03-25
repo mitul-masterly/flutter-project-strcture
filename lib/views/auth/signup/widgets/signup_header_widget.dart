@@ -19,11 +19,11 @@ class SignUpHeaderWidget extends StatelessWidget {
           Text(
             'Sign Up'.tr(context),
             style:
-                rubikW700.copyWith(color: AppColors.color003366, fontSize: 25),
+                dMSansW700.copyWith(color: AppColors.colorPrimary500, fontSize: 25),
           ),
           Text(
             'Create your account'.tr(context),
-            style: rubikW400.copyWith(color: AppColors.color808080),
+            style: dMSansW400.copyWith(color: AppColors.baseColorWhite85),
           ),
         ],
       ),

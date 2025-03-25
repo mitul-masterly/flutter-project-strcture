@@ -15,8 +15,6 @@ import 'package:flutter_project_structure/views/auth/signup/widgets/signup_heade
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
-
   @override
   Widget build(final BuildContext buildContext) {
     return BlocProvider<SignUpBloc>(
@@ -24,7 +22,7 @@ class SignUpScreen extends StatelessWidget {
           SignUpBloc(authRepo: context.read<AuthRepo>()),
       child: BlocConsumer<SignUpBloc, SignUpState>(
         listener: (final BuildContext context, final SignUpState state) {
-          if (state.isSubmitting) {
+          if (state.status == CommonScreenState.success) {
             showSuccessSnackBar(AppMessages.registrationSuccess.message);
             Navigator.pop(context);
           }
@@ -41,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
                       Expanded(
                         child: SingleChildScrollView(
                           child: Form(
-                            key: signUpFormKey,
+                            key: bloc.signUpFormKey,
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Column(
@@ -65,11 +63,14 @@ class SignUpScreen extends StatelessWidget {
                         child: AppButton(
                           title: AppStrings.submit.tr(buildContext),
                           width: double.maxFinite,
-                          isLoading: state.isSubmitting,
+                          isLoading: state.status == CommonScreenState.loading,
                           icon: null,
                           onPressed: () {
                             FocusScope.of(context).unfocus();
-                            bloc.add(OnTapSubmit(formKey: signUpFormKey));
+                            if (bloc.signUpFormKey.currentState?.validate() ==
+                                true) {
+                              bloc.add(OnTapSubmit());
+                            }
                           },
                           type: AppButtonType.primary,
                         ),
@@ -78,8 +79,9 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              if (state.isSubmitting) Utils.loaderBrier(),
-              if (state.isSubmitting) Utils.loaderWid(),
+              if (state.status == CommonScreenState.loading)
+                Utils.loaderBrier(),
+              if (state.status == CommonScreenState.loading) Utils.loaderWid(),
             ],
           );
         },

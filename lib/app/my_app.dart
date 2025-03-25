@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_project_structure/Routes/routes_name.dart';
 import 'package:flutter_project_structure/bloc/my_app/localisation_bloc.dart';
+import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
 import 'package:flutter_project_structure/helper/push_notification/notification_service.dart';
 import 'package:flutter_project_structure/routes/app_routes.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.color003366),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.colorPrimary500),
           useMaterial3: true,
         ),
         initialRoute: _getInitialRoute(),
@@ -62,6 +63,12 @@ class MyApp extends StatelessWidget {
         }
       },
     );
-    return RouteName.splashScreen;
+
+    if (SharedPreferenceHelper().isLoggedIn) {
+      return RouteName.homeScreen;
+    } else {
+      return RouteName.loginScreen;
+    }
+
   }
 }

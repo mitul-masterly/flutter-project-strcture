@@ -102,65 +102,150 @@ class _$OnChangeRememberMeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class OnValidateForm implements LoginEvent {
-  const OnValidateForm({required this.formKEy});
+class OnChangeEmail implements LoginEvent {
+  const OnChangeEmail({required this.email});
 
-  final GlobalKey<FormState> formKEy;
+  final String email;
 
   /// Create a copy of LoginEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $OnValidateFormCopyWith<OnValidateForm> get copyWith =>
-      _$OnValidateFormCopyWithImpl<OnValidateForm>(this, _$identity);
+  $OnChangeEmailCopyWith<OnChangeEmail> get copyWith =>
+      _$OnChangeEmailCopyWithImpl<OnChangeEmail>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is OnValidateForm &&
-            (identical(other.formKEy, formKEy) || other.formKEy == formKEy));
+            other is OnChangeEmail &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, formKEy);
+  int get hashCode => Object.hash(runtimeType, email);
 
   @override
   String toString() {
-    return 'LoginEvent.onValidateForm(formKEy: $formKEy)';
+    return 'LoginEvent.onChangeEmail(email: $email)';
   }
 }
 
 /// @nodoc
-abstract mixin class $OnValidateFormCopyWith<$Res>
+abstract mixin class $OnChangeEmailCopyWith<$Res>
     implements $LoginEventCopyWith<$Res> {
-  factory $OnValidateFormCopyWith(
-          OnValidateForm value, $Res Function(OnValidateForm) _then) =
-      _$OnValidateFormCopyWithImpl;
+  factory $OnChangeEmailCopyWith(
+          OnChangeEmail value, $Res Function(OnChangeEmail) _then) =
+      _$OnChangeEmailCopyWithImpl;
   @useResult
-  $Res call({GlobalKey<FormState> formKEy});
+  $Res call({String email});
 }
 
 /// @nodoc
-class _$OnValidateFormCopyWithImpl<$Res>
-    implements $OnValidateFormCopyWith<$Res> {
-  _$OnValidateFormCopyWithImpl(this._self, this._then);
+class _$OnChangeEmailCopyWithImpl<$Res>
+    implements $OnChangeEmailCopyWith<$Res> {
+  _$OnChangeEmailCopyWithImpl(this._self, this._then);
 
-  final OnValidateForm _self;
-  final $Res Function(OnValidateForm) _then;
+  final OnChangeEmail _self;
+  final $Res Function(OnChangeEmail) _then;
 
   /// Create a copy of LoginEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? formKEy = null,
+    Object? email = null,
   }) {
-    return _then(OnValidateForm(
-      formKEy: null == formKEy
-          ? _self.formKEy
-          : formKEy // ignore: cast_nullable_to_non_nullable
-              as GlobalKey<FormState>,
+    return _then(OnChangeEmail(
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
+  }
+}
+
+/// @nodoc
+
+class OnChangePassword implements LoginEvent {
+  const OnChangePassword({required this.password});
+
+  final String password;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangePasswordCopyWith<OnChangePassword> get copyWith =>
+      _$OnChangePasswordCopyWithImpl<OnChangePassword>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangePassword &&
+            (identical(other.password, password) ||
+                other.password == password));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, password);
+
+  @override
+  String toString() {
+    return 'LoginEvent.onChangePassword(password: $password)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangePasswordCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $OnChangePasswordCopyWith(
+          OnChangePassword value, $Res Function(OnChangePassword) _then) =
+      _$OnChangePasswordCopyWithImpl;
+  @useResult
+  $Res call({String password});
+}
+
+/// @nodoc
+class _$OnChangePasswordCopyWithImpl<$Res>
+    implements $OnChangePasswordCopyWith<$Res> {
+  _$OnChangePasswordCopyWithImpl(this._self, this._then);
+
+  final OnChangePassword _self;
+  final $Res Function(OnChangePassword) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? password = null,
+  }) {
+    return _then(OnChangePassword(
+      password: null == password
+          ? _self.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnSubmit implements LoginEvent {
+  const OnSubmit();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is OnSubmit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LoginEvent.onSubmit()';
   }
 }
 
@@ -229,12 +314,205 @@ class _$OnTapForgotPasswordCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
+class SignUpWithGoogleEvent implements LoginEvent {
+  const SignUpWithGoogleEvent({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SignUpWithGoogleEventCopyWith<SignUpWithGoogleEvent> get copyWith =>
+      _$SignUpWithGoogleEventCopyWithImpl<SignUpWithGoogleEvent>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SignUpWithGoogleEvent &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @override
+  String toString() {
+    return 'LoginEvent.signUpWithGoogleEvent(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SignUpWithGoogleEventCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $SignUpWithGoogleEventCopyWith(SignUpWithGoogleEvent value,
+          $Res Function(SignUpWithGoogleEvent) _then) =
+      _$SignUpWithGoogleEventCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$SignUpWithGoogleEventCopyWithImpl<$Res>
+    implements $SignUpWithGoogleEventCopyWith<$Res> {
+  _$SignUpWithGoogleEventCopyWithImpl(this._self, this._then);
+
+  final SignUpWithGoogleEvent _self;
+  final $Res Function(SignUpWithGoogleEvent) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(SignUpWithGoogleEvent(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class SignUpWithAppleEvent implements LoginEvent {
+  const SignUpWithAppleEvent({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SignUpWithAppleEventCopyWith<SignUpWithAppleEvent> get copyWith =>
+      _$SignUpWithAppleEventCopyWithImpl<SignUpWithAppleEvent>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SignUpWithAppleEvent &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @override
+  String toString() {
+    return 'LoginEvent.signUpWithAppleEvent(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SignUpWithAppleEventCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $SignUpWithAppleEventCopyWith(SignUpWithAppleEvent value,
+          $Res Function(SignUpWithAppleEvent) _then) =
+      _$SignUpWithAppleEventCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$SignUpWithAppleEventCopyWithImpl<$Res>
+    implements $SignUpWithAppleEventCopyWith<$Res> {
+  _$SignUpWithAppleEventCopyWithImpl(this._self, this._then);
+
+  final SignUpWithAppleEvent _self;
+  final $Res Function(SignUpWithAppleEvent) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(SignUpWithAppleEvent(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class SignUpWithFacebookEvent implements LoginEvent {
+  const SignUpWithFacebookEvent({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SignUpWithFacebookEventCopyWith<SignUpWithFacebookEvent> get copyWith =>
+      _$SignUpWithFacebookEventCopyWithImpl<SignUpWithFacebookEvent>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SignUpWithFacebookEvent &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @override
+  String toString() {
+    return 'LoginEvent.signUpWithFacebookEvent(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SignUpWithFacebookEventCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $SignUpWithFacebookEventCopyWith(SignUpWithFacebookEvent value,
+          $Res Function(SignUpWithFacebookEvent) _then) =
+      _$SignUpWithFacebookEventCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$SignUpWithFacebookEventCopyWithImpl<$Res>
+    implements $SignUpWithFacebookEventCopyWith<$Res> {
+  _$SignUpWithFacebookEventCopyWithImpl(this._self, this._then);
+
+  final SignUpWithFacebookEvent _self;
+  final $Res Function(SignUpWithFacebookEvent) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(SignUpWithFacebookEvent(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$LoginState {
-  bool get isLoading;
-  TextEditingController get emailController;
-  TextEditingController get passwordController;
-  String? get errorMessage;
-  bool get isSuccess;
+  CommonScreenState get status;
+  String get email;
+  String get password;
   bool get isRememberMe;
   UserDataModel? get user;
 
@@ -250,28 +528,22 @@ mixin _$LoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is LoginState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.emailController, emailController) ||
-                other.emailController == emailController) &&
-            (identical(other.passwordController, passwordController) ||
-                other.passwordController == passwordController) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.isSuccess, isSuccess) ||
-                other.isSuccess == isSuccess) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             (identical(other.isRememberMe, isRememberMe) ||
                 other.isRememberMe == isRememberMe) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, emailController,
-      passwordController, errorMessage, isSuccess, isRememberMe, user);
+  int get hashCode =>
+      Object.hash(runtimeType, status, email, password, isRememberMe, user);
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, emailController: $emailController, passwordController: $passwordController, errorMessage: $errorMessage, isSuccess: $isSuccess, isRememberMe: $isRememberMe, user: $user)';
+    return 'LoginState(status: $status, email: $email, password: $password, isRememberMe: $isRememberMe, user: $user)';
   }
 }
 
@@ -282,11 +554,9 @@ abstract mixin class $LoginStateCopyWith<$Res> {
       _$LoginStateCopyWithImpl;
   @useResult
   $Res call(
-      {bool isLoading,
-      TextEditingController emailController,
-      TextEditingController passwordController,
-      String? errorMessage,
-      bool isSuccess,
+      {CommonScreenState status,
+      String email,
+      String password,
       bool isRememberMe,
       UserDataModel? user});
 }
@@ -303,35 +573,25 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
-    Object? emailController = null,
-    Object? passwordController = null,
-    Object? errorMessage = freezed,
-    Object? isSuccess = null,
+    Object? status = null,
+    Object? email = null,
+    Object? password = null,
     Object? isRememberMe = null,
     Object? user = freezed,
   }) {
     return _then(_self.copyWith(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      emailController: null == emailController
-          ? _self.emailController
-          : emailController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      passwordController: null == passwordController
-          ? _self.passwordController
-          : passwordController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      errorMessage: freezed == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isSuccess: null == isSuccess
-          ? _self.isSuccess
-          : isSuccess // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _self.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
       isRememberMe: null == isRememberMe
           ? _self.isRememberMe
           : isRememberMe // ignore: cast_nullable_to_non_nullable
@@ -348,24 +608,18 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 
 class _LoginState implements LoginState {
   _LoginState(
-      {required this.isLoading,
-      required this.emailController,
-      required this.passwordController,
-      required this.errorMessage,
-      required this.isSuccess,
+      {required this.status,
+      required this.email,
+      required this.password,
       required this.isRememberMe,
       required this.user});
 
   @override
-  final bool isLoading;
+  final CommonScreenState status;
   @override
-  final TextEditingController emailController;
+  final String email;
   @override
-  final TextEditingController passwordController;
-  @override
-  final String? errorMessage;
-  @override
-  final bool isSuccess;
+  final String password;
   @override
   final bool isRememberMe;
   @override
@@ -384,28 +638,22 @@ class _LoginState implements LoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoginState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.emailController, emailController) ||
-                other.emailController == emailController) &&
-            (identical(other.passwordController, passwordController) ||
-                other.passwordController == passwordController) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.isSuccess, isSuccess) ||
-                other.isSuccess == isSuccess) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             (identical(other.isRememberMe, isRememberMe) ||
                 other.isRememberMe == isRememberMe) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, emailController,
-      passwordController, errorMessage, isSuccess, isRememberMe, user);
+  int get hashCode =>
+      Object.hash(runtimeType, status, email, password, isRememberMe, user);
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, emailController: $emailController, passwordController: $passwordController, errorMessage: $errorMessage, isSuccess: $isSuccess, isRememberMe: $isRememberMe, user: $user)';
+    return 'LoginState(status: $status, email: $email, password: $password, isRememberMe: $isRememberMe, user: $user)';
   }
 }
 
@@ -418,11 +666,9 @@ abstract mixin class _$LoginStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading,
-      TextEditingController emailController,
-      TextEditingController passwordController,
-      String? errorMessage,
-      bool isSuccess,
+      {CommonScreenState status,
+      String email,
+      String password,
       bool isRememberMe,
       UserDataModel? user});
 }
@@ -439,35 +685,25 @@ class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = null,
-    Object? emailController = null,
-    Object? passwordController = null,
-    Object? errorMessage = freezed,
-    Object? isSuccess = null,
+    Object? status = null,
+    Object? email = null,
+    Object? password = null,
     Object? isRememberMe = null,
     Object? user = freezed,
   }) {
     return _then(_LoginState(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      emailController: null == emailController
-          ? _self.emailController
-          : emailController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      passwordController: null == passwordController
-          ? _self.passwordController
-          : passwordController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      errorMessage: freezed == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isSuccess: null == isSuccess
-          ? _self.isSuccess
-          : isSuccess // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _self.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
       isRememberMe: null == isRememberMe
           ? _self.isRememberMe
           : isRememberMe // ignore: cast_nullable_to_non_nullable

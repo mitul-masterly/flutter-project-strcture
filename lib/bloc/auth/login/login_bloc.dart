@@ -1,31 +1,74 @@
-import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project_structure/Utils/utils.dart';
+import 'package:flutter_project_structure/data/api/either.dart';
+import 'package:flutter_project_structure/data/errors/failure.dart';
 import 'package:flutter_project_structure/data/models/request_model/login_request_model.dart';
 import 'package:flutter_project_structure/data/models/response_model/auth/user_data_model.dart';
 import 'package:flutter_project_structure/data/models/response_model/device_info_model.dart';
 import 'package:flutter_project_structure/data/repository/auth_repo.dart';
 import 'package:flutter_project_structure/helper/pref_helper/pref_keys.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/constants.dart';
-import 'package:flutter_project_structure/utils/utils.dart';
 import 'package:flutter_project_structure/views/tab_navigation_view.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepo authRepo;
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   LoginBloc({required this.authRepo}) : super(LoginState.initial()) {
-    on<OnValidateForm>(
-        (final OnValidateForm event, final Emitter<LoginState> emit) async {
-      if (event.formKEy.currentState!.validate()) {
-        await callLoginAPI(emit);
-      }
+    on<OnChangeEmail>(
+        (final OnChangeEmail event, final Emitter<LoginState> emit) {
+      emit(state.copyWith(email: event.email));
+    });
+
+    on<OnChangePassword>(
+        (final OnChangePassword event, final Emitter<LoginState> emit) {
+      emit(state.copyWith(password: event.password));
+    });
+
+    on<OnSubmit>((final OnSubmit event, final Emitter<LoginState> emit) async {
+      debugPrint('OnSubmit called');
+      emit(state.copyWith(status: CommonScreenState.loading, user: null));
+
+      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      final String? fcmToken = await SharedPreferenceHelper().fcmToken;
+      final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
+
+      final LoginRequestModel request = LoginRequestModel(
+          emailId: state.email,
+          userPassword: state.password,
+          appVersion: packageInfo.version,
+          deviceToken: fcmToken,
+          deviceType: deviceData.deviceType,
+          deviceId: deviceData.deviceId,
+          deviceName: deviceData.userDeviceName);
+
+      final Either<Failure, UserDataModel> result =
+          await authRepo.apiLogin(requestParams: request);
+
+      result.fold((final Failure error) {
+        emit(state.copyWith(status: CommonScreenState.error, user: null));
+      }, (final UserDataModel user) async {
+        emit(state.copyWith(status: CommonScreenState.success, user: user));
+        SharedPreferenceHelper().saveIsLoggedIn(true);
+        await SharedPreferenceHelper().saveUser(user);
+        if (state.isRememberMe) {
+          sharedPreferenceHelper.setRememberEmail(request.emailId ?? '');
+          sharedPreferenceHelper.setUserPassword(request.userPassword ?? '');
+        } else {
+          sharedPreferenceHelper.removeString(PrefKeys.rememberEmail);
+          sharedPreferenceHelper.removeString(PrefKeys.rememberPassword);
+        }
+      });
     });
 
     on<OnChangeRememberMe>(
@@ -33,52 +76,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       sharedPreferenceHelper.saveIsRememberMe(event.isRememberMe);
       emit(state.copyWith(isRememberMe: event.isRememberMe));
     });
-  }
 
-  Future<void> callLoginAPI(final Emitter<LoginState> emit) async {
-    emit(state.copyWith(
-        isLoading: true, errorMessage: null, isSuccess: false, user: null));
+    on<OnTapForgotPassword>((final event, final Emitter<LoginState> emit) {
+      navigateToForgotPassword(event.context);
+    });
+    on<SignUpWithGoogleEvent>(
+            (final SignUpWithGoogleEvent event, final Emitter<LoginState> emit) async {
+              final User? user = await _signInWithGoogle();
+              if (user != null) {
+                // Navigate to the home screen or wherever you need
+                ScaffoldMessenger.of(event.context).showSnackBar(
+                  SnackBar(content: Text('Signed in as ${user.displayName}')),
+                );
+              } else {
+                ScaffoldMessenger.of(event.context).showSnackBar(
+                  SnackBar(content: Text('Failed to sign in')),
+                );
+              }
+        });
 
-    try {
-      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      final String? fcmToken = await SharedPreferenceHelper().fcmToken;
-      final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
-
-      final LoginRequestModel request = LoginRequestModel(
-          emailId: state.emailController.text,
-          userPassword: state.passwordController.text,
-          appVersion: packageInfo.version,
-          deviceToken: fcmToken,
-          deviceType: deviceData.deviceType,
-          deviceId: deviceData.deviceId,
-          deviceName: deviceData.userDeviceName);
-
-      final UserDataModel user =
-          await authRepo.apiLogin(requestParams: request);
-      SharedPreferenceHelper().saveIsLoggedIn(true);
-      await SharedPreferenceHelper().saveUser(user);
-      if (state.isRememberMe) {
-        sharedPreferenceHelper.setRememberEmail(request.emailId ?? '');
-        sharedPreferenceHelper.setUserPassword(request.userPassword ?? '');
-      } else {
-        sharedPreferenceHelper.removeString(PrefKeys.rememberEmail);
-        sharedPreferenceHelper.removeString(PrefKeys.rememberPassword);
-      }
-      emit(state.copyWith(
-          isLoading: false, errorMessage: null, user: user, isSuccess: true));
-    } catch (e) {
-      debugPrint('error message $e');
-
-      final DioException error = e as DioException;
-      emit(state.copyWith(
-          isLoading: false,
-          errorMessage: error.message,
-          user: null,
-          isSuccess: false));
-    }
   }
 
   void navigateToDashboard(final BuildContext context) {
+    debugPrint('navigateToDashboard');
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
@@ -89,3 +109,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void navigateToForgotPassword(final BuildContext context) {}
 }
+  Future<User?> _signInWithGoogle() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+     /* if (googleUser == null) {
+        // User canceled the sign-in process
+        return null;
+      }*/
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Sign in with Firebase using the Google credentials
+      final UserCredential userCredential = await auth.signInWithCredential(credential);
+      return userCredential.user;
+    } catch (e) {
+
+      return null;
+    }
+  }

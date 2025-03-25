@@ -1,4 +1,6 @@
-class SignupRequest {
+import 'package:equatable/equatable.dart';
+
+class SignupRequest extends Equatable {
   String? firstName;
   String? lastName;
   String? emailId;
@@ -6,8 +8,8 @@ class SignupRequest {
   String? isdCode;
   String? userPassword;
   String? countryCodeISO2;
-  String? CreatedByDeviceName;
-  String? CreatedByDeviceTypeId;
+  String? createdByDeviceName;
+  String? createdByDeviceTypeId;
 
   SignupRequest({
     required this.firstName,
@@ -17,8 +19,8 @@ class SignupRequest {
     required this.isdCode,
     required this.userPassword,
     required this.countryCodeISO2,
-    required this.CreatedByDeviceName,
-    required this.CreatedByDeviceTypeId,
+    required this.createdByDeviceName,
+    required this.createdByDeviceTypeId,
   });
 
   SignupRequest.fromJson(final Map<String, dynamic> json) {
@@ -29,8 +31,8 @@ class SignupRequest {
     isdCode = json['isdCode'];
     userPassword = json['userPassword'];
     countryCodeISO2 = json['countryCodeISO2'];
-    CreatedByDeviceName = json['CreatedByDeviceName'];
-    CreatedByDeviceTypeId = json['CreatedByDeviceTypeId'];
+    createdByDeviceName = json['CreatedByDeviceName'];
+    createdByDeviceTypeId = json['CreatedByDeviceTypeId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,8 +44,22 @@ class SignupRequest {
       'isdCode': isdCode,
       'userPassword': userPassword,
       'countryCodeISO2': countryCodeISO2,
-      'CreatedByDeviceName': CreatedByDeviceName,
-      'CreatedByDeviceTypeId': CreatedByDeviceTypeId,
+      'CreatedByDeviceName': createdByDeviceName,
+      'CreatedByDeviceTypeId': createdByDeviceTypeId,
     };
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        firstName,
+        lastName,
+        emailId,
+        contactNo,
+        userPassword,
+        isdCode,
+        countryCodeISO2,
+        createdByDeviceName,
+        createdByDeviceTypeId
+      ];
 }

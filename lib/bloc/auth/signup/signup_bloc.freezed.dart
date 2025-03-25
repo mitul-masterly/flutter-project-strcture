@@ -38,63 +38,20 @@ class $SignUpEventCopyWith<$Res> {
 /// @nodoc
 
 class OnTapSubmit implements SignUpEvent {
-  const OnTapSubmit({required this.formKey});
-
-  final GlobalKey<FormState> formKey;
-
-  /// Create a copy of SignUpEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $OnTapSubmitCopyWith<OnTapSubmit> get copyWith =>
-      _$OnTapSubmitCopyWithImpl<OnTapSubmit>(this, _$identity);
+  const OnTapSubmit();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is OnTapSubmit &&
-            (identical(other.formKey, formKey) || other.formKey == formKey));
+        (other.runtimeType == runtimeType && other is OnTapSubmit);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, formKey);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'SignUpEvent.onTapSubmit(formKey: $formKey)';
-  }
-}
-
-/// @nodoc
-abstract mixin class $OnTapSubmitCopyWith<$Res>
-    implements $SignUpEventCopyWith<$Res> {
-  factory $OnTapSubmitCopyWith(
-          OnTapSubmit value, $Res Function(OnTapSubmit) _then) =
-      _$OnTapSubmitCopyWithImpl;
-  @useResult
-  $Res call({GlobalKey<FormState> formKey});
-}
-
-/// @nodoc
-class _$OnTapSubmitCopyWithImpl<$Res> implements $OnTapSubmitCopyWith<$Res> {
-  _$OnTapSubmitCopyWithImpl(this._self, this._then);
-
-  final OnTapSubmit _self;
-  final $Res Function(OnTapSubmit) _then;
-
-  /// Create a copy of SignUpEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? formKey = null,
-  }) {
-    return _then(OnTapSubmit(
-      formKey: null == formKey
-          ? _self.formKey
-          : formKey // ignore: cast_nullable_to_non_nullable
-              as GlobalKey<FormState>,
-    ));
+    return 'SignUpEvent.onTapSubmit()';
   }
 }
 
@@ -164,18 +121,405 @@ class _$OnChangeCountryCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
+class OnChangeFirstName implements SignUpEvent {
+  const OnChangeFirstName({required this.fName});
+
+  final String fName;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangeFirstNameCopyWith<OnChangeFirstName> get copyWith =>
+      _$OnChangeFirstNameCopyWithImpl<OnChangeFirstName>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangeFirstName &&
+            (identical(other.fName, fName) || other.fName == fName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fName);
+
+  @override
+  String toString() {
+    return 'SignUpEvent.onChangeFirstName(fName: $fName)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangeFirstNameCopyWith<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  factory $OnChangeFirstNameCopyWith(
+          OnChangeFirstName value, $Res Function(OnChangeFirstName) _then) =
+      _$OnChangeFirstNameCopyWithImpl;
+  @useResult
+  $Res call({String fName});
+}
+
+/// @nodoc
+class _$OnChangeFirstNameCopyWithImpl<$Res>
+    implements $OnChangeFirstNameCopyWith<$Res> {
+  _$OnChangeFirstNameCopyWithImpl(this._self, this._then);
+
+  final OnChangeFirstName _self;
+  final $Res Function(OnChangeFirstName) _then;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? fName = null,
+  }) {
+    return _then(OnChangeFirstName(
+      fName: null == fName
+          ? _self.fName
+          : fName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnChangeLastName implements SignUpEvent {
+  const OnChangeLastName({required this.lName});
+
+  final String lName;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangeLastNameCopyWith<OnChangeLastName> get copyWith =>
+      _$OnChangeLastNameCopyWithImpl<OnChangeLastName>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangeLastName &&
+            (identical(other.lName, lName) || other.lName == lName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, lName);
+
+  @override
+  String toString() {
+    return 'SignUpEvent.onChangeLastName(lName: $lName)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangeLastNameCopyWith<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  factory $OnChangeLastNameCopyWith(
+          OnChangeLastName value, $Res Function(OnChangeLastName) _then) =
+      _$OnChangeLastNameCopyWithImpl;
+  @useResult
+  $Res call({String lName});
+}
+
+/// @nodoc
+class _$OnChangeLastNameCopyWithImpl<$Res>
+    implements $OnChangeLastNameCopyWith<$Res> {
+  _$OnChangeLastNameCopyWithImpl(this._self, this._then);
+
+  final OnChangeLastName _self;
+  final $Res Function(OnChangeLastName) _then;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? lName = null,
+  }) {
+    return _then(OnChangeLastName(
+      lName: null == lName
+          ? _self.lName
+          : lName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnChangeEmail implements SignUpEvent {
+  const OnChangeEmail({required this.email});
+
+  final String email;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangeEmailCopyWith<OnChangeEmail> get copyWith =>
+      _$OnChangeEmailCopyWithImpl<OnChangeEmail>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangeEmail &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @override
+  String toString() {
+    return 'SignUpEvent.onChangeEmail(email: $email)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangeEmailCopyWith<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  factory $OnChangeEmailCopyWith(
+          OnChangeEmail value, $Res Function(OnChangeEmail) _then) =
+      _$OnChangeEmailCopyWithImpl;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class _$OnChangeEmailCopyWithImpl<$Res>
+    implements $OnChangeEmailCopyWith<$Res> {
+  _$OnChangeEmailCopyWithImpl(this._self, this._then);
+
+  final OnChangeEmail _self;
+  final $Res Function(OnChangeEmail) _then;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(OnChangeEmail(
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnChangePassword implements SignUpEvent {
+  const OnChangePassword({required this.password});
+
+  final String password;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangePasswordCopyWith<OnChangePassword> get copyWith =>
+      _$OnChangePasswordCopyWithImpl<OnChangePassword>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangePassword &&
+            (identical(other.password, password) ||
+                other.password == password));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, password);
+
+  @override
+  String toString() {
+    return 'SignUpEvent.onChangePassword(password: $password)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangePasswordCopyWith<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  factory $OnChangePasswordCopyWith(
+          OnChangePassword value, $Res Function(OnChangePassword) _then) =
+      _$OnChangePasswordCopyWithImpl;
+  @useResult
+  $Res call({String password});
+}
+
+/// @nodoc
+class _$OnChangePasswordCopyWithImpl<$Res>
+    implements $OnChangePasswordCopyWith<$Res> {
+  _$OnChangePasswordCopyWithImpl(this._self, this._then);
+
+  final OnChangePassword _self;
+  final $Res Function(OnChangePassword) _then;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? password = null,
+  }) {
+    return _then(OnChangePassword(
+      password: null == password
+          ? _self.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnChangeConfirmPassword implements SignUpEvent {
+  const OnChangeConfirmPassword({required this.confirmPassword});
+
+  final String confirmPassword;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangeConfirmPasswordCopyWith<OnChangeConfirmPassword> get copyWith =>
+      _$OnChangeConfirmPasswordCopyWithImpl<OnChangeConfirmPassword>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangeConfirmPassword &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, confirmPassword);
+
+  @override
+  String toString() {
+    return 'SignUpEvent.onChangeConfirmPassword(confirmPassword: $confirmPassword)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangeConfirmPasswordCopyWith<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  factory $OnChangeConfirmPasswordCopyWith(OnChangeConfirmPassword value,
+          $Res Function(OnChangeConfirmPassword) _then) =
+      _$OnChangeConfirmPasswordCopyWithImpl;
+  @useResult
+  $Res call({String confirmPassword});
+}
+
+/// @nodoc
+class _$OnChangeConfirmPasswordCopyWithImpl<$Res>
+    implements $OnChangeConfirmPasswordCopyWith<$Res> {
+  _$OnChangeConfirmPasswordCopyWithImpl(this._self, this._then);
+
+  final OnChangeConfirmPassword _self;
+  final $Res Function(OnChangeConfirmPassword) _then;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? confirmPassword = null,
+  }) {
+    return _then(OnChangeConfirmPassword(
+      confirmPassword: null == confirmPassword
+          ? _self.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class OnChangeMobileNumber implements SignUpEvent {
+  const OnChangeMobileNumber({required this.mobileNumber});
+
+  final String mobileNumber;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangeMobileNumberCopyWith<OnChangeMobileNumber> get copyWith =>
+      _$OnChangeMobileNumberCopyWithImpl<OnChangeMobileNumber>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangeMobileNumber &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, mobileNumber);
+
+  @override
+  String toString() {
+    return 'SignUpEvent.onChangeMobileNumber(mobileNumber: $mobileNumber)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangeMobileNumberCopyWith<$Res>
+    implements $SignUpEventCopyWith<$Res> {
+  factory $OnChangeMobileNumberCopyWith(OnChangeMobileNumber value,
+          $Res Function(OnChangeMobileNumber) _then) =
+      _$OnChangeMobileNumberCopyWithImpl;
+  @useResult
+  $Res call({String mobileNumber});
+}
+
+/// @nodoc
+class _$OnChangeMobileNumberCopyWithImpl<$Res>
+    implements $OnChangeMobileNumberCopyWith<$Res> {
+  _$OnChangeMobileNumberCopyWithImpl(this._self, this._then);
+
+  final OnChangeMobileNumber _self;
+  final $Res Function(OnChangeMobileNumber) _then;
+
+  /// Create a copy of SignUpEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? mobileNumber = null,
+  }) {
+    return _then(OnChangeMobileNumber(
+      mobileNumber: null == mobileNumber
+          ? _self.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$SignUpState {
-  TextEditingController get txtFirstName;
-  TextEditingController get txtLastName;
-  TextEditingController get txtEmail;
-  TextEditingController get txtPassword;
-  TextEditingController get txtConfirmPassword;
-  TextEditingController get txtMobileNumber;
-  bool get isSubmitting;
-  String? get errorMessage;
-  bool? get isSuccess;
-  String? get countryCode;
-  String? get countryCodeISO2;
+  String get firstName;
+  String get lastName;
+  String get email;
+  String get password;
+  String get confirmPassword;
+  String get countryISOCode;
+  String get countryCode;
+  String get mobileNumber;
+  CommonScreenState get status;
 
   /// Create a copy of SignUpState
   /// with the given fields replaced by the non-null parameter values.
@@ -189,48 +533,40 @@ mixin _$SignUpState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SignUpState &&
-            (identical(other.txtFirstName, txtFirstName) ||
-                other.txtFirstName == txtFirstName) &&
-            (identical(other.txtLastName, txtLastName) ||
-                other.txtLastName == txtLastName) &&
-            (identical(other.txtEmail, txtEmail) ||
-                other.txtEmail == txtEmail) &&
-            (identical(other.txtPassword, txtPassword) ||
-                other.txtPassword == txtPassword) &&
-            (identical(other.txtConfirmPassword, txtConfirmPassword) ||
-                other.txtConfirmPassword == txtConfirmPassword) &&
-            (identical(other.txtMobileNumber, txtMobileNumber) ||
-                other.txtMobileNumber == txtMobileNumber) &&
-            (identical(other.isSubmitting, isSubmitting) ||
-                other.isSubmitting == isSubmitting) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.isSuccess, isSuccess) ||
-                other.isSuccess == isSuccess) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword) &&
+            (identical(other.countryISOCode, countryISOCode) ||
+                other.countryISOCode == countryISOCode) &&
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
-            (identical(other.countryCodeISO2, countryCodeISO2) ||
-                other.countryCodeISO2 == countryCodeISO2));
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      txtFirstName,
-      txtLastName,
-      txtEmail,
-      txtPassword,
-      txtConfirmPassword,
-      txtMobileNumber,
-      isSubmitting,
-      errorMessage,
-      isSuccess,
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      countryISOCode,
       countryCode,
-      countryCodeISO2);
+      mobileNumber,
+      status);
 
   @override
   String toString() {
-    return 'SignUpState(txtFirstName: $txtFirstName, txtLastName: $txtLastName, txtEmail: $txtEmail, txtPassword: $txtPassword, txtConfirmPassword: $txtConfirmPassword, txtMobileNumber: $txtMobileNumber, isSubmitting: $isSubmitting, errorMessage: $errorMessage, isSuccess: $isSuccess, countryCode: $countryCode, countryCodeISO2: $countryCodeISO2)';
+    return 'SignUpState(firstName: $firstName, lastName: $lastName, email: $email, password: $password, confirmPassword: $confirmPassword, countryISOCode: $countryISOCode, countryCode: $countryCode, mobileNumber: $mobileNumber, status: $status)';
   }
 }
 
@@ -241,17 +577,15 @@ abstract mixin class $SignUpStateCopyWith<$Res> {
       _$SignUpStateCopyWithImpl;
   @useResult
   $Res call(
-      {TextEditingController txtFirstName,
-      TextEditingController txtLastName,
-      TextEditingController txtEmail,
-      TextEditingController txtPassword,
-      TextEditingController txtConfirmPassword,
-      TextEditingController txtMobileNumber,
-      bool isSubmitting,
-      String? errorMessage,
-      bool? isSuccess,
-      String? countryCode,
-      String? countryCodeISO2});
+      {String firstName,
+      String lastName,
+      String email,
+      String password,
+      String confirmPassword,
+      String countryISOCode,
+      String countryCode,
+      String mobileNumber,
+      CommonScreenState status});
 }
 
 /// @nodoc
@@ -266,63 +600,53 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? txtFirstName = null,
-    Object? txtLastName = null,
-    Object? txtEmail = null,
-    Object? txtPassword = null,
-    Object? txtConfirmPassword = null,
-    Object? txtMobileNumber = null,
-    Object? isSubmitting = null,
-    Object? errorMessage = freezed,
-    Object? isSuccess = freezed,
-    Object? countryCode = freezed,
-    Object? countryCodeISO2 = freezed,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? email = null,
+    Object? password = null,
+    Object? confirmPassword = null,
+    Object? countryISOCode = null,
+    Object? countryCode = null,
+    Object? mobileNumber = null,
+    Object? status = null,
   }) {
     return _then(_self.copyWith(
-      txtFirstName: null == txtFirstName
-          ? _self.txtFirstName
-          : txtFirstName // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtLastName: null == txtLastName
-          ? _self.txtLastName
-          : txtLastName // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtEmail: null == txtEmail
-          ? _self.txtEmail
-          : txtEmail // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtPassword: null == txtPassword
-          ? _self.txtPassword
-          : txtPassword // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtConfirmPassword: null == txtConfirmPassword
-          ? _self.txtConfirmPassword
-          : txtConfirmPassword // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtMobileNumber: null == txtMobileNumber
-          ? _self.txtMobileNumber
-          : txtMobileNumber // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      isSubmitting: null == isSubmitting
-          ? _self.isSubmitting
-          : isSubmitting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorMessage: freezed == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isSuccess: freezed == isSuccess
-          ? _self.isSuccess
-          : isSuccess // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      countryCode: freezed == countryCode
+      firstName: null == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _self.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      confirmPassword: null == confirmPassword
+          ? _self.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryISOCode: null == countryISOCode
+          ? _self.countryISOCode
+          : countryISOCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
           ? _self.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      countryCodeISO2: freezed == countryCodeISO2
-          ? _self.countryCodeISO2
-          : countryCodeISO2 // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      mobileNumber: null == mobileNumber
+          ? _self.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
     ));
   }
 }
@@ -331,40 +655,34 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
 
 class _SignUpState implements SignUpState {
   _SignUpState(
-      {required this.txtFirstName,
-      required this.txtLastName,
-      required this.txtEmail,
-      required this.txtPassword,
-      required this.txtConfirmPassword,
-      required this.txtMobileNumber,
-      required this.isSubmitting,
-      this.errorMessage,
-      this.isSuccess,
-      this.countryCode,
-      this.countryCodeISO2});
+      {required this.firstName,
+      required this.lastName,
+      required this.email,
+      required this.password,
+      required this.confirmPassword,
+      required this.countryISOCode,
+      required this.countryCode,
+      required this.mobileNumber,
+      required this.status});
 
   @override
-  final TextEditingController txtFirstName;
+  final String firstName;
   @override
-  final TextEditingController txtLastName;
+  final String lastName;
   @override
-  final TextEditingController txtEmail;
+  final String email;
   @override
-  final TextEditingController txtPassword;
+  final String password;
   @override
-  final TextEditingController txtConfirmPassword;
+  final String confirmPassword;
   @override
-  final TextEditingController txtMobileNumber;
+  final String countryISOCode;
   @override
-  final bool isSubmitting;
+  final String countryCode;
   @override
-  final String? errorMessage;
+  final String mobileNumber;
   @override
-  final bool? isSuccess;
-  @override
-  final String? countryCode;
-  @override
-  final String? countryCodeISO2;
+  final CommonScreenState status;
 
   /// Create a copy of SignUpState
   /// with the given fields replaced by the non-null parameter values.
@@ -379,48 +697,40 @@ class _SignUpState implements SignUpState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SignUpState &&
-            (identical(other.txtFirstName, txtFirstName) ||
-                other.txtFirstName == txtFirstName) &&
-            (identical(other.txtLastName, txtLastName) ||
-                other.txtLastName == txtLastName) &&
-            (identical(other.txtEmail, txtEmail) ||
-                other.txtEmail == txtEmail) &&
-            (identical(other.txtPassword, txtPassword) ||
-                other.txtPassword == txtPassword) &&
-            (identical(other.txtConfirmPassword, txtConfirmPassword) ||
-                other.txtConfirmPassword == txtConfirmPassword) &&
-            (identical(other.txtMobileNumber, txtMobileNumber) ||
-                other.txtMobileNumber == txtMobileNumber) &&
-            (identical(other.isSubmitting, isSubmitting) ||
-                other.isSubmitting == isSubmitting) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.isSuccess, isSuccess) ||
-                other.isSuccess == isSuccess) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword) &&
+            (identical(other.countryISOCode, countryISOCode) ||
+                other.countryISOCode == countryISOCode) &&
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
-            (identical(other.countryCodeISO2, countryCodeISO2) ||
-                other.countryCodeISO2 == countryCodeISO2));
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      txtFirstName,
-      txtLastName,
-      txtEmail,
-      txtPassword,
-      txtConfirmPassword,
-      txtMobileNumber,
-      isSubmitting,
-      errorMessage,
-      isSuccess,
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      countryISOCode,
       countryCode,
-      countryCodeISO2);
+      mobileNumber,
+      status);
 
   @override
   String toString() {
-    return 'SignUpState(txtFirstName: $txtFirstName, txtLastName: $txtLastName, txtEmail: $txtEmail, txtPassword: $txtPassword, txtConfirmPassword: $txtConfirmPassword, txtMobileNumber: $txtMobileNumber, isSubmitting: $isSubmitting, errorMessage: $errorMessage, isSuccess: $isSuccess, countryCode: $countryCode, countryCodeISO2: $countryCodeISO2)';
+    return 'SignUpState(firstName: $firstName, lastName: $lastName, email: $email, password: $password, confirmPassword: $confirmPassword, countryISOCode: $countryISOCode, countryCode: $countryCode, mobileNumber: $mobileNumber, status: $status)';
   }
 }
 
@@ -433,17 +743,15 @@ abstract mixin class _$SignUpStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TextEditingController txtFirstName,
-      TextEditingController txtLastName,
-      TextEditingController txtEmail,
-      TextEditingController txtPassword,
-      TextEditingController txtConfirmPassword,
-      TextEditingController txtMobileNumber,
-      bool isSubmitting,
-      String? errorMessage,
-      bool? isSuccess,
-      String? countryCode,
-      String? countryCodeISO2});
+      {String firstName,
+      String lastName,
+      String email,
+      String password,
+      String confirmPassword,
+      String countryISOCode,
+      String countryCode,
+      String mobileNumber,
+      CommonScreenState status});
 }
 
 /// @nodoc
@@ -458,63 +766,53 @@ class __$SignUpStateCopyWithImpl<$Res> implements _$SignUpStateCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? txtFirstName = null,
-    Object? txtLastName = null,
-    Object? txtEmail = null,
-    Object? txtPassword = null,
-    Object? txtConfirmPassword = null,
-    Object? txtMobileNumber = null,
-    Object? isSubmitting = null,
-    Object? errorMessage = freezed,
-    Object? isSuccess = freezed,
-    Object? countryCode = freezed,
-    Object? countryCodeISO2 = freezed,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? email = null,
+    Object? password = null,
+    Object? confirmPassword = null,
+    Object? countryISOCode = null,
+    Object? countryCode = null,
+    Object? mobileNumber = null,
+    Object? status = null,
   }) {
     return _then(_SignUpState(
-      txtFirstName: null == txtFirstName
-          ? _self.txtFirstName
-          : txtFirstName // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtLastName: null == txtLastName
-          ? _self.txtLastName
-          : txtLastName // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtEmail: null == txtEmail
-          ? _self.txtEmail
-          : txtEmail // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtPassword: null == txtPassword
-          ? _self.txtPassword
-          : txtPassword // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtConfirmPassword: null == txtConfirmPassword
-          ? _self.txtConfirmPassword
-          : txtConfirmPassword // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      txtMobileNumber: null == txtMobileNumber
-          ? _self.txtMobileNumber
-          : txtMobileNumber // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
-      isSubmitting: null == isSubmitting
-          ? _self.isSubmitting
-          : isSubmitting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorMessage: freezed == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isSuccess: freezed == isSuccess
-          ? _self.isSuccess
-          : isSuccess // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      countryCode: freezed == countryCode
+      firstName: null == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _self.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      confirmPassword: null == confirmPassword
+          ? _self.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryISOCode: null == countryISOCode
+          ? _self.countryISOCode
+          : countryISOCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryCode: null == countryCode
           ? _self.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      countryCodeISO2: freezed == countryCodeISO2
-          ? _self.countryCodeISO2
-          : countryCodeISO2 // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      mobileNumber: null == mobileNumber
+          ? _self.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
     ));
   }
 }

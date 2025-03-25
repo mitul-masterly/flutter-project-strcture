@@ -40,10 +40,10 @@ class Utils {
         child: Platform.isIOS
             ? CupertinoActivityIndicator(
                 radius: 16.0,
-                color: AppColors.color003366,
+                color: AppColors.colorPrimary500,
               )
             : CircularProgressIndicator(
-                color: AppColors.color003366,
+                color: AppColors.colorPrimary500,
               ),
       );
 

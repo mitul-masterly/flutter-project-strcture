@@ -14,6 +14,9 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget? icon;
   final bool isLoading;
+  final Color? loadingIndicatorColor;
+  final Color? bgColor;
+  final Color? titleColor;
 
   const AppButton(
       {super.key,
@@ -22,7 +25,11 @@ class AppButton extends StatelessWidget {
       required this.width,
       required this.type,
       required this.icon,
-      required this.isLoading});
+      required this.isLoading,
+      this.loadingIndicatorColor,
+      this.bgColor,
+      this.titleColor
+      });
 
   @override
   Widget build(final BuildContext context) {
@@ -36,21 +43,21 @@ class AppButton extends StatelessWidget {
               const EdgeInsets.all(0)),
           foregroundColor:
               WidgetStateProperty.all<Color>(type == AppButtonType.primary
-                  ? AppColors.color003366
+                  ?AppColors.colorPrimary500
                   : type == AppButtonType.secondary
-                      ? AppColors.color990033
+                      ? AppColors.colorError500
                       : AppColors.white),
           backgroundColor:
               WidgetStateProperty.all<Color>(type == AppButtonType.primary
-                  ? AppColors.color003366
+                  ? bgColor ??  AppColors.colorPrimary500
                   : type == AppButtonType.secondary
-                      ? AppColors.color003366
+                      ? AppColors.colorPrimary500
                       : AppColors.white),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               side: BorderSide(
                   color: type == AppButtonType.thirdB
-                      ? AppColors.color003366
+                      ? AppColors.colorPrimary500
                       : Colors.transparent),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -59,8 +66,12 @@ class AppButton extends StatelessWidget {
         onPressed: onPressed,
         child: isLoading
             ? Platform.isIOS
-                ? CupertinoActivityIndicator()
-                : CircularProgressIndicator()
+                ? CupertinoActivityIndicator(
+                    color: loadingIndicatorColor ?? AppColors.white,
+                  )
+                : CircularProgressIndicator(
+                    color: loadingIndicatorColor ?? AppColors.white,
+                  )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -69,11 +80,11 @@ class AppButton extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: rubikW500.copyWith(
+                    style: dMSansW400.copyWith(
                         color: type == AppButtonType.primary ||
                                 type == AppButtonType.secondary
-                            ? AppColors.white
-                            : AppColors.color003366),
+                            ? titleColor ??  AppColors.white
+                            : titleColor ??  AppColors.colorPrimary500),
                   ),
                 ],
               ),

@@ -21,23 +21,31 @@ class LoginFormWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           AppTextField(
+            key: Key('login_email_field'),
+            initialValue: state.email,
             type: TextFieldTypes.email,
             title: AppStrings.email,
-            textEditingController: state.emailController,
-            strHeaderTitle: '${AppStrings.email.tr(buildContext)}*',
+            strHeaderTitle: '${AppStrings.email.tr(buildContext)} ',
             textInputAction: TextInputAction.next,
+            onChange: (final String value) {
+              context.read<LoginBloc>().add(OnChangeEmail(email: value));
+            },
           ),
           20.height,
           AppTextField(
+            key: Key('login_password_field'),
+            initialValue: state.password,
             type: TextFieldTypes.password,
             title: AppStrings.password,
-            textEditingController: state.passwordController,
-            strHeaderTitle: '${AppStrings.password.tr(buildContext)}*',
+            strHeaderTitle: '${AppStrings.password.tr(buildContext)} ',
             textInputAction: TextInputAction.done,
+            onChange: (final String value) {
+              context.read<LoginBloc>().add(OnChangePassword(password: value));
+            },
           ),
           12.height,
           Row(
-            children: [
+            children: <Widget>[
               Expanded(
                 child: InkWell(
                   splashColor: Colors.transparent,
@@ -46,18 +54,18 @@ class LoginFormWidget extends StatelessWidget {
                         OnChangeRememberMe(isRememberMe: !state.isRememberMe));
                   },
                   child: Row(
-                    children: [
+                    children: <Widget>[
                       Icon(
                         state.isRememberMe
                             ? Icons.check_box_rounded
                             : Icons.check_box_outline_blank_rounded,
-                        color: AppColors.color003366,
+                        color: AppColors.colorPrimary500,
                       ),
                       5.width,
                       Text(
                         'Remember me'.tr(context),
-                        style: rubikW400.copyWith(
-                            color: AppColors.color808080, fontSize: 14),
+                        style: dMSansW400.copyWith(
+                            color: AppColors.baseColorWhite45, fontSize: 14),
                       )
                     ],
                   ),
@@ -75,8 +83,8 @@ class LoginFormWidget extends StatelessWidget {
                   child: Text(
                     textAlign: TextAlign.end,
                     'Forgot Password?'.tr(context),
-                    style: rubikW700.copyWith(
-                        color: AppColors.color003366, fontSize: 14),
+                    style: dMSansW700.copyWith(
+                        color: AppColors.colorPrimary500, fontSize: 14),
                   ),
                 ),
               ),

@@ -13,7 +13,8 @@ import 'package:intl_phone_field/phone_number.dart';
 class AppTextField extends StatelessWidget with Validator {
   final TextFieldTypes type;
   final String title;
-  final TextEditingController textEditingController;
+  final TextEditingController? textEditingController;
+  final String? initialValue;
   final String? strPrefixText;
   final List<TextInputFormatter>? inputFormatters;
   final String? hintText;
@@ -23,12 +24,14 @@ class AppTextField extends StatelessWidget with Validator {
   final TextInputAction textInputAction;
   final FocusNode? nextFocusNode;
   final FocusNode? focusNode;
+  final ValueChanged<String>? onChange;
+  final bool isRequired;
 
   const AppTextField(
       {super.key,
       required this.type,
       required this.title,
-      required this.textEditingController,
+      this.textEditingController,
       this.strPrefixText = '',
       this.inputFormatters = const <TextInputFormatter>[],
       this.hintText,
@@ -37,7 +40,11 @@ class AppTextField extends StatelessWidget with Validator {
       this.validator,
       required this.textInputAction,
       this.nextFocusNode,
-      this.focusNode});
+      this.focusNode,
+      this.initialValue,
+      this.onChange,
+      this.isRequired = true,
+      });
 
   @override
   Widget build(final BuildContext buildContext) {
@@ -47,9 +54,18 @@ class AppTextField extends StatelessWidget with Validator {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (showHeaderTitle ?? false) ...<Widget>[
-          Text(
-            strHeaderTitle ?? '',
-            style: rubikW700.copyWith(fontSize: 14),
+          RichText(
+            text: TextSpan(
+              text: strHeaderTitle,
+              style: interW500,
+              children:isRequired ? <TextSpan>[
+                TextSpan(
+                  text: '*',
+                  style: dMSansW700.copyWith(
+                      fontSize: 14, color: AppColors.colorError500),
+                ),
+              ] : <InlineSpan>[],
+            ),
           ),
           10.height,
         ],
@@ -58,8 +74,9 @@ class AppTextField extends StatelessWidget with Validator {
             builder: (final BuildContext context, final bool value,
                 final Widget? child) {
               return TextFormField(
+                initialValue: initialValue ?? '',
                 focusNode: this.focusNode,
-                style: rubikW400.copyWith(fontSize: 14),
+                style: dMSansW400.copyWith(fontSize: 14),
                 controller: textEditingController,
                 obscureText: type == TextFieldTypes.password && !isShow.value,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -80,10 +97,11 @@ class AppTextField extends StatelessWidget with Validator {
                 onTap: () {
                   // Scrollable.ensureVisible(buildContext);
                 },
+                onChanged: onChange,
                 onTapOutside: (final PointerDownEvent v) {
                   FocusScope.of(buildContext).unfocus();
                 },
-                onFieldSubmitted: (final value) {
+                onFieldSubmitted: (final String value) {
                   if (nextFocusNode != null) {
                     FocusScope.of(context).requestFocus(nextFocusNode);
                   }
@@ -95,14 +113,14 @@ class AppTextField extends StatelessWidget with Validator {
                   return _validateTextField(type, value, title, context, null);
                 },
                 decoration: InputDecoration(
-                  errorStyle: TextStyle(color: AppColors.colorF92814),
+                  errorStyle: TextStyle(color: AppColors.colorError500),
                   hintText: hintText ??
                       AppStrings.enterTxt.tr(buildContext,
                           namedArgs: <String, String>{
                             'field_name': title.tr(buildContext).toLowerCase()
                           }),
-                  hintStyle: rubikW400.copyWith(
-                    color: AppColors.color808080,
+                  hintStyle: dMSansW400.copyWith(
+                    color: AppColors.baseColorWhite85,
                     fontSize: 14,
                   ),
                   prefixIcon: strPrefixText != ''
@@ -114,7 +132,7 @@ class AppTextField extends StatelessWidget with Validator {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   strPrefixText ?? '',
-                                  style: rubikW400.copyWith(
+                                  style: dMSansW400.copyWith(
                                     fontSize: 15,
                                   ),
                                 )),
@@ -136,15 +154,15 @@ class AppTextField extends StatelessWidget with Validator {
                               isShow.value
                                   ? Icons.visibility_outlined
                                   : Icons.visibility_off_outlined,
-                              color: AppColors.color808080,
+                              color: AppColors.baseColorWhite45,
                             ),
                           ),
                         )
                       : 10.width,
-                  focusedBorder: Utils.inputBorder(AppColors.color003366),
-                  focusedErrorBorder: Utils.inputBorder(AppColors.colorF92814),
-                  errorBorder: Utils.inputBorder(AppColors.colorF92814),
-                  enabledBorder: Utils.inputBorder(AppColors.color808080),
+                  focusedBorder: Utils.inputBorder(AppColors.colorPrimary500),
+                  focusedErrorBorder: Utils.inputBorder(AppColors.colorError500),
+                  errorBorder: Utils.inputBorder(AppColors.colorError500),
+                  enabledBorder: Utils.inputBorder(AppColors.baseColorWhite85),
                   contentPadding: EdgeInsets.zero,
                 ),
               );

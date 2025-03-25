@@ -1,3 +1,5 @@
+import 'package:flutter_project_structure/utils/app_enums.dart';
+
 class AppStrings {
   static const String login = 'Login';
   static const String email = 'Email';
@@ -9,4 +11,6 @@ class AppStrings {
   static const String submit = 'Submit';
   static const String isRequired = 'is Required';
   static const String mobileNumber = 'Mobile Number';
+  static const String globalErrorMessage = 'Something Went Wrong..!';
+
 }
