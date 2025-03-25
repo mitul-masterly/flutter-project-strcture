@@ -9,6 +9,7 @@ import 'package:flutter_project_structure/helper/push_notification/notification_
 import 'package:flutter_project_structure/routes/app_routes.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
+import 'package:flutter_project_structure/utils/flavors.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<LocalisationBloc, LocalisationState>(
         builder: (final BuildContext context, final LocalisationState state) {
       return MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: FlavorConfig.isStaging ? true : false,
+        title: FlavorConfig.title,
         navigatorKey: navigatorKey,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.color003366),

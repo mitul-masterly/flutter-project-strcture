@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
@@ -51,11 +52,12 @@ class LoginScreen extends StatelessWidget {
                         isLoading: state.status == CommonScreenState.loading,
                         icon: null,
                         onPressed: () {
-                          if (bloc.loginFormKey.currentState?.validate() ==
-                              true) {
-                            debugPrint('Login Button Pressed');
-                            bloc.add(OnSubmit());
-                          }
+                         throw Exception();
+                          // if (bloc.loginFormKey.currentState?.validate() ==
+                          //     true) {
+                          //   debugPrint('Login Button Pressed');
+                          //   bloc.add(OnSubmit());
+                          // }
                         },
                         type: AppButtonType.primary,
                       ),
