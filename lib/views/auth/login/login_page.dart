@@ -10,7 +10,7 @@ import 'package:flutter_project_structure/utils/app_strings.dart';
 import 'package:flutter_project_structure/views/auth/login/widgets/login_footer_widget.dart';
 import 'package:flutter_project_structure/views/auth/login/widgets/login_form_widget.dart';
 import 'package:flutter_project_structure/views/auth/login/widgets/login_header_widget.dart';
-import 'package:flutter_project_structure/views/auth/login/widgets/sign_up_with_google_widget.dart';
+import 'package:flutter_project_structure/views/auth/login/widgets/sign_up_method_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -73,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                           ]
                       ),
                       30.height,
-                      SignUpWithGoogleWidget(),
+                      SignUpMethodWidget(),
                       LoginFooterWidget(),
                       30.height
                     ],

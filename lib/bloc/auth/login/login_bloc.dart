@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
@@ -13,8 +14,8 @@ import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/constants.dart';
 import 'package:flutter_project_structure/views/tab_navigation_view.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
@@ -79,6 +80,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<OnTapForgotPassword>((final event, final Emitter<LoginState> emit) {
       navigateToForgotPassword(event.context);
     });
+    on<SignUpWithGoogleEvent>(
+            (final SignUpWithGoogleEvent event, final Emitter<LoginState> emit) async {
+              final User? user = await _signInWithGoogle();
+              if (user != null) {
+                // Navigate to the home screen or wherever you need
+                ScaffoldMessenger.of(event.context).showSnackBar(
+                  SnackBar(content: Text('Signed in as ${user.displayName}')),
+                );
+              } else {
+                ScaffoldMessenger.of(event.context).showSnackBar(
+                  SnackBar(content: Text('Failed to sign in')),
+                );
+              }
+        });
+
   }
 
   void navigateToDashboard(final BuildContext context) {
@@ -93,3 +109,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void navigateToForgotPassword(final BuildContext context) {}
 }
+  Future<User?> _signInWithGoogle() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+     /* if (googleUser == null) {
+        // User canceled the sign-in process
+        return null;
+      }*/
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Sign in with Firebase using the Google credentials
+      final UserCredential userCredential = await auth.signInWithCredential(credential);
+      return userCredential.user;
+    } catch (e) {
+
+      return null;
+    }
+  }
