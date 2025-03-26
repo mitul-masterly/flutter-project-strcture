@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/Components/common_button_widget.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
-import 'package:flutter_project_structure/bloc/auth/login/login_bloc.dart';
 import 'package:flutter_project_structure/bloc/auth/social_media/social_media_bloc.dart';
 import 'package:flutter_project_structure/gen/assets.gen.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';

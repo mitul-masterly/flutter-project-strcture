@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_project_structure/Routes/routes_name.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
 import 'package:flutter_project_structure/data/api/either.dart';
 import 'package:flutter_project_structure/data/errors/failure.dart';

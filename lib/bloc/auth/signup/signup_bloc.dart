@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_project_structure/data/api/either.dart';
-import 'package:flutter_project_structure/data/errors/failure.dart';
-import 'package:flutter_project_structure/data/models/request_model/signup_request_model.dart';
-import 'package:flutter_project_structure/data/models/response_model/device_info_model.dart';
 import 'package:flutter_project_structure/data/repository/auth_repo.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
-import 'package:flutter_project_structure/utils/utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl_phone_field/countries.dart';
 

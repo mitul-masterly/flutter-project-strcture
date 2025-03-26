@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_structure/Utils/utils.dart';
-import 'package:flutter_project_structure/gen/assets.gen.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/theme/font_styles.dart';

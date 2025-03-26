@@ -6,7 +6,6 @@ import 'package:flutter_project_structure/components/common_phone_field_widget.d
 import 'package:flutter_project_structure/components/common_rich_text_widget.dart';
 import 'package:flutter_project_structure/components/common_text_field_widget.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
-import 'package:flutter_project_structure/theme/font_styles.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/app_strings.dart';
 import 'package:flutter_project_structure/utils/utils.dart';
