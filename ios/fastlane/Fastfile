@@ -15,18 +15,16 @@ platform :ios do
     # Build the app
     sh "flutter build ipa --flavor #{flavor} --release"
 
-    # API key path validation
-      api_key_path = "./fastlane/AuthKey_#{ENV['APP_STORE_KEY_ID']}.p8"
-      unless File.exist?(api_key_path)
-        UI.user_error!("API Key not found at #{api_key_path}")
-      end
 
     # Upload to TestFlight
     pilot(
       app_identifier: "com.masterly.flutterbasecodestg",
-      api_key: ENV['APP_STORE_API_KEY'],
-      api_key_id: ENV['APP_STORE_KEY_ID'],
-      issuer_id: ENV['APP_STORE_ISSUER_ID'],
+      api_key: {
+            key_id: ENV['APP_STORE_KEY_ID'],
+            issuer_id: ENV['APP_STORE_ISSUER_ID'],
+            key_content: ENV['APP_STORE_API_KEY'], # Base64 encoded if using secrets
+            is_key_content_base64: false
+          },
       team_id: ENV['FASTLANE_TEAM_ID'],
       skip_waiting_for_build_processing: false
     )
