@@ -16,7 +16,7 @@ class Utils {
   }
 
   static BoxDecoration borderBox(
-      final dynamic color, final Color? borderColor, final double? radius) {
+      {final Color? color,  final Color? borderColor, final double? radius}) {
     return BoxDecoration(
       color: color,
       border: Border.all(color: borderColor ?? AppColors.white),
@@ -74,6 +74,17 @@ class Utils {
 
     return DeviceInfoModel.fromJson(allInfo);
   }
+
+  static String formatDate(final DateTime date, final String format) {
+    if(date != DateTime.parse('0001-01-01T00:00:00')){
+      final String newDate = DateFormat(format).format(date);
+      return newDate;
+    }
+    else{
+      return '';
+    }
+  }
+
 }
 
 extension EmptySpace on num {

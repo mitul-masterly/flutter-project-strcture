@@ -18,7 +18,7 @@ Future<void> main() async {
   );
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-  await NotificationService.shared.initNotification();
+ await NotificationService.shared.initNotification();
   if (kReleaseMode) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);

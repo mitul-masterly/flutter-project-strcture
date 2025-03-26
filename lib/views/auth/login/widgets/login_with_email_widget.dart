@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project_structure/Components/common_button_widget.dart';
+import 'package:flutter_project_structure/Routes/routes_name.dart';
 import 'package:flutter_project_structure/bloc/auth/login/login_bloc.dart';
 import 'package:flutter_project_structure/components/common_text_field_widget.dart';
+import 'package:flutter_project_structure/gen/assets.gen.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/theme/font_styles.dart';
@@ -9,13 +12,14 @@ import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/app_strings.dart';
 import 'package:flutter_project_structure/utils/utils.dart';
 
-class LoginFormWidget extends StatelessWidget {
-  const LoginFormWidget({final Key? key}) : super(key: key);
+class LoginWithEmailWidget extends StatelessWidget {
+  const LoginWithEmailWidget({final Key? key}) : super(key: key);
 
   @override
   Widget build(final BuildContext buildContext) {
     return BlocBuilder<LoginBloc, LoginState>(
         builder: (final BuildContext context, final LoginState state) {
+          final LoginBloc bloc = context.read<LoginBloc>();
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -72,24 +76,69 @@ class LoginFormWidget extends StatelessWidget {
                 ),
               ),
               8.width,
-              Expanded(
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  onTap: () {
-                    context
-                        .read<LoginBloc>()
-                        .add(LoginEvent.onTapForgotPassword(context: context));
-                  },
-                  child: Text(
-                    textAlign: TextAlign.end,
-                    'Forgot Password?'.tr(context),
-                    style: dMSansW700.copyWith(
-                        color: AppColors.colorPrimary500, fontSize: 14),
-                  ),
+              InkWell(
+                splashColor: Colors.transparent,
+                onTap: () {
+                  context
+                      .read<LoginBloc>()
+                      .add(LoginEvent.onTapForgotPassword(context: context));
+                },
+                child: Text(
+                  textAlign: TextAlign.end,
+                  'Forgot Password?'.tr(context),
+                  style: dMSansW700.copyWith(
+                      color: AppColors.colorPrimary500, fontSize: 14),
                 ),
               ),
             ],
           ),
+          40.height,
+          AppButton(
+            key: Key('login_button'),
+            title: AppStrings.login.tr(buildContext),
+            width: double.maxFinite,
+            isLoading: state.status == CommonScreenState.loading,
+            icon: null,
+            onPressed: () {
+              if (bloc.loginFormKey.currentState?.validate() ==
+                  true) {
+                debugPrint('Login Button Pressed');
+                bloc.add(OnSubmit());
+              }
+            },
+            type: AppButtonType.primary,
+          ),
+          10.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  bloc.add(LoginEvent.onTapLoginWithOtpStateEvent());
+                },
+                child: Text(
+                  'Login With OTP'.tr(context),
+                  style: dMSansW400.copyWith(fontSize: 12.0,color: AppColors.colorPrimary500),
+                ),
+              ),
+              15.width,
+              Row(
+                children: <Widget>[
+                  Assets.svg.icFinger.svg(),
+                  5.width,
+                  GestureDetector(
+                    onTap: () {
+                       Navigator.pushNamed(context, RouteName.fingerprintAuthScreen);
+                    },
+                    child: Text(
+                      'Use Fingerprint'.tr(context),
+                      style: dMSansW400.copyWith(fontSize: 12.0,color: AppColors.colorNeutral700),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          )
         ],
       );
     });

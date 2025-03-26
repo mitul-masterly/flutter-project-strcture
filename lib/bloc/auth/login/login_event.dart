@@ -15,12 +15,9 @@ class LoginEvent with _$LoginEvent {
 
   const factory LoginEvent.onTapForgotPassword(
       {required final BuildContext context}) = OnTapForgotPassword;
+  const factory LoginEvent.onTapLoginWithOtpStateEvent() =
+      OnTapLoginWithOtpStateEvent;
 
-  const factory LoginEvent.signUpWithGoogleEvent(
-      {required final BuildContext context}) = SignUpWithGoogleEvent;
-
-  const factory LoginEvent.signUpWithAppleEvent(
-      {required final BuildContext context}) = SignUpWithAppleEvent;
-  const factory LoginEvent.signUpWithFacebookEvent(
-      {required final BuildContext context}) = SignUpWithFacebookEvent;
+  const factory LoginEvent.loginWithBiometric({required final BuildContext context}) =
+  LoginWithBiometric;
 }

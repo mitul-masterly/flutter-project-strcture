@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_project_structure/Utils/app_strings.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
+import 'package:flutter_project_structure/components/common_rich_text_widget.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/helper/extension/string_ext.dart';
 import 'package:flutter_project_structure/helper/validator.dart';
@@ -26,6 +27,7 @@ class AppTextField extends StatelessWidget with Validator {
   final FocusNode? focusNode;
   final ValueChanged<String>? onChange;
   final bool isRequired;
+  final Widget? suffixWidget;
 
   const AppTextField(
       {super.key,
@@ -44,7 +46,7 @@ class AppTextField extends StatelessWidget with Validator {
       this.initialValue,
       this.onChange,
       this.isRequired = true,
-      });
+      this.suffixWidget});
 
   @override
   Widget build(final BuildContext buildContext) {
@@ -53,22 +55,8 @@ class AppTextField extends StatelessWidget with Validator {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        if (showHeaderTitle ?? false) ...<Widget>[
-          RichText(
-            text: TextSpan(
-              text: strHeaderTitle,
-              style: interW500,
-              children:isRequired ? <TextSpan>[
-                TextSpan(
-                  text: '*',
-                  style: dMSansW700.copyWith(
-                      fontSize: 14, color: AppColors.colorError500),
-                ),
-              ] : <InlineSpan>[],
-            ),
-          ),
-          10.height,
-        ],
+        CommonRichTextWidget(strHeaderTitle: strHeaderTitle ?? ''),
+        10.height,
         ValueListenableBuilder<bool>(
             valueListenable: isShow,
             builder: (final BuildContext context, final bool value,
@@ -120,8 +108,8 @@ class AppTextField extends StatelessWidget with Validator {
                             'field_name': title.tr(buildContext).toLowerCase()
                           }),
                   hintStyle: dMSansW400.copyWith(
-                    color: AppColors.baseColorWhite85,
-                    fontSize: 14,
+                    color: AppColors.baseColorWhite45,
+                    fontSize: 13,
                   ),
                   prefixIcon: strPrefixText != ''
                       ? Column(
@@ -158,9 +146,10 @@ class AppTextField extends StatelessWidget with Validator {
                             ),
                           ),
                         )
-                      : 10.width,
+                      : suffixWidget,
                   focusedBorder: Utils.inputBorder(AppColors.colorPrimary500),
-                  focusedErrorBorder: Utils.inputBorder(AppColors.colorError500),
+                  focusedErrorBorder:
+                      Utils.inputBorder(AppColors.colorError500),
                   errorBorder: Utils.inputBorder(AppColors.colorError500),
                   enabledBorder: Utils.inputBorder(AppColors.baseColorWhite85),
                   contentPadding: EdgeInsets.zero,

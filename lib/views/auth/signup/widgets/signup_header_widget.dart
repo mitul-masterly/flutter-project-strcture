@@ -11,8 +11,8 @@ class SignUpHeaderWidget extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Row(children: <Widget>[
-      Assets.svg.icLogo.svg(height: 80, width: 80),
-      20.width,
+    /*  Assets.svg.icLogo.svg(height: 80, width: 80),
+      20.width,*/
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,7 +23,7 @@ class SignUpHeaderWidget extends StatelessWidget {
           ),
           Text(
             'Create your account'.tr(context),
-            style: dMSansW400.copyWith(color: AppColors.baseColorWhite85),
+            style: dMSansW400.copyWith(color: AppColors.baseColorWhite45),
           ),
         ],
       ),

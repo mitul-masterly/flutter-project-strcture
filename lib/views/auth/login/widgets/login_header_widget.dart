@@ -10,13 +10,6 @@ class LoginHeaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Assets.svg.icSplashBg.svg(),
-         /* Center(
-            child: Text(
-              AppStrings.login.tr(context),
-              style: dMSansW700.copyWith(
-                  color: AppColors.colorPrimary500, fontSize: 25),
-            ),
-          ),*/
         ]);
   }
 }

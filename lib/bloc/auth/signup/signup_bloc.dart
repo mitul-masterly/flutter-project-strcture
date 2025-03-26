@@ -11,7 +11,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl_phone_field/countries.dart';
 
 part 'signup_bloc.freezed.dart';
+
 part 'signup_event.dart';
+
 part 'signup_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
@@ -20,16 +22,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final FocusNode lNameFocus = FocusNode();
   final FocusNode emailFocus = FocusNode();
   final FocusNode mobileFocus = FocusNode();
-  final FocusNode passwordFocus = FocusNode();
-  final FocusNode cPasswordFocus = FocusNode();
+  final FocusNode addressFocus = FocusNode();
+
   final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
 
   SignUpBloc({required this.authRepo}) : super(SignUpState.initial()) {
-    on<OnTapSubmit>(
-        (final OnTapSubmit event, final Emitter<SignUpState> emit) async {
-      await callSignUpApi(emit);
-    });
-
     on<OnChangeCountry>(
         (final OnChangeCountry event, final Emitter<SignUpState> emit) {
       emit(state.copyWith(countryCode: event.selectedCountry.dialCode));
@@ -49,44 +46,27 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(state.copyWith(email: event.email));
     });
 
-    on<OnChangePassword>(
-        (final OnChangePassword event, final Emitter<SignUpState> emit) {
-      emit(state.copyWith(password: event.password));
-    });
-    on<OnChangeConfirmPassword>(
-        (final OnChangeConfirmPassword event, final Emitter<SignUpState> emit) {
-      emit(state.copyWith(confirmPassword: event.confirmPassword));
-    });
     on<OnChangeMobileNumber>(
         (final OnChangeMobileNumber event, final Emitter<SignUpState> emit) {
       emit(state.copyWith(mobileNumber: event.mobileNumber));
     });
-  }
-
-  Future<void> callSignUpApi(final Emitter<SignUpState> emit) async {
-    emit(state.copyWith(status: CommonScreenState.loading));
-    final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
-
-    final SignupRequest request = SignupRequest(
-        firstName: state.firstName,
-        lastName: state.lastName,
-        emailId: state.email,
-        contactNo: state.mobileNumber,
-        isdCode: state.countryCode,
-        userPassword: state.password,
-        countryCodeISO2: state.countryISOCode,
-        createdByDeviceName: deviceData.userDeviceName,
-        createdByDeviceTypeId: deviceData.deviceTypeID);
-
-    final Either<Failure, int?> result =
-        await authRepo.apiSignUp(requestParams: request);
-
-    result.fold((final Failure error) {
-      emit(state.copyWith(status: CommonScreenState.error));
-    }, (final int? statusCode) {
-      if (statusCode == 200) {
-        emit(state.copyWith(status: CommonScreenState.success));
-      }
+    on<OnChangeAddress>(
+        (final OnChangeAddress event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(address: event.address));
+    });
+    on<OnSelectBirthDate>(
+        (final OnSelectBirthDate event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(
+        birthDate: event.birthDate,
+      ));
+    });
+    on<OnSelectGender>(
+        (final OnSelectGender event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(genderId: event.genderId));
+    });
+    on<OnSelectCountry>(
+        (final OnSelectCountry event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(countryId: event.countryId));
     });
   }
 }

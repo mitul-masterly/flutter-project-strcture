@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/bloc/my_app/localisation_bloc.dart';
+import 'package:flutter_project_structure/components/common_rich_text_widget.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/helper/regex_helper.dart';
 import 'package:flutter_project_structure/helper/validator.dart';
@@ -45,10 +46,7 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (showHeaderTitle ?? true) ...<Widget>[
-          Text(
-            (strHeaderTitle ?? AppStrings.mobileNumber).tr(context),
-            style: dMSansW700.copyWith(fontSize: 14),
-          ),
+          CommonRichTextWidget(strHeaderTitle: strHeaderTitle ?? AppStrings.mobileNumber),
           10.height,
         ],
         IntlPhoneField(

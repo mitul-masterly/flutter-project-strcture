@@ -23,10 +23,10 @@ void main() {
               firstName: '',
               lastName: '',
               email: '',
-              password: '',
+             // password: '',
               countryISOCode: 'US',
               countryCode: '+1',
-              confirmPassword: '',
+              //confirmPassword: '',
               status: CommonScreenState.initial),
           SignUpState.initial());
     });
@@ -68,19 +68,19 @@ void main() {
       ],
     );
 
-    blocTest<SignUpBloc, SignUpState>(
-      'emits state password',
-      build: () => SignUpBloc(authRepo: authRepo),
-      act: (final SignUpBloc bloc) =>
-          bloc.add(OnChangePassword(password: '123456')),
-      // skip: 1,
-      expect: () => <SignUpState>[
-        SignUpState.initial().copyWith(
-          password: '123456',
-        ),
-      ],
-    );
-
+    // blocTest<SignUpBloc, SignUpState>(
+    //   'emits state password',
+    //   build: () => SignUpBloc(authRepo: authRepo),
+    //   act: (final SignUpBloc bloc) =>
+    //       bloc.add(OnChangePassword(password: '123456')),
+    //   // skip: 1,
+    //   expect: () => <SignUpState>[
+    //     SignUpState.initial().copyWith(
+    //       password: '123456',
+    //     ),
+    //   ],
+    // );
+/*
     blocTest<SignUpBloc, SignUpState>(
       'emits state confirm password',
       build: () => SignUpBloc(authRepo: authRepo),
@@ -92,7 +92,7 @@ void main() {
           confirmPassword: '123456',
         ),
       ],
-    );
+    );*/
 
     blocTest<SignUpBloc, SignUpState>(
       'emits state mobile number',
@@ -139,7 +139,7 @@ void main() {
             .thenAnswer((final _) async => Right(200));
       },
       build: () => SignUpBloc(authRepo: authRepo),
-      act: (final SignUpBloc bloc) => bloc.add(OnTapSubmit()),
+     // act: (final SignUpBloc bloc) => bloc.add(OnTapSubmit()),
       // skip: 1,
       expect: () => <SignUpState>[
         SignUpState.initial().copyWith(
