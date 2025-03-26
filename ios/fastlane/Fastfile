@@ -15,11 +15,16 @@ platform :ios do
     # Build the app
     sh "flutter build ipa --flavor #{flavor} --release"
 
-    gym(
-      scheme: scheme,
-      export_method: "app-store",
-      configuration: "Release-staging"
-    )
+    build_app(
+        scheme: "scheme",
+        export_method: "app-store",
+        export_options: {
+          signingStyle: "manual",
+          provisioningProfiles: {
+            "com.masterly.flutterbasecodestg" => "masterly_flutterbasecode_ios_appstore"
+          }
+        }
+      )
 
     # Upload to TestFlight
     pilot(
