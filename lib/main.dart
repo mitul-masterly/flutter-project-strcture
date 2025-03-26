@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -9,8 +11,11 @@ import 'package:flutter_project_structure/helper/firebase_options.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
 import 'package:flutter_project_structure/helper/push_notification/notification_service.dart';
 import 'package:flutter_project_structure/routes/app_providers.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
+import 'package:flutter_project_structure/utils/flavors.dart';
 
 Future<void> main() async {
+  FlavorConfig(flavor: Flavor.staging);
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferenceHelper().init();
   await Firebase.initializeApp(

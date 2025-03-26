@@ -42,3 +42,5 @@ enum CommonScreenState {
   success,
   error,
 }
+
+enum Flavor { staging, prod }

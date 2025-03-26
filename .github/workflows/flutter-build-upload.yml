@@ -8,31 +8,47 @@ on:
       - feature/*
 
 jobs:
-  build-android:
-    name: Build and Upload Android
-    runs-on: macos-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#  build-android:
+#    name: Build and Upload Android
+#    runs-on: macos-latest
+#
+#    strategy:
+#      matrix:
+#        flavor: [ staging ] # prod
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Setup Flutter
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.29.0'
+#          architecture: x64
+#
+#
+#      - name: Install dependencies
+#        run: flutter pub get
+#
+#      - name: Generate code
+#        run: flutter pub run build_runner build --delete-conflicting-outputs
+#
+#      # Use without flavor
+##      - name: Build APK
+##        run: flutter build apk --release
+##
+##      - name: Build AAB (Android App Bundle)
+##        run: flutter build appbundle --release
+#
+#
+#      # Build APK for the specific flavor
+##      - name: Build APK for ${{ matrix.flavor }}
+##        run: flutter build apk --flavor ${{ matrix.flavor }} --release
+#
+#      # Build AAB for the specific flavor
+#      - name: Build AAB for ${{ matrix.flavor }}
+#        run: flutter build appbundle --flavor ${{ matrix.flavor }} --release
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.29.0'
-          architecture: x64
-
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Generate code
-        run: flutter pub run build_runner build --delete-conflicting-outputs
-
-      - name: Build APK
-        run: flutter build apk --release
-
-      - name: Build AAB (Android App Bundle)
-        run: flutter build appbundle --release
 
   #      - name: Install Fastlane
   #        run: |
@@ -46,37 +62,54 @@ jobs:
   #          cd android
   #          fastlane upload_to_play_store
 
-#  build-ios:
-#    name: Build and Upload iOS
-#    runs-on: macos-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v3
-#
-#      - name: Setup Flutter
-#        uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: '3.29.0'
-#          architecture: x64
-#
-#      - name: Install dependencies
-#        run: flutter pub get
-#
-#      - name: Generate code
-#        run: flutter pub run build_runner build --delete-conflicting-outputs
-#
-#      - name: Build iOS
-#        run: flutter build ipa --release
+  build-ios:
+    name: Build and Upload iOS
+    runs-on: macos-latest
 
-#      - name: Install Fastlane
-#        run: gem install fastlane
+    strategy:
+      matrix:
+        flavor: [ staging ] # prod
+        scheme: [ staging ]
 
-#      - name: Upload to TestFlight
-#        env:
-#          APP_STORE_API_KEY_ID: ${{ secrets.APP_STORE_API_KEY_ID }}
-#          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
-#          APP_STORE_API_KEY: ${{ secrets.APP_STORE_API_KEY }}
-#          FASTLANE_APPLE_ID: ${{ secrets.FASTLANE_APPLE_ID }}
-#        run: |
-#          cd ios
-#          fastlane upload_testflight
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.0'
+          architecture: x64
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate code
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Select correct Xcode version
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+      - name: Build iOS
+        run: flutter build ipa --flavor ${{ matrix.flavor }} --release --export-options-plist=ios/ExportOptions.plist
+
+      - name: Export IPA
+        run: |
+            xcodebuild -exportArchive \
+            -archivePath build/ios/archive/Runner.xcarchive \
+            -exportPath build/ios/ipa \
+            -exportOptionsPlist ios/ExportOptions.plist
+
+      - name: Install Fastlane
+        run: gem install fastlane
+
+      - name: Upload to TestFlight
+        env:
+          APP_STORE_API_KEY_ID: ${{ secrets.APP_STORE_API_KEY_ID }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_API_KEY: ${{ secrets.APP_STORE_API_KEY }}
+          FASTLANE_APPLE_ID: ${{ secrets.FASTLANE_APPLE_ID }}
+          FASTLANE_TEAM_ID: ${{ secrets.FASTLANE_TEAM_ID }}
+        run: |
+          cd ios
+          fastlane upload_to_testflight --scheme=${{ matrix.scheme }} --flavor=${{ matrix.flavor }}

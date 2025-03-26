@@ -80,6 +80,28 @@ android {
             signingConfig signingConfigs.SignConfig
         }
     }
+
+    flavorDimensions "app"
+    productFlavors {
+        prod {
+            dimension "app"
+            applicationId "com.masterly.flutterbasecode"
+            manifestPlaceholders = [
+                    appName: "Flutter Base",
+//                    icon: "@mipmap/ic_launcher",
+//                    notificationIcon: "@drawable/ic_notification"
+            ]
+        }
+        staging {
+            dimension "app"
+            applicationId "com.masterly.flutterbasecodestg"
+            manifestPlaceholders = [
+                    appName: "Flutter Base Staging",
+//                    icon: "@mipmap/ic_launcher_staging",
+//                    notificationIcon: "@drawable/ic_notification_staging"
+            ]
+        }
+    }
 }
 
 flutter {

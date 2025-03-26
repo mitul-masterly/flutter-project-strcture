@@ -3,30 +3,18 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_project_structure/utils/flavors.dart';
 
-/// Default [FirebaseOptions] for use with your Firebase apps.
-///
-/// Example:
-/// ```dart
-/// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptions.currentPlatform,
-/// );
-/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
-    }
+    // if (kIsWeb) {
+    //   return web;
+    // }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        return FlavorConfig.isStaging ? android_staging : android_prod;
       case TargetPlatform.iOS:
-        return ios;
+        return FlavorConfig.isStaging ? ios_staging : ios_prod;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -49,20 +37,37 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
+
+  static const FirebaseOptions android_prod = FirebaseOptions(
     apiKey: 'AIzaSyCARi30S-QEuWy7iVKQYrlrrPvL5OcGJPo',
-    appId: '1:545061596433:android:0ac49de3b14a9d69df70b0',
+    appId: '1:545061596433:android:02c63b08a6138194df70b0',
     messagingSenderId: '545061596433',
     projectId: 'masterly-flutterbasecode',
     storageBucket: 'masterly-flutterbasecode.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDdvrJD0jBqWNChUIxlhrht4MbDVTHlTcw',
-    appId: '1:545061596433:ios:147207c942e02f16df70b0',
+  static const FirebaseOptions android_staging = FirebaseOptions(
+    apiKey: 'AIzaSyCARi30S-QEuWy7iVKQYrlrrPvL5OcGJPo',
+    appId: '1:545061596433:android:22b40f355608c67fdf70b0',
     messagingSenderId: '545061596433',
     projectId: 'masterly-flutterbasecode',
     storageBucket: 'masterly-flutterbasecode.firebasestorage.app',
-    iosBundleId: 'com.masterly.flutterbase',
+  );
+
+  static const FirebaseOptions ios_staging = FirebaseOptions(
+    apiKey: 'AIzaSyDdvrJD0jBqWNChUIxlhrht4MbDVTHlTcw',
+    appId: '1:545061596433:ios:608bb317131ea832df70b0',
+    messagingSenderId: '545061596433',
+    projectId: 'masterly-flutterbasecode',
+    storageBucket: 'masterly-flutterbasecode.firebasestorage.app',
+    iosBundleId: 'com.masterly.flutterbasecodestg',
+  );
+  static const FirebaseOptions ios_prod = FirebaseOptions(
+    apiKey: 'AIzaSyDdvrJD0jBqWNChUIxlhrht4MbDVTHlTcw',
+    appId: '1:545061596433:ios:8a17273d99bc3d81df70b0',
+    messagingSenderId: '545061596433',
+    projectId: 'masterly-flutterbasecode',
+    storageBucket: 'masterly-flutterbasecode.firebasestorage.app',
+    iosBundleId: 'com.masterly.flutterbasecode',
   );
 }

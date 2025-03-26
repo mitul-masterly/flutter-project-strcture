@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyC5no-fBONdR9rdUkL4oEcb_oxUM1mFZkE</string>
+	<string>AIzaSyDdvrJD0jBqWNChUIxlhrht4MbDVTHlTcw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>477121729769</string>
+	<string>545061596433</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.masterly.flutterbasecode</string>
 	<key>PROJECT_ID</key>
-	<string>flutter-base-45674</string>
+	<string>masterly-flutterbasecode</string>
 	<key>STORAGE_BUCKET</key>
-	<string>flutter-base-45674.firebasestorage.app</string>
+	<string>masterly-flutterbasecode.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:477121729769:ios:9ed4e2a1a6e2ff06e2cc78</string>
+	<string>1:545061596433:ios:8a17273d99bc3d81df70b0</string>
 </dict>
 </plist>
