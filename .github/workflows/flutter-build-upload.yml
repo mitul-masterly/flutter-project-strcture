@@ -65,6 +65,12 @@ jobs:
   build-ios:
     name: Build and Upload iOS
     runs-on: macos-latest
+
+    strategy:
+      matrix:
+        flavor: [ staging ] # prod
+        scheme: [ staging ]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -99,4 +105,4 @@ jobs:
           FASTLANE_TEAM_ID: ${{ secrets.FASTLANE_TEAM_ID }}
         run: |
           cd ios
-          fastlane upload_to_testflight --scheme="staging" --flavor="staging"
+          fastlane upload_to_testflight --scheme="${{ matrix.scheme }}" --flavor="${{ matrix.flavor }}"
