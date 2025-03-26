@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
@@ -58,8 +59,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(status: CommonScreenState.error, user: null));
       }, (final UserDataModel user) async {
         emit(state.copyWith(status: CommonScreenState.success, user: user));
+        FirebaseCrashlytics.instance.setUserIdentifier(user.emailId ?? '');
+        FirebaseCrashlytics.instance.setCustomKey('user_name', user.fullName);
+        FirebaseCrashlytics.instance.setCustomKey('registration_id', user.userRegistrationId ?? 'Not Found');
         SharedPreferenceHelper().saveIsLoggedIn(true);
         await SharedPreferenceHelper().saveUser(user);
+
         if (state.isRememberMe) {
           sharedPreferenceHelper.setRememberEmail(request.emailId ?? '');
           sharedPreferenceHelper.setUserPassword(request.userPassword ?? '');
