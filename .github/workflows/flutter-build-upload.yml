@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        flavor: [ prod, staging ]
+        flavor: [ staging ] # prod
 
     steps:
       - name: Checkout code
@@ -33,6 +33,7 @@ jobs:
       - name: Generate code
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
+      # Use without flavor
 #      - name: Build APK
 #        run: flutter build apk --release
 #
@@ -41,8 +42,8 @@ jobs:
 
 
       # Build APK for the specific flavor
-      - name: Build APK for ${{ matrix.flavor }}
-        run: flutter build apk --flavor ${{ matrix.flavor }} --release
+#      - name: Build APK for ${{ matrix.flavor }}
+#        run: flutter build apk --flavor ${{ matrix.flavor }} --release
 
       # Build AAB for the specific flavor
       - name: Build AAB for ${{ matrix.flavor }}
