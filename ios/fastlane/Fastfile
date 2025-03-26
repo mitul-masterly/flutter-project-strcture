@@ -15,14 +15,20 @@ platform :ios do
     # Build the app
     sh "flutter build ipa --flavor #{flavor} --release"
 
+    gym(
+      scheme: scheme,
+      export_method: "app-store",
+      configuration: "Release-staging"
+    )
 
     # Upload to TestFlight
     pilot(
       app_identifier: "com.masterly.flutterbasecodestg",
       api_key: {
+            api_key_path: "./fastlane/AuthKey_#{ENV['APP_STORE_KEY_ID']}.p8",
             key_id: ENV['APP_STORE_KEY_ID'],
             issuer_id: ENV['APP_STORE_ISSUER_ID'],
-            key_content: ENV['APP_STORE_API_KEY'], # Base64 encoded if using secrets
+            key_content: ENV['APP_STORE_API_KEY'],
             is_key_content_base64: false
           },
       team_id: ENV['FASTLANE_TEAM_ID'],
