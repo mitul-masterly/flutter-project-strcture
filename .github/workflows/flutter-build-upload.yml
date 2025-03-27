@@ -128,8 +128,8 @@ jobs:
       - name: Install Fastlane
         run: gem install fastlane
 
-#      - name: Run Fastlane Match
-#        run: fastlane match appstore --verbose
+      - name: Run Fastlane Match
+        run: fastlane match appstore --readonly=true
 
       - name: Upload to TestFlight
         env:
@@ -140,4 +140,5 @@ jobs:
           FASTLANE_TEAM_ID: ${{ secrets.FASTLANE_TEAM_ID }}
         run: |
           cd ios
-          fastlane upload_to_testflight --scheme=${{ matrix.scheme }} --flavor=${{ matrix.flavor }}
+          fastlane upload_to_testflight
+#          --scheme=${{ matrix.scheme }} --flavor=${{ matrix.flavor }}
