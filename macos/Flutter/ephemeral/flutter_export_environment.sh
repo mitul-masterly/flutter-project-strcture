@@ -1,6 +1,6 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/masetlysolutions/fvm/versions/3.29.0"
+export "FLUTTER_ROOT=/Users/masetlysolutions/Documents/development/flutter_sdk/flutter"
 export "FLUTTER_APPLICATION_PATH=/Users/masetlysolutions/Documents/Flutter Projects/flutter-project-strcture"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
