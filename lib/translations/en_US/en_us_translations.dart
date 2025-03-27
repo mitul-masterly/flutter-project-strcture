@@ -68,4 +68,5 @@ final Map<String, String> enUs = <String, String>{
   'privacy policy ': 'privacy policy ',
   'terms and conditions ': 'terms and conditions ',
   'Please Select Question ': 'Please Select Question ',
+  'Failed to sign in ': 'Failed to sign in ',
 };

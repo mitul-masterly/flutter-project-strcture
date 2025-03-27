@@ -14,7 +14,7 @@ class SocialMediaWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext buildContext) {
-    return BlocProvider(
+    return BlocProvider<SocialMediaBloc>(
       create: (final BuildContext context) => SocialMediaBloc(),
       child: BlocBuilder<SocialMediaBloc, SocialMediaState>(
         builder: (final BuildContext context, final SocialMediaState state) {
@@ -42,7 +42,7 @@ class SocialMediaWidget extends StatelessWidget {
                 icon: Assets.svg.icApple.svg(),
                 titleColor: AppColors.black,
                 onPressed: () {
-
+                  bloc.add(SignUpWithAppleEvent(context: context));
                 },
                 type: AppButtonType.primary,
               ),

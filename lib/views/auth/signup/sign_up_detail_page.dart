@@ -82,6 +82,7 @@ class SignUpDetailScreen extends StatelessWidget {
                             type: AppButtonType.primary,
                           ),
                         ),
+                        20.height,
                       ],
                     ),
                   ),
