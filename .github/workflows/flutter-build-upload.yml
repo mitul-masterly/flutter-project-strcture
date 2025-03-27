@@ -91,7 +91,7 @@ jobs:
         run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
       - name: Decode Certificate
-        run: echo ${{ secrets.CERTIFICATE_BASE64 }} | base64 --decode > ios/certificate.p12
+        run: echo ${{ secrets.STAGING_CERTIFICATE_BASE64 }} | base64 --decode > ios/certificate.p12
 
       - name: Decode Provisioning Profile
         run: echo ${{ secrets.STAGING_PROVISIONING_PROFILE_BASE64 }} | base64 --decode > ios/profile.mobileprovision
