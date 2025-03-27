@@ -138,7 +138,8 @@ jobs:
           APP_STORE_API_KEY: ${{ secrets.APP_STORE_API_KEY }}
           FASTLANE_APPLE_ID: ${{ secrets.FASTLANE_APPLE_ID }}
           FASTLANE_TEAM_ID: ${{ secrets.FASTLANE_TEAM_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: |
           cd ios
-          fastlane release_beta
+          fastlane upload_to_testflight
 #          --scheme=${{ matrix.scheme }} --flavor=${{ matrix.flavor }}

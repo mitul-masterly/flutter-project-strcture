@@ -1,24 +1,32 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Build and upload to TestFlight"
-  lane :release_beta do
-    # Ensure certificates and provisioning profiles are managed
-    match(type: "appstore", readonly: false, app_identifier: "com.masterly.flutterbasecodestg", team_id: ENV["BN6UXX7XJP"])
+  desc "Upload to TestFlight"
+  lane :upload_to_testflight do
+    match(
+      type: "appstore",
+      readonly: true,
+      app_identifier:  "com.masterly.flutterbasecodestg",
+      team_id: ENV['FASTLANE_TEAM_ID'],
+      username: ENV['FASTLANE_APPLE_ID']
+    )
 
-    # Build the app
     build_app(
+      scheme: "staging",
       workspace: "Runner.xcworkspace",
-      scheme: "staging", # or "prod" for production
       export_options: {
-        method: "app-store",
-        provisioningProfiles: {
-          "com.masterly.flutterbasecodestg" => "masterly_flutterbasecode_ios_appstore"
-        }
+        method: "app-store"
       }
     )
 
-    # Upload to TestFlight
-    upload_to_testflight
+    upload_to_testflight(
+      api_key: {
+        key_id: ENV['APP_STORE_API_KEY_ID'],
+        issuer_id: ENV['APP_STORE_ISSUER_ID'],
+        key_content: ENV['APP_STORE_API_KEY'],
+        is_key_content_base64: false
+      },
+      skip_waiting_for_build_processing: true
+    )
   end
 end
