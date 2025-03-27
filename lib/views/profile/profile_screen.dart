@@ -37,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   useRootNavigator: true,
-                  builder: (final BuildContext contextt) => LogoutBottomSheet(
+                  builder: (final BuildContext context) => LogoutBottomSheet(
                     onTapLogout: () {
                       context.read<ProfileBloc>().add(CallLogoutApi());
                     },

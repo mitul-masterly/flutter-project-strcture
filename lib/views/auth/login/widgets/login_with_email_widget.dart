@@ -19,7 +19,7 @@ class LoginWithEmailWidget extends StatelessWidget {
   Widget build(final BuildContext buildContext) {
     return BlocBuilder<LoginBloc, LoginState>(
         builder: (final BuildContext context, final LoginState state) {
-          final LoginBloc bloc = context.read<LoginBloc>();
+      final LoginBloc bloc = context.read<LoginBloc>();
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -100,8 +100,7 @@ class LoginWithEmailWidget extends StatelessWidget {
             isLoading: state.status == CommonScreenState.loading,
             icon: null,
             onPressed: () {
-              if (bloc.loginFormKey.currentState?.validate() ==
-                  true) {
+              if (bloc.loginFormKey.currentState?.validate() == true) {
                 debugPrint('Login Button Pressed');
                 bloc.add(OnSubmit());
               }
@@ -118,7 +117,8 @@ class LoginWithEmailWidget extends StatelessWidget {
                 },
                 child: Text(
                   'Login With OTP'.tr(context),
-                  style: dMSansW400.copyWith(fontSize: 12.0,color: AppColors.colorPrimary500),
+                  style: dMSansW400.copyWith(
+                      fontSize: 12.0, color: AppColors.colorPrimary500),
                 ),
               ),
               15.width,
@@ -128,11 +128,13 @@ class LoginWithEmailWidget extends StatelessWidget {
                   5.width,
                   GestureDetector(
                     onTap: () {
-                       Navigator.pushNamed(context, RouteName.fingerprintAuthScreen);
+                      Navigator.pushNamed(
+                          context, RouteName.fingerprintAuthScreen);
                     },
                     child: Text(
                       'Use Fingerprint'.tr(context),
-                      style: dMSansW400.copyWith(fontSize: 12.0,color: AppColors.colorNeutral700),
+                      style: dMSansW400.copyWith(
+                          fontSize: 12.0, color: AppColors.colorNeutral700),
                     ),
                   ),
                 ],
