@@ -29,7 +29,7 @@ class SocialMediaWidget extends StatelessWidget {
                 icon: Assets.svg.icGoogle.svg(),
                 titleColor: AppColors.black,
                 onPressed: () async {
-                  bloc.add(SignUpWithGoogleEvent(context: context));
+                  //   bloc.add(SignUpWithGoogleEvent(context: context));
                 },
                 type: AppButtonType.primary,
               ),
@@ -41,9 +41,7 @@ class SocialMediaWidget extends StatelessWidget {
                 isLoading: state.status == CommonScreenState.loading,
                 icon: Assets.svg.icApple.svg(),
                 titleColor: AppColors.black,
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 type: AppButtonType.primary,
               ),
               10.height,
@@ -54,9 +52,7 @@ class SocialMediaWidget extends StatelessWidget {
                 isLoading: state.status == CommonScreenState.loading,
                 icon: Assets.svg.icFacebook.svg(),
                 titleColor: AppColors.black,
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 type: AppButtonType.primary,
               ),
               10.height,
