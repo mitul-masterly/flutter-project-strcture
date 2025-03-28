@@ -23,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: darkStatusBarTransparent,
       child: BlocBuilder<LocalisationBloc, LocalisationState>(builder:
-          (final BuildContext context,
+          (final BuildContext localisationContext,
               final LocalisationState localisationState) {
         return BlocProvider<ProfileBloc>(
           create: (final BuildContext context) => ProfileBloc(
@@ -37,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   useRootNavigator: true,
-                  builder: (final BuildContext context) => LogoutBottomSheet(
+                  builder: (final BuildContext ccontext) => LogoutBottomSheet(
                     onTapLogout: () {
                       context.read<ProfileBloc>().add(CallLogoutApi());
                     },

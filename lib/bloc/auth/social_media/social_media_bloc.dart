@@ -40,10 +40,10 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
             AppleIDAuthorizationScopes.fullName,
           ],
         );
-        showErrorSnackBar(
+        debugPrint('Apple Sign-In successful: ${credential.identityToken}');
+        showSuccessSnackBar(
           'Apple Sign-In successful:'.tr(event.context),
         );
-        debugPrint('Apple Sign-In successful: ${credential.email}');
       } catch (error) {
         debugPrint('Error: $error');
         showErrorSnackBar('Error: $error');
