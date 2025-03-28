@@ -108,6 +108,33 @@ void main() {
     );
 
     blocTest<SignUpBloc, SignUpState>(
+      'emits state gender',
+      build: () => SignUpBloc(authRepo: authRepo),
+      act: (final SignUpBloc bloc) =>
+          bloc.add(OnSelectGender(genderId: 1)),
+      // skip: 1,
+      expect: () => <SignUpState>[
+        SignUpState.initial().copyWith(
+          genderId: 1,
+        ),
+      ],
+    );
+
+    blocTest<SignUpBloc, SignUpState>(
+      'emits state address',
+      build: () => SignUpBloc(authRepo: authRepo),
+      act: (final SignUpBloc bloc) =>
+          bloc.add(OnChangeAddress(address: 'test')),
+      // skip: 1,
+      expect: () => <SignUpState>[
+        SignUpState.initial().copyWith(
+          address: 'test',
+        ),
+      ],
+    );
+
+
+    blocTest<SignUpBloc, SignUpState>(
       'emits state Country',
       build: () => SignUpBloc(authRepo: authRepo),
       act: (final SignUpBloc bloc) => bloc.add(

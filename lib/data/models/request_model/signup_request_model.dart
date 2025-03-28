@@ -1,106 +1,120 @@
-import 'package:equatable/equatable.dart';
-
-class SignupRequest extends Equatable {
-  String? firstName;
-  String? lastName;
-  String? emailId;
-  String? contactNo;
-  String? isdCode;
-  String? userPassword;
-  String? countryCodeISO2;
-  String? createdByDeviceName;
-  String? createdByDeviceTypeId;
-  String? dateOfBirth;
-  String? gender;
-  String? county;
-  String? address;
-  String? securityQuestion;
-  String? securityAnswer;
-  bool? privacyPolicy;
+class SignupRequest {
+  final String? firstName;
+  final String? lastName;
+  final String? emailId;
+  final String? contactNo;
+  final String? isdCode;
+  final String? userPassword;
+  final String? countryCodeISO2;
+  final String? createdByDeviceName;
+  final String? createdByDeviceTypeId;
+  final String? dateOfBirth;
+  final String? gender;
+  final String? county;
+  final String? address;
+  final String? securityQuestion;
+  final String? securityAnswer;
   bool? termsAndConditions;
+  bool? privacyPolicy;
 
-  SignupRequest(
-      {this.firstName,
-      this.lastName,
-      this.emailId,
-      this.contactNo,
-      this.isdCode,
-      this.userPassword,
-      this.countryCodeISO2,
-      this.createdByDeviceName,
-      this.createdByDeviceTypeId,
-      this.address,
-      this.gender,
-      this.county,
-      this.dateOfBirth,
-        this.securityAnswer,
-        this.privacyPolicy,
-        this.securityQuestion,
-        this.termsAndConditions
+  SignupRequest({
+    this.firstName,
+    this.lastName,
+    this.emailId,
+    this.contactNo,
+    this.isdCode,
+    this.userPassword,
+    this.countryCodeISO2,
+    this.createdByDeviceName,
+    this.createdByDeviceTypeId,
+    this.dateOfBirth,
+    this.gender,
+    this.county,
+    this.address,
+    this.securityQuestion,
+    this.securityAnswer,
+    this.termsAndConditions,
+    this.privacyPolicy,
+  });
 
-      });
+  SignupRequest copyWith({
+    final String? firstName,
+    final String? lastName,
+    final String? emailId,
+    final String? contactNo,
+    final String? isdCode,
+    final String? userPassword,
+    final String? countryCodeIso2,
+    final String? createdByDeviceName,
+    final String? createdByDeviceTypeId,
+    final String? dateOfBirth,
+    final String? gender,
+    final String? county,
+    final String? address,
+    final String? securityQuestion,
+    final String? securityAnswer,
+    final bool? termsAndConditions,
+    final bool? privacyPolicy,
+  }) =>
+      SignupRequest(
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        emailId: emailId ?? this.emailId,
+        contactNo: contactNo ?? this.contactNo,
+        isdCode: isdCode ?? this.isdCode,
+        userPassword: userPassword ?? this.userPassword,
+        countryCodeISO2: countryCodeIso2 ?? this.countryCodeISO2,
+        createdByDeviceName: createdByDeviceName ?? this.createdByDeviceName,
+        createdByDeviceTypeId:
+            createdByDeviceTypeId ?? this.createdByDeviceTypeId,
+        dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+        gender: gender ?? this.gender,
+        county: county ?? this.county,
+        address: address ?? this.address,
+        securityQuestion: securityQuestion ?? this.securityQuestion,
+        securityAnswer: securityAnswer ?? this.securityAnswer,
+        termsAndConditions: termsAndConditions ?? this.termsAndConditions,
+        privacyPolicy: privacyPolicy ?? this.privacyPolicy,
+      );
 
-  SignupRequest.fromJson(final Map<String, dynamic> json) {
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    emailId = json['emailId'];
-    contactNo = json['contactNo'];
-    isdCode = json['isdCode'];
-    userPassword = json['userPassword'];
-    countryCodeISO2 = json['countryCodeISO2'];
-    createdByDeviceName = json['CreatedByDeviceName'];
-    createdByDeviceTypeId = json['CreatedByDeviceTypeId'];
-    address = json['address'];
-    gender = json['gender'];
-    county = json['county'];
-    dateOfBirth = json['dateOfBirth'];
-    securityAnswer = json['securityAnswer'];
-    securityQuestion = json['securityQuestion'];
-    privacyPolicy = json['privacyPolicy'];
-    termsAndConditions = json['termsAndConditions'];
-  }
+  factory SignupRequest.fromJson(final Map<String, dynamic> json) =>
+      SignupRequest(
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        emailId: json["emailId"],
+        contactNo: json["contactNo"],
+        isdCode: json["isdCode"],
+        userPassword: json["userPassword"],
+        countryCodeISO2: json["countryCodeISO2"],
+        createdByDeviceName: json["createdByDeviceName"],
+        createdByDeviceTypeId: json["createdByDeviceTypeId"],
+        dateOfBirth: json["dateOfBirth"],
+        gender: json["gender"],
+        county: json["county"],
+        address: json["address"],
+        securityQuestion: json["securityQuestion"],
+        securityAnswer: json["securityAnswer"],
+        termsAndConditions: json["termsAndConditions"],
+        privacyPolicy: json["privacyPolicy"],
+      );
 
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'firstName': firstName,
-      'lastName': lastName,
-      'emailId': emailId,
-      'contactNo': contactNo,
-      'isdCode': isdCode,
-      'userPassword': userPassword,
-      'countryCodeISO2': countryCodeISO2,
-      'CreatedByDeviceName': createdByDeviceName,
-      'CreatedByDeviceTypeId': createdByDeviceTypeId,
-      'address': address,
-      'gender': gender,
-      'county': county,
-      'dateOfBirth': dateOfBirth,
-      'securityAnswer': securityAnswer,
-      'securityQuestion': securityQuestion,
-      'privacyPolicy': privacyPolicy,
-      'termsAndConditions': termsAndConditions,
-    };
-  }
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [
-        firstName,
-        lastName,
-        emailId,
-        contactNo,
-        userPassword,
-        isdCode,
-        countryCodeISO2,
-        createdByDeviceName,
-        createdByDeviceTypeId,
-        address,
-        gender,
-        county,
-        dateOfBirth,
-    securityAnswer,
-    securityQuestion,
-    privacyPolicy,
-    termsAndConditions
-      ];
+  Map<String, dynamic> toJson() => {
+        "firstName": firstName,
+        "lastName": lastName,
+        "emailId": emailId,
+        "contactNo": contactNo,
+        "isdCode": isdCode,
+        "userPassword": userPassword,
+        "countryCodeISO2": countryCodeISO2,
+        "createdByDeviceName": createdByDeviceName,
+        "createdByDeviceTypeId": createdByDeviceTypeId,
+        "dateOfBirth": dateOfBirth,
+        "gender": gender,
+        "county": county,
+        "address": address,
+        'securityQuestion': securityQuestion,
+        'securityAnswer': securityAnswer,
+        "termsAndConditions": termsAndConditions,
+        "privacyPolicy": privacyPolicy,
+      };
 }

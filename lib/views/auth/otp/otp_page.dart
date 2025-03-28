@@ -6,6 +6,7 @@ import 'package:flutter_project_structure/Utils/utils.dart';
 import 'package:flutter_project_structure/bloc/auth/otp/otp_bloc.dart';
 import 'package:flutter_project_structure/components/common_app_bar.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
+import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/theme/font_styles.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
@@ -100,6 +101,8 @@ class OtpScreen extends StatelessWidget {
                         /* Navigator.pushNamedAndRemoveUntil(context, RouteName.tabNavigationView,
                               (final Route<dynamic> route) => false,
                         );*/
+
+                        SharedPreferenceHelper().saveIsLoggedIn(true);
                         Navigator.pushNamed(
                           context,
                           RouteName.tabNavigationView,

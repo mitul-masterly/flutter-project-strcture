@@ -20,8 +20,8 @@ class FingerprintAuthScreen extends StatelessWidget {
                 body: SafeArea(
                     child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text('Fingerprint Authentication'),
                       20.height,
@@ -30,17 +30,11 @@ class FingerprintAuthScreen extends StatelessWidget {
                       Text('Cancel'),
                       GestureDetector(
                           onTap: () {
-                            bloc.add(LoginWithBiometric(context: context));
+                            bloc.add(LoginWithBiometric());
                           },
                           child:
                               Assets.svg.icFinger.svg(height: 53, width: 53)),
                       20.height,
-                      GestureDetector(
-                          onTap: () {
-                            bloc.add(LoginWithFaceID(context: context));
-                          },
-                          child:
-                              Text('face')),
                     ],
                   ),
                 )),

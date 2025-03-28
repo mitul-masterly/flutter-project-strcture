@@ -64,15 +64,18 @@ class SignUpDetailsBloc extends Bloc<SignUpDetailsEvent, SignUpDetailsState> {
   Future<void> callSignUpApi(final Emitter<SignUpDetailsState> emit) async {
     emit(state.copyWith(status: CommonScreenState.loading));
     final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
-    signupRequest.userPassword = state.password;
-    signupRequest.securityQuestion = state.questionList[state.securityQuestionId ?? 0]['value'];
-    signupRequest.securityAnswer = state.securityAnswer;
-    signupRequest.privacyPolicy = state.checkPrivacyPolicy;
-    signupRequest.termsAndConditions = state.checkTermsAndCondition;
-    signupRequest.createdByDeviceName =  deviceData.userDeviceName;
-    signupRequest.createdByDeviceTypeId = deviceData.deviceTypeID;
+    final SignupRequest updatedSignupRequest = signupRequest.copyWith(
+      userPassword : state.password,
+      securityQuestion : state.questionList[state.securityQuestionId ?? 0]['value'],
+      securityAnswer : state.securityAnswer,
+      privacyPolicy: state.checkPrivacyPolicy,
+      termsAndConditions: state.checkTermsAndCondition,
+      createdByDeviceName: deviceData.userDeviceName,
+      createdByDeviceTypeId: deviceData.deviceTypeID,
 
-    final SignupRequest request = signupRequest;
+    );
+
+    final SignupRequest request = updatedSignupRequest;
     debugPrint('signupRequest_____${signupRequest}');
 
     final Either<Failure, int?> result =

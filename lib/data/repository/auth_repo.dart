@@ -57,7 +57,7 @@ class AuthRepoImp implements AuthRepo {
       return Left(ApiFailure(
           message: e.message ?? '', statusCode: e.response?.statusCode ?? -1));
     } catch (e) {
-      return Left(ApiFailure(message: e.toString() ?? '', statusCode: -1));
+      return Left(ApiFailure(message: e.toString() , statusCode: -1));
     }
   }
 

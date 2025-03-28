@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
-import 'package:flutter_project_structure/utils/constants.dart';
 import 'package:flutter_project_structure/utils/flavors.dart';
 
 /// Top-level background message handler for Firebase Messaging
