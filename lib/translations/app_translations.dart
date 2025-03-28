@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_structure/translations/ar_IN/ar_in_translations.dart';
 import 'package:flutter_project_structure/translations/en_US/en_us_translations.dart';
+import 'package:flutter_project_structure/translations/gu_IN/gu_in_translations.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 
 Map<String, Map<String, String>> translations = <String, Map<String, String>>{
   SupportedLangCode.english.langCode: enUs,
   SupportedLangCode.arabic.langCode: arIN,
+  SupportedLangCode.gujarati.langCode: guIN
+  ,
 };
 
 class AppTranslation {

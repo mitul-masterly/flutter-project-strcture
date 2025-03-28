@@ -175,7 +175,7 @@ class AppTextField extends StatelessWidget with Validator {
 
       default:
         if (!strValue.isNotNullAndEmpty()) {
-          return title + ' is Required'.tr(context); //.toLowerCase();
+          return (title + ' is Required').tr(context); //.toLowerCase();
         }
     }
 

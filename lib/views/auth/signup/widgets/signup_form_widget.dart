@@ -87,7 +87,7 @@ class SignUpFormWidget extends StatelessWidget with Validator {
             initialValue: state.confirmPassword,
             strHeaderTitle: '${AppStrings.confirmPassword.tr(buildContext)}*',
             validator: (final String? value) {
-              return validateConfirmPassword(value, state.password);
+              return validateConfirmPassword(value, state.password)?.tr(context);
             },
             textInputAction: TextInputAction.next,
             nextFocusNode: bloc.mobileFocus,

@@ -95,9 +95,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
                   Locale(SupportedLangCode.english.langCode,
                       SupportedLangCode.english.countryCode)) {
                 context.read<LocalisationBloc>().add(
-                    LocalisationEvent.onChangeLanguage(Locale(
-                        SupportedLangCode.arabic.langCode,
-                        SupportedLangCode.arabic.countryCode)));
+                    OnChangeLanguage(Locale(
+                        SupportedLangCode.gujarati.langCode,
+                        SupportedLangCode.gujarati.countryCode)));
               } else {
                 context.read<LocalisationBloc>().add(
                     LocalisationEvent.onChangeLanguage(Locale(

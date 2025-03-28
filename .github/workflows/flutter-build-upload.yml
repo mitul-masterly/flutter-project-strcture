@@ -81,6 +81,9 @@ jobs:
           flutter-version: '3.29.0'
           architecture: x64
 
+      - name: Clear Flutter Cache
+        run: flutter clean
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -128,8 +131,8 @@ jobs:
       - name: Install Fastlane
         run: gem install fastlane
 
-      - name: Run Fastlane Match
-        run: fastlane match appstore --readonly=true
+#      - name: Run Fastlane Match
+#        run: fastlane match appstore --readonly=true
 
       - name: Upload to TestFlight
         env:
