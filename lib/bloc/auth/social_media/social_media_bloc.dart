@@ -10,16 +10,30 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-part 'social_media_event.dart';
-
-part 'social_media_state.dart';
-
 part 'social_media_bloc.freezed.dart';
+part 'social_media_event.dart';
+part 'social_media_state.dart';
 
 class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
   SocialMediaBloc() : super(SocialMediaState.initial()) {
     on<SignUpWithGoogleEvent>((final SignUpWithGoogleEvent event,
         final Emitter<SocialMediaState> emit) async {
+      emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.google));
+      final User? user = await signInWithGoogle();
+      if (user != null) {
+        emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.success));
+        Navigator.pushNamed(event.context, RouteName.tabNavigationView);
+      } else {
+        emit(state.copyWith(status: CommonScreenState.error));
+        showErrorSnackBar(
+          'Failed to sign in'.tr(event.context),
+        );
+      }
+    });
+
+    on<SignUpWithAppleEvent>((final SignUpWithAppleEvent event,
+        final Emitter<SocialMediaState> emit) async {
+      emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.apple));
       final User? user = await signInWithGoogle();
       if (user != null) {
         Navigator.pushNamed(event.context, RouteName.tabNavigationView);
@@ -30,29 +44,9 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
       }
     });
 
-    on<SignUpWithAppleEvent>((final SignUpWithAppleEvent event,
-        final Emitter<SocialMediaState> emit) async {
-      try {
-        final AuthorizationCredentialAppleID credential =
-            await SignInWithApple.getAppleIDCredential(
-          scopes: <AppleIDAuthorizationScopes>[
-            AppleIDAuthorizationScopes.email,
-            AppleIDAuthorizationScopes.fullName,
-          ],
-        );
-        debugPrint('Apple Sign-In successful: ${credential.identityToken}');
-        showSuccessSnackBar(
-          'Apple Sign-In successful:'.tr(event.context),
-        );
-      } catch (error) {
-        debugPrint('Error: $error');
-        showErrorSnackBar('Error: $error');
-      }
-    });
-
     on<SignUpWithFacebookEvent>((final SignUpWithFacebookEvent event,
         final Emitter<SocialMediaState> emit) async {
-    /*  final FacebookLogin facebookLogin = await FacebookLogin();
+      /*  final FacebookLogin facebookLogin = await FacebookLogin();
       final FacebookLoginResult result = await facebookLogin.logIn(customPermissions: <String>['email']);
       switch (result.status) {
         case FacebookLoginStatus.success:
@@ -65,11 +59,8 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
         // There was an error during login.
           break;
       }*/
-
     });
   }
-
-
 
   Future<User?> signInWithGoogle() async {
     final FirebaseAuth auth = await FirebaseAuth.instance;
@@ -86,6 +77,31 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
           await auth.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
+      return null;
+    }
+  }
+
+  Future<User?> signInWithApple() async {
+    try {
+      final AuthorizationCredentialAppleID appleCredential =
+          await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final OAuthCredential oauthCredential =
+          OAuthProvider('apple.com').credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      debugPrint('userCredential: ${userCredential}');
+      return userCredential.user;
+    } catch (e) {
+      debugPrint('Apple Sign-in Error: $e');
       return null;
     }
   }

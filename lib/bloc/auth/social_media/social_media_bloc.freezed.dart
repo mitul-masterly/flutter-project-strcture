@@ -254,6 +254,7 @@ class _$SignUpWithFacebookEventCopyWithImpl<$Res>
 /// @nodoc
 mixin _$SocialMediaState {
   CommonScreenState get status;
+  SocialMediaLoginState get socialMediaStatus;
 
   /// Create a copy of SocialMediaState
   /// with the given fields replaced by the non-null parameter values.
@@ -268,15 +269,17 @@ mixin _$SocialMediaState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SocialMediaState &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.socialMediaStatus, socialMediaStatus) ||
+                other.socialMediaStatus == socialMediaStatus));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status);
+  int get hashCode => Object.hash(runtimeType, status, socialMediaStatus);
 
   @override
   String toString() {
-    return 'SocialMediaState(status: $status)';
+    return 'SocialMediaState(status: $status, socialMediaStatus: $socialMediaStatus)';
   }
 }
 
@@ -286,7 +289,8 @@ abstract mixin class $SocialMediaStateCopyWith<$Res> {
           SocialMediaState value, $Res Function(SocialMediaState) _then) =
       _$SocialMediaStateCopyWithImpl;
   @useResult
-  $Res call({CommonScreenState status});
+  $Res call(
+      {CommonScreenState status, SocialMediaLoginState socialMediaStatus});
 }
 
 /// @nodoc
@@ -303,12 +307,17 @@ class _$SocialMediaStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
+    Object? socialMediaStatus = null,
   }) {
     return _then(_self.copyWith(
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as CommonScreenState,
+      socialMediaStatus: null == socialMediaStatus
+          ? _self.socialMediaStatus
+          : socialMediaStatus // ignore: cast_nullable_to_non_nullable
+              as SocialMediaLoginState,
     ));
   }
 }
@@ -316,10 +325,12 @@ class _$SocialMediaStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _SocialMediaState implements SocialMediaState {
-  _SocialMediaState({required this.status});
+  _SocialMediaState({required this.status, required this.socialMediaStatus});
 
   @override
   final CommonScreenState status;
+  @override
+  final SocialMediaLoginState socialMediaStatus;
 
   /// Create a copy of SocialMediaState
   /// with the given fields replaced by the non-null parameter values.
@@ -334,15 +345,17 @@ class _SocialMediaState implements SocialMediaState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _SocialMediaState &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.socialMediaStatus, socialMediaStatus) ||
+                other.socialMediaStatus == socialMediaStatus));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status);
+  int get hashCode => Object.hash(runtimeType, status, socialMediaStatus);
 
   @override
   String toString() {
-    return 'SocialMediaState(status: $status)';
+    return 'SocialMediaState(status: $status, socialMediaStatus: $socialMediaStatus)';
   }
 }
 
@@ -354,7 +367,8 @@ abstract mixin class _$SocialMediaStateCopyWith<$Res>
       __$SocialMediaStateCopyWithImpl;
   @override
   @useResult
-  $Res call({CommonScreenState status});
+  $Res call(
+      {CommonScreenState status, SocialMediaLoginState socialMediaStatus});
 }
 
 /// @nodoc
@@ -371,12 +385,17 @@ class __$SocialMediaStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? status = null,
+    Object? socialMediaStatus = null,
   }) {
     return _then(_SocialMediaState(
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as CommonScreenState,
+      socialMediaStatus: null == socialMediaStatus
+          ? _self.socialMediaStatus
+          : socialMediaStatus // ignore: cast_nullable_to_non_nullable
+              as SocialMediaLoginState,
     ));
   }
 }
