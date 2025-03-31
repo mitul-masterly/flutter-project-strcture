@@ -1,3 +1,3 @@
 app_identifier "com.masterly.flutterbasecodestg" #(ENV['FLAVOR'] == 'staging' ? "com.masterly.flutterbasecodestg" : "com.masterly.flutterbasecode")
-apple_id ENV['6743781381'] #|| "your-apple-id@example.com"
-team_id ENV['BN6UXX7XJP'] #|| "Your_Team_ID"
+apple_id ENV['FASTLANE_APPLE_ID'] #|| "your-apple-id@example.com"
+team_id ENV['FASTLANE_TEAM_ID'] #|| "Your_Team_ID"
