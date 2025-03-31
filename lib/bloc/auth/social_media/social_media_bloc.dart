@@ -66,8 +66,8 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
   }
 
   Future<User?> signInWithGoogle() async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = await GoogleSignIn();
+    final FirebaseAuth auth =  FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn =  GoogleSignIn();
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       final GoogleSignInAuthentication? googleAuth =

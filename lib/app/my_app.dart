@@ -67,10 +67,10 @@ class MyApp extends StatelessWidget {
       },
     );
 
-    if (SharedPreferenceHelper().isLoggedIn) {
-      return RouteName.tabNavigationView;
-    } else {
+    // if (SharedPreferenceHelper().isLoggedIn) {
+    //   return RouteName.tabNavigationView;
+    // } else {
       return RouteName.loginScreen;
-    }
+    // }
   }
 }
