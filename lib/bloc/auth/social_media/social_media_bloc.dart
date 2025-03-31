@@ -2,9 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_project_structure/Routes/routes_name.dart';
 import 'package:flutter_project_structure/components/common_snack_bar.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
+import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,9 +24,10 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
       final User? user = await signInWithGoogle();
       if (user != null) {
         emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.success));
+        SharedPreferenceHelper().saveIsLoggedIn(true);
         Navigator.pushNamed(event.context, RouteName.tabNavigationView);
       } else {
-        emit(state.copyWith(status: CommonScreenState.error));
+        emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.error));
         showErrorSnackBar(
           'Failed to sign in'.tr(event.context),
         );
@@ -36,8 +39,11 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
       emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.apple));
       final User? user = await signInWithGoogle();
       if (user != null) {
+        SharedPreferenceHelper().saveIsLoggedIn(true);
+        emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.success));
         Navigator.pushNamed(event.context, RouteName.tabNavigationView);
       } else {
+        emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.error));
         showErrorSnackBar(
           'Failed to sign in'.tr(event.context),
         );
@@ -46,19 +52,16 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
 
     on<SignUpWithFacebookEvent>((final SignUpWithFacebookEvent event,
         final Emitter<SocialMediaState> emit) async {
-      /*  final FacebookLogin facebookLogin = await FacebookLogin();
-      final FacebookLoginResult result = await facebookLogin.logIn(customPermissions: <String>['email']);
-      switch (result.status) {
-        case FacebookLoginStatus.success:
-        // You're logged in with Facebook, use result.accessToken to make API calls.
-          break;
-        case FacebookLoginStatus.cancel:
-        // User cancelled the login.
-          break;
-        case FacebookLoginStatus.error:
-        // There was an error during login.
-          break;
-      }*/
+      final LoginResult result = await FacebookAuth.instance.login();
+      late AccessToken _accessToken;
+      if (result.status == LoginStatus.success) {
+        _accessToken = result.accessToken!;
+        final Map<String, dynamic> userData =
+            await FacebookAuth.instance.getUserData();
+        debugPrint('userData_____${userData}');
+      } else {
+        debugPrint('Facebook login failed: ${result.message}');
+      }
     });
   }
 
@@ -85,12 +88,11 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
     try {
       final AuthorizationCredentialAppleID appleCredential =
           await SignInWithApple.getAppleIDCredential(
-        scopes: [
+        scopes: <AppleIDAuthorizationScopes>[
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
       );
-
       final OAuthCredential oauthCredential =
           OAuthProvider('apple.com').credential(
         idToken: appleCredential.identityToken,

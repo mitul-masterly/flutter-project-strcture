@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,46 +22,55 @@ class SocialMediaWidget extends StatelessWidget {
         builder: (final BuildContext context, final SocialMediaState state) {
           final SocialMediaBloc bloc = context.read<SocialMediaBloc>();
           return Column(
-            children: [
+            children: <Widget>[
               AppButton(
                 bgColor: AppColors.white,
                 title: 'Sign up with Google'.tr(buildContext),
                 width: double.maxFinite,
-                isLoading: state.status == CommonScreenState.loading,
+                isLoading: state.status == CommonScreenState.initial &&
+                    state.socialMediaStatus == SocialMediaLoginState.google,
                 icon: Assets.svg.icGoogle.svg(),
                 titleColor: AppColors.black,
+                loadingIndicatorColor: AppColors.colorPrimary500,
                 onPressed: () async {
                   bloc.add(SignUpWithGoogleEvent(context: context));
                 },
                 type: AppButtonType.primary,
               ),
               10.height,
-              AppButton(
-                bgColor: AppColors.white,
-                title: 'Sign up with Apple'.tr(buildContext),
-                width: double.maxFinite,
-                isLoading: state.status == CommonScreenState.loading,
-                icon: Assets.svg.icApple.svg(),
-                titleColor: AppColors.black,
-                onPressed: () {
-                  bloc.add(SignUpWithAppleEvent(context: context));
-                },
-                type: AppButtonType.primary,
-              ),
-              10.height,
-              AppButton(
+              Platform.isIOS
+                  ? AppButton(
+                      bgColor: AppColors.white,
+                      title: 'Sign up with Apple'.tr(buildContext),
+                      width: double.maxFinite,
+                      isLoading: state.status == CommonScreenState.initial &&
+                          state.socialMediaStatus ==
+                              SocialMediaLoginState.apple,
+                      icon: Assets.svg.icApple.svg(),
+                      titleColor: AppColors.black,
+                      loadingIndicatorColor: AppColors.colorPrimary500,
+                      onPressed: () {
+                        bloc.add(SignUpWithAppleEvent(context: context));
+                      },
+                      type: AppButtonType.primary,
+                    )
+                  : SizedBox(),
+              Platform.isIOS ? 10.height : SizedBox(),
+              /*   AppButton(
                 bgColor: AppColors.white,
                 title: 'Sign up with Facebook'.tr(buildContext),
                 width: double.maxFinite,
-                isLoading: state.status == CommonScreenState.loading,
+                isLoading: state.status == CommonScreenState.initial &&
+                    state.socialMediaStatus == SocialMediaLoginState.facebook,
                 icon: Assets.svg.icFacebook.svg(),
                 titleColor: AppColors.black,
+                loadingIndicatorColor: AppColors.colorPrimary500,
                 onPressed: () {
-
+                  bloc.add(SignUpWithFacebookEvent(context: context));
                 },
                 type: AppButtonType.primary,
               ),
-              10.height,
+              10.height,*/
             ],
           );
         },

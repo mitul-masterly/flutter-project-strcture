@@ -43,6 +43,6 @@ enum CommonScreenState {
   error,
 }
 
-enum SocialMediaLoginState { initial, google, facebook, apple, success }
+enum SocialMediaLoginState { initial, google, facebook, apple, success, error }
 
 enum Flavor { staging, prod }

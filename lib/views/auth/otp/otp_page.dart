@@ -98,15 +98,16 @@ class OtpScreen extends StatelessWidget {
                     isLoading: state.status == CommonScreenState.loading,
                     onPressed: () async {
                       if (state.status == CommonScreenState.success) {
-                        /* Navigator.pushNamedAndRemoveUntil(context, RouteName.tabNavigationView,
-                              (final Route<dynamic> route) => false,
-                        );*/
-
                         SharedPreferenceHelper().saveIsLoggedIn(true);
-                        Navigator.pushNamed(
+                        Navigator.pushNamedAndRemoveUntil(
                           context,
                           RouteName.tabNavigationView,
+                          (final Route<dynamic> route) => false,
                         );
+                        /* Navigator.pushNamed(
+                          context,
+                          RouteName.tabNavigationView,
+                        );*/
                       }
                     },
                     type: AppButtonType.primary,

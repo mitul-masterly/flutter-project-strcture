@@ -44,6 +44,7 @@ dependencies:
   local_auth: ^2.3.0
   flutter_flavorizr: ^2.3.0
   sign_in_with_apple: ^6.1.4
+  flutter_facebook_auth: ^7.1.1
 
 
 

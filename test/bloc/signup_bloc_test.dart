@@ -23,7 +23,7 @@ void main() {
               firstName: '',
               lastName: '',
               email: '',
-             // password: '',
+              // password: '',
               countryISOCode: 'US',
               countryCode: '+1',
               //confirmPassword: '',
@@ -58,8 +58,12 @@ void main() {
     blocTest<SignUpBloc, SignUpState>(
       'emits state email address',
       build: () => SignUpBloc(authRepo: authRepo),
-      act: (final SignUpBloc bloc) =>
-          bloc.add(OnChangeEmail(email: 'bhoomi.n@gmail.com')),
+      act: (final SignUpBloc bloc) {
+        final FieldValidator fieldValidator = FieldValidator();
+        final String result = fieldValidator.validateEmail('');
+        expect(result, 'Enter Email');
+        bloc.add(OnChangeEmail(email: 'bhoomi.n@gmail.com'));
+      },
       // skip: 1,
       expect: () => <SignUpState>[
         SignUpState.initial().copyWith(
@@ -110,9 +114,7 @@ void main() {
     blocTest<SignUpBloc, SignUpState>(
       'emits state gender',
       build: () => SignUpBloc(authRepo: authRepo),
-      act: (final SignUpBloc bloc) =>
-          bloc.add(OnSelectGender(genderId: 1)),
-      // skip: 1,
+      act: (final SignUpBloc bloc) => bloc.add(OnSelectGender(genderId: 1)),
       expect: () => <SignUpState>[
         SignUpState.initial().copyWith(
           genderId: 1,
@@ -132,7 +134,6 @@ void main() {
         ),
       ],
     );
-
 
     blocTest<SignUpBloc, SignUpState>(
       'emits state Country',
@@ -166,7 +167,7 @@ void main() {
             .thenAnswer((final _) async => Right(200));
       },
       build: () => SignUpBloc(authRepo: authRepo),
-     // act: (final SignUpBloc bloc) => bloc.add(OnTapSubmit()),
+      // act: (final SignUpBloc bloc) => bloc.add(OnTapSubmit()),
       // skip: 1,
       expect: () => <SignUpState>[
         SignUpState.initial().copyWith(
@@ -178,4 +179,31 @@ void main() {
       ],
     );
   });
+}
+
+class FieldValidator {
+  String validateEmail(final String value) {
+    if (value.isEmpty) {
+      return 'Enter Email';
+    }
+
+    final bool emailValid =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+            .hasMatch(value);
+    if (!emailValid) {
+      return 'Enter Valid Email';
+    }
+    return '';
+  }
+
+  String validatePassword(final String value) {
+    if (value.isEmpty) {
+      return 'Enter password';
+    }
+
+    if (value.length < 6) {
+      return 'Password is too short';
+    }
+    return '';
+  }
 }

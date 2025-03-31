@@ -66,9 +66,9 @@ class SignUpDetailsFormWidget extends StatelessWidget with Validator {
           AppTextField(
             key: Key('security_answer_field'),
             type: TextFieldTypes.text,
-            title: 'signupRequest',
+            title: 'Security Answer',
             initialValue: state.securityAnswer,
-            strHeaderTitle: '${'signupRequest'.tr(buildContext)}',
+            strHeaderTitle: '${'Security Answer'.tr(buildContext)}',
             textInputAction: TextInputAction.done,
             focusNode: bloc.answerFocus,
             onChange: (final String value) {
