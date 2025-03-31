@@ -11,10 +11,19 @@ import flutter_local_notifications
   ) -> Bool {
 
 
-    if #available(iOS 10.0, *) {
-        UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
-    }
-      FirebaseApp.configure()
+//    if #available(iOS 10.0, *) {
+//        UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+//    }
+//    #if STAGING
+//      let filePath = Bundle.main.path(forResource: "Firebase/staging/GoogleService-Info_Staging", ofType: "plist")
+//    #else
+//      let filePath = Bundle.main.path(forResource: "Firebase/prod/GoogleService-Info_Prod", ofType: "plist")
+//   #endif
+//
+//   guard let fileopts = FirebaseOptions(contentsOfFile: filePath!) else {
+//       fatalError("Couldn't load config file")
+//   }
+   FirebaseApp.configure()
 
     application.registerForRemoteNotifications()
     FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
