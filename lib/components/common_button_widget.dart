@@ -14,6 +14,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget? icon;
   final bool isLoading;
+  final Color? loadingIndicatorColor;
 
   const AppButton(
       {super.key,
@@ -22,7 +23,8 @@ class AppButton extends StatelessWidget {
       required this.width,
       required this.type,
       required this.icon,
-      required this.isLoading});
+      required this.isLoading,
+      this.loadingIndicatorColor});
 
   @override
   Widget build(final BuildContext context) {
@@ -59,8 +61,12 @@ class AppButton extends StatelessWidget {
         onPressed: onPressed,
         child: isLoading
             ? Platform.isIOS
-                ? CupertinoActivityIndicator()
-                : CircularProgressIndicator()
+                ? CupertinoActivityIndicator(
+                    color: loadingIndicatorColor ?? AppColors.white,
+                  )
+                : CircularProgressIndicator(
+                    color: loadingIndicatorColor ?? AppColors.white,
+                  )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

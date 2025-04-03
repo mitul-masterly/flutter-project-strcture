@@ -5,6 +5,7 @@ enum TextFieldTypes { text, email, password, number, multiline }
 enum SnackBarType { success, error, info }
 
 enum AppMessages {
+  somethingWentWrong('Something Went Wrong..!'),
   firstNameRequired('First Name is Required'),
   lastNameRequired('Last Name is Required'),
   emailRequired('Email is Required'),
@@ -32,4 +33,12 @@ enum SupportedLangCode {
 
   final String langCode;
   final String countryCode;
+}
+
+enum CommonScreenState {
+  initial,
+  loading,
+  loaded,
+  success,
+  error,
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/bloc/my_app/localisation_bloc.dart';
 import 'package:flutter_project_structure/bloc/tab_navigation_cubit.dart';
+import 'package:flutter_project_structure/data/api/either.dart';
+import 'package:flutter_project_structure/data/errors/failure.dart';
 import 'package:flutter_project_structure/data/models/others/profile_options_model.dart';
 import 'package:flutter_project_structure/data/models/response_model/auth/user_data_model.dart';
 import 'package:flutter_project_structure/data/repository/auth_repo.dart';
@@ -24,46 +26,54 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       : super(ProfileState.initial()) {
     on<OnGetUserProfile>(
         (final OnGetUserProfile event, final Emitter<ProfileState> emit) async {
-      emit(state.copyWith(isLoading: true, userData: null));
+      emit(state.copyWith(status: CommonScreenState.loading, userData: null));
 
-      try {
-        final UserDataModel user = await userRepo.getUserProfileApi();
+      final Either<Failure, UserDataModel> result =
+          await userRepo.getUserProfileApi();
+      result.fold((final Failure error) {
+        debugPrint('error message ${error.message}');
+        emit(state.copyWith(status: CommonScreenState.error, userData: null));
+      }, (final UserDataModel user) {
         user.authToken = sharedPreferenceHelper.user?.authToken;
         sharedPreferenceHelper.saveUser(user);
-        emit(state.copyWith(isLoading: false, userData: user));
-      } catch (e) {
-        debugPrint('error message $e');
-        emit(state.copyWith(isLoading: false, userData: null));
-      }
+        emit(state.copyWith(status: CommonScreenState.success, userData: user));
+      });
     });
 
+    // to open bottom sheet for confirmation
     on<OnTapLogout>(
         (final OnTapLogout event, final Emitter<ProfileState> emit) async {
       emit(state.copyWith(showLogoutSheet: true));
-      await Future.delayed(
+      await Future<dynamic>.delayed(
           Duration(milliseconds: 200)); // Small delay to ensure UI responds
       emit(state.copyWith(showLogoutSheet: false));
     });
 
     on<CallLogoutApi>(
         (final CallLogoutApi event, final Emitter<ProfileState> emit) async {
-      emit(state.copyWith(isLoading: true));
-      try {
-        final Map<String, dynamic> params = <String, dynamic>{
-          'authToken': sharedPreferenceHelper.user?.authToken,
-          'userRegistrationId': sharedPreferenceHelper.user?.userRegistrationId,
-        };
-        await authRepo.apiLogout(requestParams: params);
-        emit(state.copyWith(isLoading: false));
+      emit(state.copyWith(status: CommonScreenState.loading));
+      final Map<String, dynamic> params = <String, dynamic>{
+        'authToken': sharedPreferenceHelper.user?.authToken,
+        'userRegistrationId': sharedPreferenceHelper.user?.userRegistrationId,
+      };
+
+      final Either<Failure, int?> result =
+          await authRepo.apiLogout(requestParams: params);
+
+      result.fold((final Failure error) {
+        debugPrint('error message ${error.message}');
+        emit(state.copyWith(status: CommonScreenState.error));
+      }, (final int? statusCode) async {
         sharedPreferenceHelper.clear();
-        await Navigator.of(event.context, rootNavigator: true)
-            .pushNamedAndRemoveUntil(
-                RouteName.loginScreen, (final Route route) => false);
-      } catch (e) {
-        debugPrint('error message $e');
-        emit(state.copyWith(isLoading: false));
-      }
+        emit(state.copyWith(
+            status: CommonScreenState.success, navigateToLogin: true));
+      });
     });
+  }
+
+  Future<void> navigateToLoginScreen(final BuildContext context) async {
+    await Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
+        RouteName.loginScreen, (final Route route) => false);
   }
 
   List<ProfileOptionsModel> get arrProfileOptions => <ProfileOptionsModel>[

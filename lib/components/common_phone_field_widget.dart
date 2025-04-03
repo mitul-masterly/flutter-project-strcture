@@ -16,25 +16,28 @@ import 'package:intl_phone_field/phone_number.dart';
 
 class CommonPhoneFieldWidget extends StatelessWidget with Validator {
   CommonPhoneFieldWidget(
-      {required this.textEditController,
-      this.initialValue,
+      {super.key,
+      this.textEditController,
       this.countryCode,
       this.onCountryChanged,
       this.showHeaderTitle,
       this.strHeaderTitle,
       required this.textInputAction,
       this.nextFocusNode,
-      this.focusNode});
+      this.focusNode,
+      this.initialValue,
+      this.onChange});
 
-  final TextEditingController textEditController;
-  final String? initialValue;
+  final TextEditingController? textEditController;
   final String? countryCode;
-  final Function(Country)? onCountryChanged;
   final bool? showHeaderTitle;
   final String? strHeaderTitle;
   final TextInputAction textInputAction;
   final FocusNode? nextFocusNode;
   final FocusNode? focusNode;
+  final String? initialValue;
+  final ValueChanged<PhoneNumber>? onChange;
+  final ValueChanged<Country>? onCountryChanged;
 
   @override
   Widget build(final BuildContext context) {
@@ -84,13 +87,14 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
             enabledBorder: Utils.inputBorder(AppColors.color808080),
           ),
           flagsButtonPadding: const EdgeInsets.all(10),
-          initialValue: initialValue ?? '+1',
+          initialValue: initialValue,
           initialCountryCode: countryCode ?? 'US',
           onCountryChanged: onCountryChanged,
           invalidNumberMessage: AppMessages.invalidMobile.message.tr(context),
           validator: (final PhoneNumber? value) {
             return validateMobileNumber(value)?.tr(context);
           },
+          onChanged: onChange,
         ),
       ],
     );

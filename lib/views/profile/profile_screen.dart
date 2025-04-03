@@ -9,6 +9,7 @@ import 'package:flutter_project_structure/data/repository/user_repo.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/theme/status_bar_config.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/utils.dart';
 import 'package:flutter_project_structure/views/profile/widget/logout_bottom_sheet.dart';
 import 'package:flutter_project_structure/views/profile/widget/profile_header_widget.dart';
@@ -38,12 +39,13 @@ class ProfileScreen extends StatelessWidget {
                   useRootNavigator: true,
                   builder: (final BuildContext contextt) => LogoutBottomSheet(
                     onTapLogout: () {
-                      context
-                          .read<ProfileBloc>()
-                          .add(CallLogoutApi(context: context));
+                      context.read<ProfileBloc>().add(CallLogoutApi());
                     },
                   ),
                 );
+              }
+              if (state.navigateToLogin == true) {
+                context.read<ProfileBloc>().navigateToLoginScreen(context);
               }
             },
             builder: (final BuildContext context, final ProfileState state) {
@@ -80,8 +82,10 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (state.isLoading) Utils.loaderBrier(),
-                    if (state.isLoading) Utils.loaderWid(),
+                    if (state.status == CommonScreenState.loading)
+                      Utils.loaderBrier(),
+                    if (state.status == CommonScreenState.loading)
+                      Utils.loaderWid(),
                   ],
                 ),
               );

@@ -1,4 +1,6 @@
-class UserDataModel {
+import 'package:equatable/equatable.dart';
+
+class UserDataModel extends Equatable {
   int? userRegistrationId;
   String? authToken;
   String? firstName;
@@ -17,21 +19,22 @@ class UserDataModel {
 
   String get fullName => '$firstName $lastName';
 
-  UserDataModel({this.userRegistrationId,
-    this.authToken,
-    this.firstName,
-    this.lastName,
-    this.userName,
-    this.emailId,
-    this.isdCode,
-    this.contactNo,
-    this.dateofBirth,
-    this.userProfileImagePath,
-    this.userProfileImageName,
-    this.userProfileImageUrl,
-    this.currencySign,
-    this.preferredCurrency,
-    this.countryCodeISO2});
+  UserDataModel(
+      {this.userRegistrationId,
+      this.authToken,
+      this.firstName,
+      this.lastName,
+      this.userName,
+      this.emailId,
+      this.isdCode,
+      this.contactNo,
+      this.dateofBirth,
+      this.userProfileImagePath,
+      this.userProfileImageName,
+      this.userProfileImageUrl,
+      this.currencySign,
+      this.preferredCurrency,
+      this.countryCodeISO2});
 
   UserDataModel.fromJson(final Map<String, dynamic> json) {
     userRegistrationId = json['userRegistrationId'];
@@ -76,4 +79,7 @@ class UserDataModel {
     // TODO: implement toString
     return toJson().toString();
   }
+
+  @override
+  List<Object?> get props => [emailId];
 }

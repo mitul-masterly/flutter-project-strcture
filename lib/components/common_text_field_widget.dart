@@ -13,7 +13,8 @@ import 'package:intl_phone_field/phone_number.dart';
 class AppTextField extends StatelessWidget with Validator {
   final TextFieldTypes type;
   final String title;
-  final TextEditingController textEditingController;
+  final TextEditingController? textEditingController;
+  final String? initialValue;
   final String? strPrefixText;
   final List<TextInputFormatter>? inputFormatters;
   final String? hintText;
@@ -23,12 +24,13 @@ class AppTextField extends StatelessWidget with Validator {
   final TextInputAction textInputAction;
   final FocusNode? nextFocusNode;
   final FocusNode? focusNode;
+  final ValueChanged<String>? onChange;
 
   const AppTextField(
       {super.key,
       required this.type,
       required this.title,
-      required this.textEditingController,
+      this.textEditingController,
       this.strPrefixText = '',
       this.inputFormatters = const <TextInputFormatter>[],
       this.hintText,
@@ -37,7 +39,9 @@ class AppTextField extends StatelessWidget with Validator {
       this.validator,
       required this.textInputAction,
       this.nextFocusNode,
-      this.focusNode});
+      this.focusNode,
+      this.initialValue,
+      this.onChange});
 
   @override
   Widget build(final BuildContext buildContext) {
@@ -58,6 +62,7 @@ class AppTextField extends StatelessWidget with Validator {
             builder: (final BuildContext context, final bool value,
                 final Widget? child) {
               return TextFormField(
+                initialValue: initialValue ?? '',
                 focusNode: this.focusNode,
                 style: rubikW400.copyWith(fontSize: 14),
                 controller: textEditingController,
@@ -80,6 +85,7 @@ class AppTextField extends StatelessWidget with Validator {
                 onTap: () {
                   // Scrollable.ensureVisible(buildContext);
                 },
+                onChanged: onChange,
                 onTapOutside: (final PointerDownEvent v) {
                   FocusScope.of(buildContext).unfocus();
                 },

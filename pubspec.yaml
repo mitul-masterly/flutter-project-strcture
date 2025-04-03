@@ -35,6 +35,7 @@ dependencies:
   flutter_local_notifications: ^18.0.1
   firebase_crashlytics: ^4.3.4
   cached_network_image: ^3.4.1
+  equatable: ^2.0.7
 
 
 flutter_gen:
@@ -49,6 +50,9 @@ dev_dependencies:
   #  change_app_package_name: ^1.5.0
   flutter_gen_runner: ^5.10.0
   build_runner: ^2.4.15
+  bloc_test: ^10.0.0
+  mocktail: ^1.0.4
+  #  mockito: ^5.4.5
   flutter_lints: ^5.0.0
   freezed: ^3.0.3
   flutter_custom_linter_masterly:
