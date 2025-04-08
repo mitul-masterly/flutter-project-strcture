@@ -50,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
             },
             builder: (final BuildContext context, final ProfileState state) {
               return Scaffold(
-                backgroundColor: AppColors.color003366.withValues(alpha: 0.3),
+                backgroundColor: AppColors.colorPrimary500.withValues(alpha: 0.3),
                 appBar: CommonAppBar(
                   strTitle: 'Profile'.tr(buildContext),
                   isBack: false,

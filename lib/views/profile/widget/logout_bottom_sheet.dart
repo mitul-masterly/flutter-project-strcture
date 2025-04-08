@@ -42,7 +42,7 @@ class LogoutBottomSheet extends StatelessWidget {
                   width: 72,
                   padding: EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: AppColors.color808080.withOpacity(0.10),
+                    color: AppColors.baseColorWhite85.withOpacity(0.10),
                     borderRadius: BorderRadius.circular(36),
                   ),
                   child: Assets.svg.icLogout.svg(),
@@ -50,13 +50,13 @@ class LogoutBottomSheet extends StatelessWidget {
                 20.height,
                 Text(
                   'Logout'.tr(context),
-                  style: rubikW700.copyWith(fontSize: 22.0),
+                  style: dMSansW700.copyWith(fontSize: 22.0),
                 ),
                 8.height,
                 Text(
                   textAlign: TextAlign.center,
                   'Are you sure you want to Logout this\naccount?'.tr(context),
-                  style: rubikW500.copyWith(color: AppColors.black),
+                  style: dMSansW500.copyWith(color: AppColors.black),
                 ),
                 24.height,
                 AppButton(

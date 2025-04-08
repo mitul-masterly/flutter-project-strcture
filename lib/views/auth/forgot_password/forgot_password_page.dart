@@ -25,13 +25,13 @@ class ForgotPasswordScreen extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Forgot Password'.tr(context),
-                style: rubikW700.copyWith(fontSize: 25),
+                style: dMSansW700.copyWith(fontSize: 25),
               ),
               5.height,
               Text(
                 'Please enter your email address to receive a link to reset your password'
                     .tr(context),
-                style: rubikW400.copyWith(color: AppColors.color808080),
+                style: dMSansW400.copyWith(color: AppColors.baseColorWhite85),
               ),
               16.height,
               AppTextField(

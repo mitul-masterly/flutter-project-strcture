@@ -36,12 +36,12 @@ class ProfileCell extends StatelessWidget {
             Expanded(
               child: Text(
                 item.title.tr(context),
-                style: rubikW400.copyWith(fontSize: 14),
+                style: dMSansW400.copyWith(fontSize: 14),
               ),
             ),
             10.width,
             Icon(Icons.arrow_forward_ios,
-                size: 16, color: AppColors.color808080)
+                size: 16, color: AppColors.baseColorWhite85)
           ],
         ),
       ),

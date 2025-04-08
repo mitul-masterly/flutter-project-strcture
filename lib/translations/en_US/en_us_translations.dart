@@ -16,8 +16,8 @@ final Map<String, String> enUs = <String, String>{
       'Password must be at least 6 characters',
   'Confirm password is required': 'Confirm password is required',
   'Confirm password does not match': 'Confirm password does not match',
-  'New account?': 'New account?',
-  'Signup Here': 'Signup Here',
+  'Don’t have any account?': 'Don’t have any account?',
+  'Sign up': 'Sign up',
   'Change Language': 'Change Language',
   'Address Details': 'Address Details',
   'My Profile': 'My Profile',
@@ -47,4 +47,7 @@ final Map<String, String> enUs = <String, String>{
   'Enter your mobile number': 'Enter your mobile number',
   'Invalid Mobile Number': 'Invalid Mobile Number',
   'Forgot Password?': 'Forgot Password?',
+  'Sign up with Google': 'Sign up with Google',
+  'Sign up with Apple': 'Sign up with Apple',
+  'Sign up with Facebook': 'Sign up with Facebook',
 };

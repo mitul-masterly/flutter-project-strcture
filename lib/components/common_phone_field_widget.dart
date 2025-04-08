@@ -47,7 +47,7 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
         if (showHeaderTitle ?? true) ...<Widget>[
           Text(
             (strHeaderTitle ?? AppStrings.mobileNumber).tr(context),
-            style: rubikW700.copyWith(fontSize: 14),
+            style: dMSansW700.copyWith(fontSize: 14),
           ),
           10.height,
         ],
@@ -67,7 +67,7 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
               FocusScope.of(context).requestFocus(nextFocusNode);
             }
           },
-          style: rubikW400,
+          style: dMSansW400,
           keyboardType: const TextInputType.numberWithOptions(
               signed: true, decimal: false),
           inputFormatters: <TextInputFormatter>[
@@ -77,14 +77,14 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
             contentPadding:
                 const EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 0),
             hintText: 'Enter your mobile number'.tr(context),
-            hintStyle: rubikW400.copyWith(
-              color: AppColors.color808080,
+            hintStyle: dMSansW400.copyWith(
+              color: AppColors.baseColorWhite85,
               fontSize: 14,
             ),
-            focusedBorder: Utils.inputBorder(AppColors.color003366),
-            focusedErrorBorder: Utils.inputBorder(AppColors.colorF92814),
-            errorBorder: Utils.inputBorder(AppColors.colorF92814),
-            enabledBorder: Utils.inputBorder(AppColors.color808080),
+            focusedBorder: Utils.inputBorder(AppColors.colorPrimary500),
+            focusedErrorBorder: Utils.inputBorder(AppColors.colorError500),
+            errorBorder: Utils.inputBorder(AppColors.colorError500),
+            enabledBorder: Utils.inputBorder(AppColors.baseColorWhite85),
           ),
           flagsButtonPadding: const EdgeInsets.all(10),
           initialValue: initialValue,

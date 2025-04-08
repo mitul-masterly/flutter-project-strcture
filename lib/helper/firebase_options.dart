@@ -4,10 +4,23 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+/// Default [FirebaseOptions] for use with your Firebase apps.
+///
+/// Example:
+/// ```dart
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
+/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -36,29 +49,22 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC9y2R-_1LK51E8QTfjg2EGbPXrb3X90rk',
-    appId: '1:813740183088:web:368ec0ef73a7baaba567f5',
-    messagingSenderId: '813740183088',
-    projectId: 'loanquantum',
-    authDomain: 'loanquantum.firebaseapp.com',
-    storageBucket: 'loanquantum.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA0VPM3UQNkqqs9JEXVGMHTYWueAEDcnXY',
-    appId: '1:477121729769:android:4878d69c6711f1bce2cc78',
-    messagingSenderId: '477121729769',
-    projectId: 'flutter-base-45674',
-    storageBucket: 'flutter-base-45674.firebasestorage.app',
+    apiKey: 'AIzaSyCARi30S-QEuWy7iVKQYrlrrPvL5OcGJPo',
+    appId: '1:545061596433:android:0ac49de3b14a9d69df70b0',
+    messagingSenderId: '545061596433',
+    projectId: 'masterly-flutterbasecode',
+    storageBucket: 'masterly-flutterbasecode.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC5no-fBONdR9rdUkL4oEcb_oxUM1mFZkE',
-    appId: '1:477121729769:ios:9ed4e2a1a6e2ff06e2cc78',
-    messagingSenderId: '477121729769',
-    projectId: 'flutter-base-45674',
-    storageBucket: 'flutter-base-45674.firebasestorage.app',
-    iosBundleId: 'com.masterly.flutterbase',
+    apiKey: 'AIzaSyDdvrJD0jBqWNChUIxlhrht4MbDVTHlTcw',
+    appId: '1:545061596433:ios:147207c942e02f16df70b0',
+    messagingSenderId: '545061596433',
+    projectId: 'masterly-flutterbasecode',
+    storageBucket: 'masterly-flutterbasecode.firebasestorage.app',
+    iosBundleId: 'com.masterly.flutterbasecode',
   );
+
+
 }

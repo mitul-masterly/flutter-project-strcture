@@ -12,4 +12,5 @@ class AppStrings {
   static const String isRequired = 'is Required';
   static const String mobileNumber = 'Mobile Number';
   static const String globalErrorMessage = 'Something Went Wrong..!';
+
 }

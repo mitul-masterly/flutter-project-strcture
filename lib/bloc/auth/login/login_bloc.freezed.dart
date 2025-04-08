@@ -314,6 +314,201 @@ class _$OnTapForgotPasswordCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
+class SignUpWithGoogleEvent implements LoginEvent {
+  const SignUpWithGoogleEvent({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SignUpWithGoogleEventCopyWith<SignUpWithGoogleEvent> get copyWith =>
+      _$SignUpWithGoogleEventCopyWithImpl<SignUpWithGoogleEvent>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SignUpWithGoogleEvent &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @override
+  String toString() {
+    return 'LoginEvent.signUpWithGoogleEvent(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SignUpWithGoogleEventCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $SignUpWithGoogleEventCopyWith(SignUpWithGoogleEvent value,
+          $Res Function(SignUpWithGoogleEvent) _then) =
+      _$SignUpWithGoogleEventCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$SignUpWithGoogleEventCopyWithImpl<$Res>
+    implements $SignUpWithGoogleEventCopyWith<$Res> {
+  _$SignUpWithGoogleEventCopyWithImpl(this._self, this._then);
+
+  final SignUpWithGoogleEvent _self;
+  final $Res Function(SignUpWithGoogleEvent) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(SignUpWithGoogleEvent(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class SignUpWithAppleEvent implements LoginEvent {
+  const SignUpWithAppleEvent({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SignUpWithAppleEventCopyWith<SignUpWithAppleEvent> get copyWith =>
+      _$SignUpWithAppleEventCopyWithImpl<SignUpWithAppleEvent>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SignUpWithAppleEvent &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @override
+  String toString() {
+    return 'LoginEvent.signUpWithAppleEvent(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SignUpWithAppleEventCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $SignUpWithAppleEventCopyWith(SignUpWithAppleEvent value,
+          $Res Function(SignUpWithAppleEvent) _then) =
+      _$SignUpWithAppleEventCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$SignUpWithAppleEventCopyWithImpl<$Res>
+    implements $SignUpWithAppleEventCopyWith<$Res> {
+  _$SignUpWithAppleEventCopyWithImpl(this._self, this._then);
+
+  final SignUpWithAppleEvent _self;
+  final $Res Function(SignUpWithAppleEvent) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(SignUpWithAppleEvent(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class SignUpWithFacebookEvent implements LoginEvent {
+  const SignUpWithFacebookEvent({required this.context});
+
+  final BuildContext context;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SignUpWithFacebookEventCopyWith<SignUpWithFacebookEvent> get copyWith =>
+      _$SignUpWithFacebookEventCopyWithImpl<SignUpWithFacebookEvent>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SignUpWithFacebookEvent &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @override
+  String toString() {
+    return 'LoginEvent.signUpWithFacebookEvent(context: $context)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SignUpWithFacebookEventCopyWith<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  factory $SignUpWithFacebookEventCopyWith(SignUpWithFacebookEvent value,
+          $Res Function(SignUpWithFacebookEvent) _then) =
+      _$SignUpWithFacebookEventCopyWithImpl;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class _$SignUpWithFacebookEventCopyWithImpl<$Res>
+    implements $SignUpWithFacebookEventCopyWith<$Res> {
+  _$SignUpWithFacebookEventCopyWithImpl(this._self, this._then);
+
+  final SignUpWithFacebookEvent _self;
+  final $Res Function(SignUpWithFacebookEvent) _then;
+
+  /// Create a copy of LoginEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(SignUpWithFacebookEvent(
+      context: null == context
+          ? _self.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$LoginState {
   CommonScreenState get status;
   String get email;

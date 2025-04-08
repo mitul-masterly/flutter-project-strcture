@@ -37,7 +37,7 @@ class ProfileImageWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             border: Border.all(
-                                color: AppColors.color808080, width: 2),
+                                color: AppColors.baseColorWhite85, width: 2),
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50),
@@ -63,7 +63,7 @@ class ProfileImageWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         border:
-                            Border.all(color: AppColors.color808080, width: 2),
+                            Border.all(color: AppColors.baseColorWhite85, width: 2),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50),
@@ -102,7 +102,7 @@ class ProfileImageWidget extends StatelessWidget {
     return UserDefaultAvatar(
       size: 100,
       borderRadius: 50,
-      border: Border.all(color: AppColors.color808080, width: 2),
+      border: Border.all(color: AppColors.baseColorWhite85, width: 2),
     );
   }
 }
