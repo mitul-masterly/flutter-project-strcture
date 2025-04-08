@@ -12,7 +12,7 @@ import 'package:flutter_project_structure/helper/pref_helper/pref_keys.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/constants.dart';
-import 'package:flutter_project_structure/views/tab_navigation_view.dart';
+import 'package:flutter_project_structure/views/tab_navigation/tab_navigation_view.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -81,7 +81,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(isRememberMe: event.isRememberMe));
     });
 
-    on<OnTapForgotPassword>((final event, final Emitter<LoginState> emit) {
+    on<OnTapForgotPassword>((final OnTapForgotPassword event, final Emitter<LoginState> emit) {
       navigateToForgotPassword(event.context);
     });
   }
@@ -91,7 +91,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-          builder: (final BuildContext context) => const TabNavigationView()),
+          builder: (final BuildContext context) =>  TabNavigationView()),
       (final Route<dynamic> route) => false, // Remove all previous routes
     );
   }

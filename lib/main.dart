@@ -15,7 +15,7 @@ import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/flavors.dart';
 
 Future<void> main() async {
-  FlavorConfig(flavor: Flavor.staging);
+  FlavorConfig(flavor: Flavor.prod);
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferenceHelper().init();
   await Firebase.initializeApp(
