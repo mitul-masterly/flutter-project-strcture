@@ -90,7 +90,7 @@ class NotificationService {
 
     // Initialization settings
     const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@drawable/ic_notification');
     const DarwinInitializationSettings iOSSettings =
         DarwinInitializationSettings(
       requestSoundPermission: true,
@@ -149,7 +149,7 @@ class NotificationService {
             androidChannel.id,
             androidChannel.name,
             channelDescription: androidChannel.description,
-            icon: '@mipmap/ic_launcher',
+            icon: '@drawable/ic_notification',
           ),
           iOS: const DarwinNotificationDetails(
               presentAlert: true, presentSound: true),
