@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/bloc/my_app/localisation_bloc.dart';
+import 'package:flutter_project_structure/components/common_rich_text_widget.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/helper/regex_helper.dart';
 import 'package:flutter_project_structure/helper/validator.dart';
@@ -45,10 +46,7 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (showHeaderTitle ?? true) ...<Widget>[
-          Text(
-            (strHeaderTitle ?? AppStrings.mobileNumber).tr(context),
-            style: rubikW700.copyWith(fontSize: 14),
-          ),
+          CommonRichTextWidget(strHeaderTitle: strHeaderTitle ?? AppStrings.mobileNumber),
           10.height,
         ],
         IntlPhoneField(
@@ -67,7 +65,7 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
               FocusScope.of(context).requestFocus(nextFocusNode);
             }
           },
-          style: rubikW400,
+          style: dMSansW400,
           keyboardType: const TextInputType.numberWithOptions(
               signed: true, decimal: false),
           inputFormatters: <TextInputFormatter>[
@@ -77,14 +75,14 @@ class CommonPhoneFieldWidget extends StatelessWidget with Validator {
             contentPadding:
                 const EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 0),
             hintText: 'Enter your mobile number'.tr(context),
-            hintStyle: rubikW400.copyWith(
-              color: AppColors.color808080,
+            hintStyle: dMSansW400.copyWith(
+              color: AppColors.baseColorWhite85,
               fontSize: 14,
             ),
-            focusedBorder: Utils.inputBorder(AppColors.color003366),
-            focusedErrorBorder: Utils.inputBorder(AppColors.colorF92814),
-            errorBorder: Utils.inputBorder(AppColors.colorF92814),
-            enabledBorder: Utils.inputBorder(AppColors.color808080),
+            focusedBorder: Utils.inputBorder(AppColors.colorPrimary500),
+            focusedErrorBorder: Utils.inputBorder(AppColors.colorError500),
+            errorBorder: Utils.inputBorder(AppColors.colorError500),
+            enabledBorder: Utils.inputBorder(AppColors.baseColorWhite85),
           ),
           flagsButtonPadding: const EdgeInsets.all(10),
           initialValue: initialValue,

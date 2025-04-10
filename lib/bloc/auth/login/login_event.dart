@@ -15,4 +15,9 @@ class LoginEvent with _$LoginEvent {
 
   const factory LoginEvent.onTapForgotPassword(
       {required final BuildContext context}) = OnTapForgotPassword;
+  const factory LoginEvent.onTapLoginWithOtpStateEvent() =
+      OnTapLoginWithOtpStateEvent;
+
+  const factory LoginEvent.loginWithBiometric({required final BuildContext context}) =
+  LoginWithBiometric;
 }

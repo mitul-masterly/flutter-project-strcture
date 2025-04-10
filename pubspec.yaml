@@ -39,6 +39,10 @@ dependencies:
   equatable: ^2.0.7
   flutter_native_splash: ^2.4.5
   flutter_flavorizr: ^2.3.0
+  firebase_auth: ^5.5.1
+  google_sign_in: ^6.3.0
+  pin_code_fields: ^8.0.1
+  local_auth: ^2.3.0
 
 
 flutter_gen:
@@ -65,7 +69,6 @@ dev_dependencies:
 
   flutter_test:
     sdk: flutter
-
 
 
 
@@ -108,9 +111,15 @@ flutter:
   #         weight: 700
   #
   fonts:
-    - family: Rubik
+    - family: DMSans
       fonts:
-        - asset: assets/fonts/Rubik-Regular.ttf
+        - asset: assets/fonts/DMSans-Regular.ttf
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_18pt-Regular.ttf
+        - asset: assets/fonts/Inter_24pt-Bold.ttf
+        - asset: assets/fonts/Inter_28pt-Bold.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 

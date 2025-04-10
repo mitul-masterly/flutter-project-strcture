@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         title: FlavorConfig.title,
         navigatorKey: navigatorKey,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.color003366),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.colorPrimary500),
           useMaterial3: true,
         ),
         initialRoute: _getInitialRoute(),

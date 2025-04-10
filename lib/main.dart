@@ -15,7 +15,7 @@ import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/utils/flavors.dart';
 
 Future<void> main() async {
-  FlavorConfig(flavor: Flavor.prod);
+  FlavorConfig(flavor: Flavor.staging);
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferenceHelper().init();
   await Firebase.initializeApp(
@@ -23,7 +23,7 @@ Future<void> main() async {
   );
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-  await NotificationService.shared.initNotification();
+ await NotificationService.shared.initNotification();
   if (kReleaseMode) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);

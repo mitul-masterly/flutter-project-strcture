@@ -30,10 +30,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: isBack
           ? IconButton(
               onPressed: () {
-                Navigator.pop(context);
                 if (onBack != null) {
                   onBack;
                 }
+                Navigator.pop(context);
               },
               icon: Icon(
                 Icons.arrow_back_ios_new_rounded,
@@ -43,7 +43,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         strTitle,
         style: titleStyle ??
-            rubikW700.copyWith(color: AppColors.black, fontSize: 20),
+            dMSansW700.copyWith(color: AppColors.black, fontSize: 20),
       ),
       actions: actions,
     );

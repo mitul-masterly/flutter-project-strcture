@@ -36,7 +36,7 @@ class UserDefaultIcon extends StatelessWidget {
     return Center(
       child: Icon(
         Icons.person,
-        color: AppColors.color003366,
+        color: AppColors.colorPrimary500,
         size: size,
       ),
     );

@@ -28,7 +28,7 @@ class ProfileHeaderWidget extends StatelessWidget {
           7.height,
           Text(
             state.userData?.fullName ?? '',
-            style: rubikW700.copyWith(fontSize: 25),
+            style: dMSansW700.copyWith(fontSize: 25),
           ),
           7.height,
           Row(
@@ -36,14 +36,14 @@ class ProfileHeaderWidget extends StatelessWidget {
             children: <Widget>[
               Assets.svg.icEmail.svg(
                   colorFilter: ColorFilter.mode(
-                AppColors.color003366,
+                AppColors.colorPrimary500,
                 BlendMode.srcIn,
               )),
               7.width,
               Text(
                 state.userData?.emailId ?? '',
-                style: rubikW400.copyWith(
-                    fontSize: 14, color: AppColors.color003366),
+                style: dMSansW400.copyWith(
+                    fontSize: 14, color: AppColors.colorPrimary500),
               ),
             ],
           )

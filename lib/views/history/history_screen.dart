@@ -10,7 +10,7 @@ class HistoryScreen extends StatelessWidget {
       body: Center(
         child: Text(
           'History Screen',
-          style: rubikW500,
+          style: dMSansW500,
         ),
       ),
     );

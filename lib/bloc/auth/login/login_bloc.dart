@@ -17,7 +17,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 part 'login_bloc.freezed.dart';
+
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -84,6 +86,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<OnTapForgotPassword>((final OnTapForgotPassword event, final Emitter<LoginState> emit) {
       navigateToForgotPassword(event.context);
     });
+
+    on<OnTapLoginWithOtpStateEvent>((final OnTapLoginWithOtpStateEvent event,
+        final Emitter<LoginState> emit) async {
+      emit(state.copyWith(isLoginWithOtp: !state.isLoginWithOtp));
+    });
+
+
+
   }
 
   void navigateToDashboard(final BuildContext context) {
@@ -97,4 +107,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void navigateToForgotPassword(final BuildContext context) {}
+
+
+
 }
+
+
