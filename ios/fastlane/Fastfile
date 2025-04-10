@@ -1,0 +1,32 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Upload to TestFlight"
+  lane :upload_to_testflight do
+    match(
+      type: "appstore",
+      readonly: true,
+      app_identifier:  "com.masterly.flutterbasecodestg",
+      team_id: ENV['FASTLANE_TEAM_ID'],
+      username: ENV['FASTLANE_APPLE_ID']
+    )
+
+    build_app(
+      scheme: "staging",
+      workspace: "Runner.xcworkspace",
+      export_options: {
+        method: "app-store"
+      }
+    )
+
+    upload_to_testflight(
+      api_key: {
+        key_id: ENV['APP_STORE_API_KEY_ID'],
+        issuer_id: ENV['APP_STORE_ISSUER_ID'],
+        key_content: ENV['APP_STORE_API_KEY'],
+        is_key_content_base64: false
+      },
+      skip_waiting_for_build_processing: true
+    )
+  end
+end
