@@ -363,20 +363,66 @@ class _$OnChangeAnswerCopyWithImpl<$Res>
 /// @nodoc
 
 class OnCheckPrivacyPolicy implements SignUpDetailsEvent {
-  const OnCheckPrivacyPolicy();
+  const OnCheckPrivacyPolicy({required this.checkPrivacyPolicy});
+
+  final bool checkPrivacyPolicy;
+
+  /// Create a copy of SignUpDetailsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnCheckPrivacyPolicyCopyWith<OnCheckPrivacyPolicy> get copyWith =>
+      _$OnCheckPrivacyPolicyCopyWithImpl<OnCheckPrivacyPolicy>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is OnCheckPrivacyPolicy);
+        (other.runtimeType == runtimeType &&
+            other is OnCheckPrivacyPolicy &&
+            (identical(other.checkPrivacyPolicy, checkPrivacyPolicy) ||
+                other.checkPrivacyPolicy == checkPrivacyPolicy));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, checkPrivacyPolicy);
 
   @override
   String toString() {
-    return 'SignUpDetailsEvent.onCheckPrivacyPolicy()';
+    return 'SignUpDetailsEvent.onCheckPrivacyPolicy(checkPrivacyPolicy: $checkPrivacyPolicy)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnCheckPrivacyPolicyCopyWith<$Res>
+    implements $SignUpDetailsEventCopyWith<$Res> {
+  factory $OnCheckPrivacyPolicyCopyWith(OnCheckPrivacyPolicy value,
+          $Res Function(OnCheckPrivacyPolicy) _then) =
+      _$OnCheckPrivacyPolicyCopyWithImpl;
+  @useResult
+  $Res call({bool checkPrivacyPolicy});
+}
+
+/// @nodoc
+class _$OnCheckPrivacyPolicyCopyWithImpl<$Res>
+    implements $OnCheckPrivacyPolicyCopyWith<$Res> {
+  _$OnCheckPrivacyPolicyCopyWithImpl(this._self, this._then);
+
+  final OnCheckPrivacyPolicy _self;
+  final $Res Function(OnCheckPrivacyPolicy) _then;
+
+  /// Create a copy of SignUpDetailsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? checkPrivacyPolicy = null,
+  }) {
+    return _then(OnCheckPrivacyPolicy(
+      checkPrivacyPolicy: null == checkPrivacyPolicy
+          ? _self.checkPrivacyPolicy
+          : checkPrivacyPolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 

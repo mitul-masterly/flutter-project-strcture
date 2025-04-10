@@ -19,12 +19,14 @@ class SignUpDetailScreen extends StatelessWidget {
 
   @override
   Widget build(final BuildContext buildContext) {
-    final SignupRequest arguments =
-        ModalRoute.of(buildContext)?.settings.arguments as SignupRequest;
+    final arguments = (ModalRoute.of(buildContext)?.settings.arguments);
     return BlocProvider<SignUpDetailsBloc>(
       create: (final BuildContext context) =>
           SignUpDetailsBloc(authRepo: context.read<AuthRepo>())
-            ..add(InitialEvent(signupRequest: arguments)),
+            ..add(InitialEvent(
+                signupRequest: arguments != null
+                    ? (arguments as SignupRequest)
+                    : SignupRequest())),
       child: BlocListener<SignUpDetailsBloc, SignUpDetailsState>(
         listener: (final BuildContext context, final SignUpDetailsState state) {
           if (state.status == CommonScreenState.success) {
@@ -63,6 +65,7 @@ class SignUpDetailScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 20, right: 20),
                             child: AppButton(
+                              key: Key('submit'),
                               title: AppStrings.submit.tr(buildContext),
                               width: double.maxFinite,
                               isLoading:
@@ -74,12 +77,12 @@ class SignUpDetailScreen extends StatelessWidget {
                                         ?.validate() ==
                                     true) {
                                   if (state.securityQuestionId != null) {
-                                    Navigator.pushNamed(
-                                        context, RouteName.otpScreen);
-                                    //   bloc.add(OnTapSubmit());
+                                    /*    Navigator.pushNamed(
+                                        context, RouteName.otpScreen);*/
+                                    bloc.add(OnTapSubmit());
                                   } else {
-                                    showErrorSnackBar(
-                                        'Please Select Question'.tr(context));
+                                    /* showErrorSnackBar(
+                                        'Please Select Question'.tr(context));*/
                                   }
                                 }
                               },

@@ -73,7 +73,7 @@ void main() {
         'emits state privacy policy',
         build: () => SignUpDetailsBloc(authRepo: authRepo),
         act: (final SignUpDetailsBloc bloc) {
-          bloc.add(OnCheckPrivacyPolicy());
+          bloc.add(OnCheckPrivacyPolicy(checkPrivacyPolicy: true));
         },
         expect: () {
           final SignUpDetailsBloc bloc = SignUpDetailsBloc(authRepo: authRepo);
@@ -92,6 +92,18 @@ void main() {
           final SignUpDetailsBloc bloc = SignUpDetailsBloc(authRepo: authRepo);
           return <SignUpDetailsState>[
             bloc.state.copyWith(checkTermsAndCondition: true),
+          ];
+        });
+
+    blocTest<SignUpDetailsBloc, SignUpDetailsState>('submit',
+        build: () => SignUpDetailsBloc(authRepo: authRepo),
+        act: (final SignUpDetailsBloc bloc) {
+          bloc.add(OnCheckTermsAndCondition());
+        },
+        expect: () {
+          //   final SignUpDetailsBloc bloc = SignUpDetailsBloc(authRepo: authRepo);
+          return <SignUpDetailsState>[
+            //    bloc.state.copyWith(checkTermsAndCondition: true),
           ];
         });
   });

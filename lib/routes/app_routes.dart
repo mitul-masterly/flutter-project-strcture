@@ -7,6 +7,7 @@ import 'package:flutter_project_structure/views/auth/signup/sign_up_detail_page.
 import 'package:flutter_project_structure/views/auth/signup/sign_up_page.dart';
 import 'package:flutter_project_structure/views/history/history_screen.dart';
 import 'package:flutter_project_structure/views/home/home_screen.dart';
+import 'package:flutter_project_structure/views/privacy_policy/privacy_policy_page.dart';
 import 'package:flutter_project_structure/views/profile/profile_screen.dart';
 import 'package:flutter_project_structure/views/tab_navigation_view.dart';
 
@@ -26,6 +27,8 @@ class AppRoutes {
       RouteName.otpScreen: (final BuildContext context) => OtpScreen(),
       RouteName.signUpDetailScreen: (final BuildContext context) =>
           SignUpDetailScreen(),
+      RouteName.privacyPolicyScreen: (final BuildContext context) =>
+          PrivacyPolicyScreen(),
     };
   }
 }

@@ -25,8 +25,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     });
 
     on<StartTimerEvent>(
-        (final StartTimerEvent event, final Emitter<OtpState> emit) {
-      timer?.cancel();
+        (final StartTimerEvent event, final Emitter<OtpState> emit) async {
       emit(state.copyWith(isEnableResend: false));
       int remainingSeconds = 30;
       timer =
@@ -35,7 +34,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         if (remainingSeconds >= 0) {
           count.value = (30 - timer.tick).toString();
         } else {
-          timer.cancel();
+          cancelTimer();
         }
       });
     });
@@ -47,5 +46,9 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         (final OnChangeEmailOrPhone event, final Emitter<OtpState> emit) {
       emit(state.copyWith(emailOrPhone: event.emailOrPhone));
     });
+  }
+
+  void cancelTimer() {
+    timer?.cancel();
   }
 }

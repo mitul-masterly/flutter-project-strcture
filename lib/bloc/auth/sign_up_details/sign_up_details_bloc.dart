@@ -9,11 +9,9 @@ import 'package:flutter_project_structure/data/repository/auth_repo.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'sign_up_details_event.dart';
-
-part 'sign_up_details_state.dart';
-
 part 'sign_up_details_bloc.freezed.dart';
+part 'sign_up_details_event.dart';
+part 'sign_up_details_state.dart';
 
 class SignUpDetailsBloc extends Bloc<SignUpDetailsEvent, SignUpDetailsState> {
   final FocusNode passwordFocus = FocusNode();
@@ -22,11 +20,11 @@ class SignUpDetailsBloc extends Bloc<SignUpDetailsEvent, SignUpDetailsState> {
   final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   final AuthRepo authRepo;
   SignupRequest signupRequest = SignupRequest();
+
   SignUpDetailsBloc({required this.authRepo})
       : super(SignUpDetailsState.initial()) {
-
     on<InitialEvent>(
-    (final InitialEvent event, final Emitter<SignUpDetailsState> emit) {
+        (final InitialEvent event, final Emitter<SignUpDetailsState> emit) {
       signupRequest = event.signupRequest;
     });
     on<OnChangePassword>(
@@ -48,7 +46,7 @@ class SignUpDetailsBloc extends Bloc<SignUpDetailsEvent, SignUpDetailsState> {
     });
     on<OnCheckPrivacyPolicy>((final OnCheckPrivacyPolicy event,
         final Emitter<SignUpDetailsState> emit) async {
-      emit(state.copyWith(checkPrivacyPolicy: !state.checkPrivacyPolicy));
+      emit(state.copyWith(checkPrivacyPolicy: event.checkPrivacyPolicy));
     });
     on<OnCheckTermsAndCondition>((final OnCheckTermsAndCondition event,
         final Emitter<SignUpDetailsState> emit) async {
@@ -57,7 +55,7 @@ class SignUpDetailsBloc extends Bloc<SignUpDetailsEvent, SignUpDetailsState> {
     });
     on<OnTapSubmit>((final OnTapSubmit event,
         final Emitter<SignUpDetailsState> emit) async {
-      await callSignUpApi(emit);
+      // await callSignUpApi(emit);
     });
   }
 
@@ -65,14 +63,14 @@ class SignUpDetailsBloc extends Bloc<SignUpDetailsEvent, SignUpDetailsState> {
     emit(state.copyWith(status: CommonScreenState.loading));
     final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
     final SignupRequest updatedSignupRequest = signupRequest.copyWith(
-      userPassword : state.password,
-      securityQuestion : state.questionList[state.securityQuestionId ?? 0]['value'],
-      securityAnswer : state.securityAnswer,
+      userPassword: state.password,
+      securityQuestion: state.questionList[state.securityQuestionId ?? 0]
+          ['value'],
+      securityAnswer: state.securityAnswer,
       privacyPolicy: state.checkPrivacyPolicy,
       termsAndConditions: state.checkTermsAndCondition,
       createdByDeviceName: deviceData.userDeviceName,
       createdByDeviceTypeId: deviceData.deviceTypeID,
-
     );
 
     final SignupRequest request = updatedSignupRequest;

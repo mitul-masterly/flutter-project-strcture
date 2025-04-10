@@ -37,7 +37,7 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
     on<SignUpWithAppleEvent>((final SignUpWithAppleEvent event,
         final Emitter<SocialMediaState> emit) async {
       emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.apple));
-      final User? user = await signInWithGoogle();
+      final User? user = await signInWithApple();
       if (user != null) {
         SharedPreferenceHelper().saveIsLoggedIn(true);
         emit(state.copyWith(socialMediaStatus: SocialMediaLoginState.success));
@@ -66,8 +66,8 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
   }
 
   Future<User?> signInWithGoogle() async {
-    final FirebaseAuth auth =  FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn =  GoogleSignIn();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       final GoogleSignInAuthentication? googleAuth =

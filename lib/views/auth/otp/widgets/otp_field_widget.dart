@@ -6,14 +6,15 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpFieldWidget extends StatelessWidget {
   final Function(String)? onChanged;
-  const OtpFieldWidget({super.key, this.onChanged });
+
+  const OtpFieldWidget({super.key, this.onChanged});
 
   @override
   Widget build(final BuildContext context) {
-    return  Padding(
-      padding:
-      const EdgeInsets.symmetric(horizontal: 25),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
       child: PinCodeTextField(
+        key: Key('otp_field_key'),
         autoFocus: true,
         appContext: context,
         length: 6,
@@ -22,8 +23,7 @@ class OtpFieldWidget extends StatelessWidget {
         textStyle: dMSansW700.copyWith(fontSize: 20),
         onChanged: onChanged,
         inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(
-              RegExp(r'[0-9]')),
+          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
         ],
         keyboardType: TextInputType.number,
         pinTheme: PinTheme(

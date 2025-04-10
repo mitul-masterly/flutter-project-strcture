@@ -89,7 +89,7 @@ class SignUpFormWidget extends StatelessWidget {
             },
           ),
           20.height,
-          CommonRichTextWidget(strHeaderTitle: 'Date of Birth' ),
+          CommonRichTextWidget(strHeaderTitle: 'Date of Birth'),
           10.height,
           DatePickerWidget(
               onPressed: (final DateTime value) {
@@ -133,7 +133,6 @@ class SignUpFormWidget extends StatelessWidget {
               bloc.add(OnChangeAddress(address: value));
             },
           ),
-
         ],
       );
     });

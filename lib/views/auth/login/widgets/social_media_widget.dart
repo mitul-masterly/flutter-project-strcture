@@ -24,6 +24,7 @@ class SocialMediaWidget extends StatelessWidget {
           return Column(
             children: <Widget>[
               AppButton(
+                key: Key('sign_up_with_google'),
                 bgColor: AppColors.white,
                 title: 'Sign up with Google'.tr(buildContext),
                 width: double.maxFinite,
