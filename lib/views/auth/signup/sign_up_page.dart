@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/Components/common_button_widget.dart';
+import 'package:flutter_project_structure/Routes/routes_name.dart';
 import 'package:flutter_project_structure/Utils/app_strings.dart';
 import 'package:flutter_project_structure/bloc/auth/signup/signup_bloc.dart';
 import 'package:flutter_project_structure/components/common_app_bar.dart';
 import 'package:flutter_project_structure/components/common_snack_bar.dart';
+import 'package:flutter_project_structure/data/models/request_model/signup_request_model.dart';
 import 'package:flutter_project_structure/data/repository/auth_repo.dart';
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
@@ -35,7 +37,7 @@ class SignUpScreen extends StatelessWidget {
                 appBar: CommonAppBar(),
                 body: SafeArea(
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       Expanded(
                         child: SingleChildScrollView(
                           child: Form(
@@ -49,7 +51,6 @@ class SignUpScreen extends StatelessWidget {
                                   SignUpHeaderWidget(),
                                   30.height,
                                   SignUpFormWidget(),
-
                                   // 40.height,
                                 ],
                               ),
@@ -61,7 +62,7 @@ class SignUpScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: AppButton(
-                          title: AppStrings.submit.tr(buildContext),
+                          title: AppStrings.next.tr(buildContext),
                           width: double.maxFinite,
                           isLoading: state.status == CommonScreenState.loading,
                           icon: null,
@@ -69,7 +70,34 @@ class SignUpScreen extends StatelessWidget {
                             FocusScope.of(context).unfocus();
                             if (bloc.signUpFormKey.currentState?.validate() ==
                                 true) {
-                              bloc.add(OnTapSubmit());
+                              if (state.mobileNumber.isNotEmpty) {
+                                if (state.birthDate != null &&
+                                    state.countryId != null &&
+                                    state.genderId != null) {
+                                  Navigator.pushNamed(
+                                      context, RouteName.signUpDetailScreen,
+                                      arguments: SignupRequest(
+                                          contactNo: state.mobileNumber,
+                                          countryCodeISO2: state.countryCode,
+                                          emailId: state.email,
+                                          firstName: state.firstName,
+                                          lastName: state.lastName,
+                                          isdCode: state.countryISOCode,
+                                          gender: state.genderList[
+                                          state.genderId ?? 0]['value'],
+                                          county: state.countryList[
+                                          state.countryId ?? 0]['value'],
+                                          address: state.address,
+                                          dateOfBirth: state.birthDate
+                                      ),);
+                                } else {
+                                  showErrorSnackBar(
+                                      'Please Enter value'.tr(context));
+                                }
+                              } else {
+                                showErrorSnackBar(
+                                    'Please Enter Mobile Number'.tr(context));
+                              }
                             }
                           },
                           type: AppButtonType.primary,

@@ -63,8 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '545061596433',
     projectId: 'masterly-flutterbasecode',
     storageBucket: 'masterly-flutterbasecode.firebasestorage.app',
-    iosBundleId: 'com.masterly.flutterbasecode',
+    iosBundleId: 'com.masterly.flutterbase',
   );
-
-
 }

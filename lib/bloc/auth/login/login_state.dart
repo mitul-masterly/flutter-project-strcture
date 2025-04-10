@@ -7,6 +7,8 @@ abstract class LoginState with _$LoginState {
       required final String email,
       required final String password,
       required final bool isRememberMe,
+      required final bool isLoginWithOtp,
+      required final String emailOrPhone,
       required final UserDataModel? user}) = _LoginState;
 
   factory LoginState.initial() {
@@ -16,6 +18,8 @@ abstract class LoginState with _$LoginState {
       password: sharedPreferenceHelper.getSavedPassword,
       user: null,
       isRememberMe: sharedPreferenceHelper.isRememberMe ?? false,
+      isLoginWithOtp: false,
+      emailOrPhone: '',
     );
   }
 }

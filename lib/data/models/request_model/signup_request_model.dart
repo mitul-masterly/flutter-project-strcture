@@ -10,18 +10,35 @@ class SignupRequest extends Equatable {
   String? countryCodeISO2;
   String? createdByDeviceName;
   String? createdByDeviceTypeId;
+  String? dateOfBirth;
+  String? gender;
+  String? county;
+  String? address;
+  String? securityQuestion;
+  String? securityAnswer;
+  bool? privacyPolicy;
+  bool? termsAndConditions;
 
-  SignupRequest({
-    required this.firstName,
-    required this.lastName,
-    required this.emailId,
-    required this.contactNo,
-    required this.isdCode,
-    required this.userPassword,
-    required this.countryCodeISO2,
-    required this.createdByDeviceName,
-    required this.createdByDeviceTypeId,
-  });
+  SignupRequest(
+      {this.firstName,
+      this.lastName,
+      this.emailId,
+      this.contactNo,
+      this.isdCode,
+      this.userPassword,
+      this.countryCodeISO2,
+      this.createdByDeviceName,
+      this.createdByDeviceTypeId,
+      this.address,
+      this.gender,
+      this.county,
+      this.dateOfBirth,
+        this.securityAnswer,
+        this.privacyPolicy,
+        this.securityQuestion,
+        this.termsAndConditions
+
+      });
 
   SignupRequest.fromJson(final Map<String, dynamic> json) {
     firstName = json['firstName'];
@@ -33,6 +50,14 @@ class SignupRequest extends Equatable {
     countryCodeISO2 = json['countryCodeISO2'];
     createdByDeviceName = json['CreatedByDeviceName'];
     createdByDeviceTypeId = json['CreatedByDeviceTypeId'];
+    address = json['address'];
+    gender = json['gender'];
+    county = json['county'];
+    dateOfBirth = json['dateOfBirth'];
+    securityAnswer = json['securityAnswer'];
+    securityQuestion = json['securityQuestion'];
+    privacyPolicy = json['privacyPolicy'];
+    termsAndConditions = json['termsAndConditions'];
   }
 
   Map<String, dynamic> toJson() {
@@ -46,6 +71,14 @@ class SignupRequest extends Equatable {
       'countryCodeISO2': countryCodeISO2,
       'CreatedByDeviceName': createdByDeviceName,
       'CreatedByDeviceTypeId': createdByDeviceTypeId,
+      'address': address,
+      'gender': gender,
+      'county': county,
+      'dateOfBirth': dateOfBirth,
+      'securityAnswer': securityAnswer,
+      'securityQuestion': securityQuestion,
+      'privacyPolicy': privacyPolicy,
+      'termsAndConditions': termsAndConditions,
     };
   }
 
@@ -60,6 +93,14 @@ class SignupRequest extends Equatable {
         isdCode,
         countryCodeISO2,
         createdByDeviceName,
-        createdByDeviceTypeId
+        createdByDeviceTypeId,
+        address,
+        gender,
+        county,
+        dateOfBirth,
+    securityAnswer,
+    securityQuestion,
+    privacyPolicy,
+    termsAndConditions
       ];
 }

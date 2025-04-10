@@ -1,4 +1,4 @@
-package com.masterly.flutterbase
+package com.masterly.flutterbasecode
 
 import io.flutter.embedding.android.FlutterActivity
 
