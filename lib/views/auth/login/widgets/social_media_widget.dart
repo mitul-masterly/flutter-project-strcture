@@ -54,9 +54,7 @@ class SocialMediaWidget extends StatelessWidget {
                 isLoading: state.status == CommonScreenState.loading,
                 icon: Assets.svg.icFacebook.svg(),
                 titleColor: AppColors.black,
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 type: AppButtonType.primary,
               ),
               10.height,

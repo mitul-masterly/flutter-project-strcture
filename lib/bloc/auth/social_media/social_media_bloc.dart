@@ -106,3 +106,4 @@ class SocialMediaBloc extends Bloc<SocialMediaEvent, SocialMediaState> {
     }
   }
 }
+
