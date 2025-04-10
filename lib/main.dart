@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/app/my_app.dart';
+import 'package:flutter_project_structure/bloc/auth/biometric/biometric_bloc.dart';
 import 'package:flutter_project_structure/helper/firebase_options.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
 import 'package:flutter_project_structure/helper/push_notification/notification_service.dart';
@@ -28,6 +29,11 @@ Future<void> main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   }
+  final bool isLoggedIn = await SharedPreferenceHelper().isLoggedIn;
+  if(isLoggedIn){
+    BiometricBloc()..add(BiometricEvent.loginWithBiometric());
+  }
+
   runApp(
     MultiRepositoryProvider(
       providers: getRepoProviders(),

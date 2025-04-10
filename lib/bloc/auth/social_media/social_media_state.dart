@@ -4,9 +4,11 @@ part of 'social_media_bloc.dart';
 abstract class SocialMediaState with _$SocialMediaState {
   factory SocialMediaState({
     required final CommonScreenState status,
+    required final SocialMediaLoginState socialMediaStatus,
   }) = _SocialMediaState;
 
   factory SocialMediaState.initial() => SocialMediaState(
-      status: CommonScreenState.initial,
-  );
+        status: CommonScreenState.initial,
+        socialMediaStatus: SocialMediaLoginState.initial,
+      );
 }

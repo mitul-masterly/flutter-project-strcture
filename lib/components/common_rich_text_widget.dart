@@ -20,7 +20,7 @@ class CommonRichTextWidget extends StatelessWidget {
         style: interW500.copyWith(fontSize : fontSize),
         children: isRequired ? <TextSpan>[
           TextSpan(
-            text: ' *',
+            text: '*',
             style: interW500.copyWith(
                 fontSize: 16, color: AppColors.colorError500),
           ),

@@ -15,6 +15,7 @@ import 'package:flutter_project_structure/views/auth/login/widgets/login_footer_
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:nested/nested.dart';
 
 import '../bloc/login_bloc_test.dart';
 import '../repository/auth_repo_test.dart';
@@ -68,7 +69,7 @@ void main() {
       routes: AppRoutes.getRoutes(),
       navigatorObservers: [mockObserver],
       home: MultiBlocProvider(
-        providers: [
+        providers: <SingleChildWidget>[
           BlocProvider<LocalisationBloc>(
             create: (final BuildContext context) => LocalisationBloc(),
           ),

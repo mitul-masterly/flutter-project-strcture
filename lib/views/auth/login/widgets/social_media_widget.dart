@@ -14,7 +14,7 @@ class SocialMediaWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext buildContext) {
-    return BlocProvider(
+    return BlocProvider<SocialMediaBloc>(
       create: (final BuildContext context) => SocialMediaBloc(),
       child: BlocBuilder<SocialMediaBloc, SocialMediaState>(
         builder: (final BuildContext context, final SocialMediaState state) {
@@ -29,7 +29,7 @@ class SocialMediaWidget extends StatelessWidget {
                 icon: Assets.svg.icGoogle.svg(),
                 titleColor: AppColors.black,
                 onPressed: () async {
-                  //   bloc.add(SignUpWithGoogleEvent(context: context));
+                  bloc.add(SignUpWithGoogleEvent(context: context));
                 },
                 type: AppButtonType.primary,
               ),
@@ -41,7 +41,9 @@ class SocialMediaWidget extends StatelessWidget {
                 isLoading: state.status == CommonScreenState.loading,
                 icon: Assets.svg.icApple.svg(),
                 titleColor: AppColors.black,
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(SignUpWithAppleEvent(context: context));
+                },
                 type: AppButtonType.primary,
               ),
               10.height,

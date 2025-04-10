@@ -103,6 +103,7 @@ class SignUpScreen extends StatelessWidget {
                           type: AppButtonType.primary,
                         ),
                       ),
+                      20.height,
                     ],
                   ),
                 ),
