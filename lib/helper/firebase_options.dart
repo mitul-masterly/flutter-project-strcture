@@ -37,6 +37,7 @@ class DefaultFirebaseOptions {
     }
   }
 
+
   static const FirebaseOptions android_prod = FirebaseOptions(
     apiKey: 'AIzaSyCARi30S-QEuWy7iVKQYrlrrPvL5OcGJPo',
     appId: '1:545061596433:android:02c63b08a6138194df70b0',

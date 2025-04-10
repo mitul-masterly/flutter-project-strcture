@@ -16,6 +16,7 @@ platform :android do
       track: "beta", # or internal for testing
       json_key: "./google_play_key.json",
       aab: "./build/app/outputs/bundle/stagingRelease/app-staging-release.aab"
+      package_name: "com.masterly.flutterbasecodestg"
     )
   end
 end
