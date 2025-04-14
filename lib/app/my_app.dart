@@ -42,6 +42,8 @@ class MyApp extends StatelessWidget {
               SupportedLangCode.english.countryCode),
           Locale(SupportedLangCode.arabic.langCode,
               SupportedLangCode.arabic.countryCode),
+          Locale(SupportedLangCode.gujarati.langCode,
+              SupportedLangCode.gujarati.countryCode),
           // Arabic (Saudi Arabia) or use 'ar_EG' for Egypt
         ],
         localeResolutionCallback:
@@ -67,10 +69,10 @@ class MyApp extends StatelessWidget {
       },
     );
 
-    // if (SharedPreferenceHelper().isLoggedIn) {
-    //   return RouteName.tabNavigationView;
-    // } else {
+    if (SharedPreferenceHelper().isLoggedIn) {
+      return RouteName.tabNavigationView;
+    } else {
       return RouteName.loginScreen;
-    // }
+    }
   }
 }

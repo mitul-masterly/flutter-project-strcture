@@ -9,7 +9,7 @@ import 'package:flutter_project_structure/views/history/history_screen.dart';
 import 'package:flutter_project_structure/views/home/home_screen.dart';
 import 'package:flutter_project_structure/views/privacy_policy/privacy_policy_page.dart';
 import 'package:flutter_project_structure/views/profile/profile_screen.dart';
-import 'package:flutter_project_structure/views/tab_navigation_view.dart';
+import 'package:flutter_project_structure/views/tab_navigation/tab_navigation_view.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> getRoutes() {
