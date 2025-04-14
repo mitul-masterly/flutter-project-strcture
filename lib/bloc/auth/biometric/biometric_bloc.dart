@@ -4,7 +4,7 @@ import 'package:flutter_project_structure/app/my_app.dart';
 import 'package:flutter_project_structure/components/common_snack_bar.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/views/auth/login/login_page.dart';
-import 'package:flutter_project_structure/views/tab_navigation_view.dart';
+import 'package:flutter_project_structure/views/tab_navigation/tab_navigation_view.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:local_auth/local_auth.dart';
 part 'biometric_event.dart';
