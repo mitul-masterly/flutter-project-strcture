@@ -19,83 +19,91 @@ class SignUpDetailScreen extends StatelessWidget {
 
   @override
   Widget build(final BuildContext buildContext) {
-    final SignupRequest  arguments = ModalRoute.of(buildContext)?.settings.arguments as SignupRequest;
+    final arguments = (ModalRoute.of(buildContext)?.settings.arguments);
     return BlocProvider<SignUpDetailsBloc>(
       create: (final BuildContext context) =>
-          SignUpDetailsBloc(authRepo: context.read<AuthRepo>())..add(InitialEvent(signupRequest: arguments)),
+          SignUpDetailsBloc(authRepo: context.read<AuthRepo>())
+            ..add(InitialEvent(
+                signupRequest: arguments != null
+                    ? (arguments as SignupRequest)
+                    : SignupRequest())),
       child: BlocListener<SignUpDetailsBloc, SignUpDetailsState>(
-  listener: (final BuildContext context, final SignUpDetailsState state) {
-    if (state.status == CommonScreenState.success) {
-      showSuccessSnackBar(AppMessages.registrationSuccess.message);
-      Navigator.pushNamed(context, RouteName.otpScreen);
-    }
-  },
-  child: BlocBuilder<SignUpDetailsBloc, SignUpDetailsState>(
-        builder: (final BuildContext context, final SignUpDetailsState state) {
-          final SignUpDetailsBloc bloc = context.read<SignUpDetailsBloc>();
-          return Stack(
-            children: <Widget>[
-              Scaffold(
-                appBar: CommonAppBar(),
-                body: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                            child: SingleChildScrollView(
-                          child: Form(
-                              key: bloc.signUpFormKey,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  SignUpHeaderWidget(),
-                                  30.height,
-                                  SignUpDetailsFormWidget(),
-                                ],
-                              )),
-                        )),
-                        20.height,
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: AppButton(
-                            title: AppStrings.submit.tr(buildContext),
-                            width: double.maxFinite,
-                            isLoading:
-                                state.status == CommonScreenState.loading,
-                            icon: null,
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              if (bloc.signUpFormKey.currentState?.validate() ==
-                                  true) {
-                                if (state.securityQuestionId != null) {
-                                  Navigator.pushNamed(
-                                      context, RouteName.otpScreen);
-                                   //   bloc.add(OnTapSubmit());
-                                } else {
-                                  showErrorSnackBar(
-                                      'Please Select Question'.tr(context));
+        listener: (final BuildContext context, final SignUpDetailsState state) {
+          if (state.status == CommonScreenState.success) {
+            showSuccessSnackBar(AppMessages.registrationSuccess.message);
+            Navigator.pushNamed(context, RouteName.otpScreen);
+          }
+        },
+        child: BlocBuilder<SignUpDetailsBloc, SignUpDetailsState>(
+          builder:
+              (final BuildContext context, final SignUpDetailsState state) {
+            final SignUpDetailsBloc bloc = context.read<SignUpDetailsBloc>();
+            return Stack(
+              children: <Widget>[
+                Scaffold(
+                  appBar: CommonAppBar(),
+                  body: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                              child: SingleChildScrollView(
+                            child: Form(
+                                key: bloc.signUpFormKey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    SignUpHeaderWidget(),
+                                    30.height,
+                                    SignUpDetailsFormWidget(),
+                                  ],
+                                )),
+                          )),
+                          20.height,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            child: AppButton(
+                              key: Key('submit'),
+                              title: AppStrings.submit.tr(buildContext),
+                              width: double.maxFinite,
+                              isLoading:
+                                  state.status == CommonScreenState.loading,
+                              icon: null,
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                if (bloc.signUpFormKey.currentState
+                                        ?.validate() ==
+                                    true) {
+                                  if (state.securityQuestionId != null) {
+                                    /*    Navigator.pushNamed(
+                                        context, RouteName.otpScreen);*/
+                                    bloc.add(OnTapSubmit());
+                                  } else {
+                                    /* showErrorSnackBar(
+                                        'Please Select Question'.tr(context));*/
+                                  }
                                 }
-                              }
-                            },
-                            type: AppButtonType.primary,
+                              },
+                              type: AppButtonType.primary,
+                            ),
                           ),
-                        ),
-                        20.height,
-                      ],
+                          20.height,
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (state.status == CommonScreenState.loading)
-                Utils.loaderBrier(),
-              if (state.status == CommonScreenState.loading) Utils.loaderWid(),
-            ],
-          );
-        },
+                if (state.status == CommonScreenState.loading)
+                  Utils.loaderBrier(),
+                if (state.status == CommonScreenState.loading)
+                  Utils.loaderWid(),
+              ],
+            );
+          },
+        ),
       ),
-),
     );
   }
 }

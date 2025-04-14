@@ -41,6 +41,24 @@
 	<key>NSFaceIDUsageDescription</key>
     <string>Please authenticate to use the app</string>
     <key>NSFaceIDUsageDescription</key>
-    <string>Why is my app authenticating using face id?</string>
+    <string>$(APP_DISPLAY_NAME) using face authentication to logged in application.</string>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <!-- Staging URL Scheme -->
+          <string>com.googleusercontent.apps.545061596433-90q50psdi6ca14aov8sch8svuldhe09v</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <!-- Production URL Scheme -->
+          <string>com.googleusercontent.apps.545061596433-2jaa25pb33b9qv4e522vkempfbgou3um</string>
+        </array>
+      </dict>
+    </array>
 </dict>
 </plist>

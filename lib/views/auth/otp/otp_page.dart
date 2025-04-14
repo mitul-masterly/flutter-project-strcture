@@ -93,20 +93,22 @@ class OtpScreen extends StatelessWidget {
                 bottomSheet: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: AppButton(
+                    key: Key('otp_next_button'),
                     title: AppStrings.next.tr(context),
                     width: double.maxFinite,
                     isLoading: state.status == CommonScreenState.loading,
                     onPressed: () async {
                       if (state.status == CommonScreenState.success) {
-                        /* Navigator.pushNamedAndRemoveUntil(context, RouteName.tabNavigationView,
-                              (final Route<dynamic> route) => false,
-                        );*/
-
                         SharedPreferenceHelper().saveIsLoggedIn(true);
-                        Navigator.pushNamed(
+                        Navigator.pushNamedAndRemoveUntil(
                           context,
                           RouteName.tabNavigationView,
+                          (final Route<dynamic> route) => false,
                         );
+                        /* Navigator.pushNamed(
+                          context,
+                          RouteName.tabNavigationView,
+                        );*/
                       }
                     },
                     type: AppButtonType.primary,

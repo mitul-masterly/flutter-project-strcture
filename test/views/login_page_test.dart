@@ -12,8 +12,8 @@ import 'package:flutter_project_structure/routes/app_routes.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:flutter_project_structure/views/auth/login/login_page.dart';
 import 'package:flutter_project_structure/views/auth/login/widgets/login_footer_widget.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nested/nested.dart';
 
@@ -33,10 +33,16 @@ class OnTapForgotPasswordFake extends Fake implements OnTapForgotPassword {}
 
 class FakeRoute extends Fake implements Route<dynamic> {}
 
+class MockGoogleSignIn extends Mock implements GoogleSignIn {}
+
+class MockGoogleSignInAccount extends Mock implements GoogleSignInAccount {}
+
 void main() {
   late final MockLoginBloc loginBloc;
   late MockNavigatorObserver mockObserver;
   late MockAuthRepo authRepo;
+  final mockGoogleSignIn = MockGoogleSignIn();
+  final mockGoogleAccount = MockGoogleSignInAccount();
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -258,7 +264,7 @@ void main() {
       await tester.pumpWidget(createTestableWidget());
       await tester.pumpAndSettle();
 
-      final Finder appLogo = find.byType(SvgPicture);
+      final Finder appLogo = find.byKey(Key('ic_splash'));
 
       expect(appLogo, findsOneWidget);
     });
@@ -295,6 +301,27 @@ void main() {
       await tester.pump();
 
       // verify(() => mockObserver.didPush(any(), any())).called(1);
+    });
+    testWidgets('Google Sign-In Test', (final WidgetTester tester) async {
+      await tester.pumpWidget(createTestableWidget());
+      await tester.pumpAndSettle();
+
+      when(mockGoogleSignIn.signIn() as Function())
+          .thenAnswer((final _) async => mockGoogleAccount);
+
+      when(mockGoogleAccount.email as Function()).thenReturn('divya@.com');
+      when(mockGoogleAccount.displayName as Function()).thenReturn('Divya');
+
+      // Build the widget with the mock GoogleSignIn instance
+
+      // Find the Sign In button and tap it
+      final Finder signInButton = find.byKey(Key('sign_up_with_google'));
+      expect(signInButton, findsOneWidget);
+      await tester.tap(signInButton, warnIfMissed: false);
+      await tester.pump(); // Wait for the animation to settle
+
+      // Verify that the success message is shown
+      //   expect(find.text('Signed in successfully'), findsOneWidget);
     });
   });
 

@@ -9,7 +9,7 @@ class LoginHeaderWidget extends StatelessWidget {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Assets.svg.icSplashBg.svg(),
+          Assets.svg.icSplashBg.svg(key: Key('ic_splash')),
         ]);
   }
 }

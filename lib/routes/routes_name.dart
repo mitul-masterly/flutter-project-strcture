@@ -9,4 +9,5 @@ class RouteName {
   static const String otpScreen = '/otp_screen';
   static const String fingerprintAuthScreen = '/fingerprint_auth_screen';
   static const String signUpDetailScreen = '/sign_up_detail_screen';
+  static const String privacyPolicyScreen = '/privacy_policy_screen';
 }

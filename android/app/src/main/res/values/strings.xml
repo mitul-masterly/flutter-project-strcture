@@ -1,5 +1,4 @@
-
 <resources>
-    <string name="facebook_app_id">YOUR_APP_ID</string>
-    <string name="facebook_client_token">YOUR_CLIENT_ACCESS_TOKEN</string>
+    <string name="facebook_app_id">"1288661505539814"</string>
+    <string name="facebook_client_token">"255a5d196783256461496c99551ab7ff"</string>
 </resources>

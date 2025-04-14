@@ -19,14 +19,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return BlocBuilder<LocalisationBloc, LocalisationState>(
-    builder: (final BuildContext context, final LocalisationState state) {
+        builder: (final BuildContext context, final LocalisationState state) {
       return MaterialApp(
         debugShowCheckedModeBanner: FlavorConfig.isStaging ? true : false,
         title: FlavorConfig.title,
         navigatorKey: navigatorKey,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: AppColors.colorPrimary500),
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: AppColors.colorPrimary500),
           useMaterial3: true,
         ),
         initialRoute: _getInitialRoute(),
@@ -36,10 +36,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        locale: context
-            .watch<LocalisationBloc>()
-            .state
-            .language,
+        locale: context.watch<LocalisationBloc>().state.language,
         supportedLocales: <Locale>[
           Locale(SupportedLangCode.english.langCode,
               SupportedLangCode.english.countryCode),
@@ -50,8 +47,7 @@ class MyApp extends StatelessWidget {
           // Arabic (Saudi Arabia) or use 'ar_EG' for Egypt
         ],
         localeResolutionCallback:
-            (final Locale? locale,
-            final Iterable<Locale> supportedLocales) {
+            (final Locale? locale, final Iterable<Locale> supportedLocales) {
           for (Locale supportedLocale in supportedLocales) {
             if (supportedLocale.languageCode == locale?.languageCode) {
               return supportedLocale;
@@ -65,7 +61,7 @@ class MyApp extends StatelessWidget {
 
   String _getInitialRoute() {
     FirebaseMessaging.instance.getInitialMessage().then(
-          (final RemoteMessage? remoteMessage) {
+      (final RemoteMessage? remoteMessage) {
         if (remoteMessage != null) {
           NotificationService.handleNotificationRedirection(
               payload: remoteMessage.data);

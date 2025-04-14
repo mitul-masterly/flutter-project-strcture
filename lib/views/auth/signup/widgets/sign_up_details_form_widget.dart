@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project_structure/Routes/routes_name.dart';
 import 'package:flutter_project_structure/Utils/app_strings.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
 import 'package:flutter_project_structure/bloc/auth/sign_up_details/sign_up_details_bloc.dart';
@@ -53,6 +54,7 @@ class SignUpDetailsFormWidget extends StatelessWidget with Validator {
           ),
           20.height,
           CommonDropdownWidget(
+            key: Key('security_question_field'),
             placeholder: 'Please Select Question',
             listData: state.questionList,
             title: 'Security Question'.tr(context),
@@ -66,9 +68,9 @@ class SignUpDetailsFormWidget extends StatelessWidget with Validator {
           AppTextField(
             key: Key('security_answer_field'),
             type: TextFieldTypes.text,
-            title: 'signupRequest',
+            title: 'Security Answer',
             initialValue: state.securityAnswer,
-            strHeaderTitle: '${'signupRequest'.tr(buildContext)}',
+            strHeaderTitle: '${'Security Answer'.tr(buildContext)}',
             textInputAction: TextInputAction.done,
             focusNode: bloc.answerFocus,
             onChange: (final String value) {
@@ -79,32 +81,46 @@ class SignUpDetailsFormWidget extends StatelessWidget with Validator {
           Row(
             children: <Widget>[
               Checkbox(
-                  tristate: state.checkPrivacyPolicy,
+                  key: Key('privacy_policy_field'),
                   value: state.checkPrivacyPolicy,
                   onChanged: (final bool? newValue) {
-                    bloc.add(OnCheckPrivacyPolicy());
+                    bloc.add(OnCheckPrivacyPolicy(
+                        checkPrivacyPolicy: newValue ?? false));
                   }),
-              CommonRichTextWidget(
-                strHeaderTitle: AppStrings.iReadAndAgreeTo,
-                isRequired: false,
-                strSubTitle: 'privacy policy',
-                fontSize: 13,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, RouteName.privacyPolicyScreen,
+                      arguments: <String, CMSPage>{'policy': CMSPage.terms});
+                },
+                child: CommonRichTextWidget(
+                  strHeaderTitle: AppStrings.iReadAndAgreeTo,
+                  isRequired: false,
+                  strSubTitle: 'privacy policy',
+                  fontSize: 13,
+                ),
               ),
             ],
           ),
           Row(
             children: <Widget>[
               Checkbox(
-                  tristate: state.checkPrivacyPolicy,
+                  key: Key('terms_conditions_field'),
+                  tristate: state.checkTermsAndCondition,
                   value: state.checkTermsAndCondition,
                   onChanged: (final bool? newValue) {
                     bloc.add(OnCheckTermsAndCondition());
                   }),
-              CommonRichTextWidget(
-                strHeaderTitle: AppStrings.iReadAndAgreeTo,
-                isRequired: false,
-                strSubTitle: 'terms and conditions',
-                fontSize: 13,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, RouteName.privacyPolicyScreen,
+                      arguments: <String, CMSPage>{'policy': CMSPage.terms});
+                },
+                child: CommonRichTextWidget(
+                  strHeaderTitle: AppStrings.iReadAndAgreeTo,
+                  isRequired: false,
+                  strSubTitle: 'terms and conditions',
+                  fontSize: 13,
+                ),
               ),
             ],
           ),

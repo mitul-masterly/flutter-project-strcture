@@ -6,13 +6,16 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'History Screen',
-          style: dMSansW500,
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Text(
+            'History Screen',
+            style: dMSansW500,
+          ),
         ),
       ),
     );
   }
 }
+//https://masterlysolutions.com/terms-and-conditions/

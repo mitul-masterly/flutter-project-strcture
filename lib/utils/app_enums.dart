@@ -18,7 +18,9 @@ enum AppMessages {
   invalidMobile('Invalid Mobile Number'),
   registrationSuccess('User registered successfully.'),
   networkError(
-      'No internet connection. Please check your internet connection.');
+      'No internet connection. Please check your internet connection.'),
+  securityQuestionRequired('Security Question required.'),
+  securityAnswerRequired('Security Answer required.');
 
   const AppMessages(this.message);
 
@@ -44,6 +46,18 @@ enum CommonScreenState {
   error,
 }
 
-enum SocialMediaLoginState { initial, google, facebook, apple, success }
+enum SocialMediaLoginState { initial, google, facebook, apple, success, error }
 
 enum Flavor { staging, prod }
+
+enum CMSPage {
+  terms('Terms and Conditions',
+      'https://masterlysolutions.com/terms-and-conditions/'),
+  policy(
+      'Privacy Policy', 'https://masterlysolutions.com/terms-and-conditions/');
+
+  const CMSPage(this.title, this.url);
+
+  final String title;
+  final String url;
+}
