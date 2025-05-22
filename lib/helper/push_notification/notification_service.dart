@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
-import 'package:flutter_project_structure/utils/constants.dart';
+import 'package:flutter_project_structure/utils/flavors.dart';
 
 /// Top-level background message handler for Firebase Messaging
 @pragma('vm:entry-point')
@@ -90,7 +90,7 @@ class NotificationService {
 
     // Initialization settings
     const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@drawable/ic_notification');
     const DarwinInitializationSettings iOSSettings =
         DarwinInitializationSettings(
       requestSoundPermission: true,
@@ -141,7 +141,7 @@ class NotificationService {
     if (message?.notification != null) {
       await flutterLocalNotificationsPlugin.show(
         message!.notification!.hashCode,
-        message.notification?.title ?? AppConstants.appName,
+        message.notification?.title ?? FlavorConfig.title,
         message.notification?.body,
         payload: jsonEncode(message.data),
         NotificationDetails(
@@ -149,7 +149,7 @@ class NotificationService {
             androidChannel.id,
             androidChannel.name,
             channelDescription: androidChannel.description,
-            icon: '@mipmap/ic_launcher',
+            icon: '@drawable/ic_notification',
           ),
           iOS: const DarwinNotificationDetails(
               presentAlert: true, presentSound: true),

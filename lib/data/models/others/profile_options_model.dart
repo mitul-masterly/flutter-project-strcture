@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
 
 class ProfileOptionsModel {
-  SvgPicture icon;
-  String title;
+  Icon icon;
+  ProfileOption option;
   Function(BuildContext)? onTap;
 
   ProfileOptionsModel({
     required this.icon,
-    required this.title,
+    required this.option,
     required this.onTap,
   });
 }

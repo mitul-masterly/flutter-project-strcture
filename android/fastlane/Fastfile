@@ -1,0 +1,22 @@
+default_platform(:android)
+
+platform :android do
+  desc "Upload Production build to Play Store"
+  lane :upload_prod do
+    upload_to_play_store(
+      track: "production",
+      json_key: "./google_play_key.json",
+      aab: "./build/app/outputs/bundle/prodRelease/app-prod-release.aab"
+    )
+  end
+
+  desc "Upload Staging build to Play Store"
+  lane :upload_staging do
+    upload_to_play_store(
+      track: "beta", # or internal for testing
+      json_key: "./google_play_key.json",
+      aab: "./build/app/outputs/bundle/stagingRelease/app-staging-release.aab"
+      package_name: "com.masterly.flutterbasecodestg"
+    )
+  end
+end

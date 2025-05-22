@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_structure/Utils/utils.dart';
 import 'package:flutter_project_structure/bloc/user/profile_bloc.dart';
 import 'package:flutter_project_structure/gen/assets.gen.dart';
+import 'package:flutter_project_structure/helper/extension/string_ext.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/theme/font_styles.dart';
 import 'package:flutter_project_structure/views/profile/widget/profile_image_widget.dart';
@@ -18,17 +19,19 @@ class ProfileHeaderWidget extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: ProfileImageWidget(
-              imageUrl: state.userData?.userProfileImageUrl ?? '',
+              imageUrl: state.selectedImage ??
+                  state.userData?.userProfileImageUrl ??
+                  '',
               canEdit: true,
               onTapCamera: () {
-                // Redirect to edit profile
+                context.read<ProfileBloc>().add(OnTapEditProfilePhoto());
               },
             ),
           ),
           7.height,
           Text(
-            state.userData?.fullName ?? '',
-            style: rubikW700.copyWith(fontSize: 25),
+            (state.userData?.fullName ?? '').capitalize(),
+            style: dMSansW700.copyWith(fontSize: 25, color: AppColors.white),
           ),
           7.height,
           Row(
@@ -36,14 +39,14 @@ class ProfileHeaderWidget extends StatelessWidget {
             children: <Widget>[
               Assets.svg.icEmail.svg(
                   colorFilter: ColorFilter.mode(
-                AppColors.color003366,
+                AppColors.white,
                 BlendMode.srcIn,
               )),
               7.width,
               Text(
                 state.userData?.emailId ?? '',
-                style: rubikW400.copyWith(
-                    fontSize: 14, color: AppColors.color003366),
+                style:
+                    dMSansW400.copyWith(fontSize: 14, color: AppColors.white),
               ),
             ],
           )

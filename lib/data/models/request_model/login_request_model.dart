@@ -1,4 +1,6 @@
-class LoginRequestModel {
+import 'package:equatable/equatable.dart';
+
+class LoginRequestModel extends Equatable {
   String? emailId;
   String? userPassword;
   String? appVersion;
@@ -16,6 +18,17 @@ class LoginRequestModel {
     required this.deviceId,
     required this.deviceName,
   });
+
+  LoginRequestModel.empty()
+      : this(
+          emailId: '_empty.emailId',
+          userPassword: '_empty.userPassword',
+          appVersion: '_empty.appVersion',
+          deviceToken: '_empty.deviceToken',
+          deviceType: '_empty.deviceType',
+          deviceId: '_empty.deviceId',
+          deviceName: '_empty.deviceName',
+        );
 
   LoginRequestModel.fromJson(final Map<String, dynamic> json) {
     emailId = json['emailId'];
@@ -43,4 +56,8 @@ class LoginRequestModel {
   String toString() {
     return toJson().toString();
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [emailId];
 }

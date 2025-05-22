@@ -4,6 +4,7 @@ import 'package:flutter_project_structure/data/models/others/profile_options_mod
 import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/theme/font_styles.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
 
 class ProfileCell extends StatelessWidget {
   final ProfileOptionsModel item;
@@ -24,10 +25,10 @@ class ProfileCell extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
             boxShadow: [
               BoxShadow(
-                  color: AppColors.black.withValues(alpha: 0.25),
+                  color: Colors.grey.withValues(alpha: 0.2),
                   blurRadius: 4,
                   offset: Offset(0, 0),
-                  spreadRadius: 0)
+                  spreadRadius: 2)
             ]),
         child: Row(
           children: <Widget>[
@@ -35,13 +36,18 @@ class ProfileCell extends StatelessWidget {
             20.width,
             Expanded(
               child: Text(
-                item.title.tr(context),
-                style: rubikW400.copyWith(fontSize: 14),
+                item.option.title.tr(context),
+                style: dMSansW500.copyWith(
+                  fontSize: 16,
+                  color: item.option == ProfileOption.logout
+                      ? AppColors.colorError500
+                      : AppColors.color4478D1,
+                ),
               ),
             ),
             10.width,
             Icon(Icons.arrow_forward_ios,
-                size: 16, color: AppColors.color808080)
+                size: 16, color: AppColors.baseColorWhite85)
           ],
         ),
       ),

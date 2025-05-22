@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_project_structure/Routes/routes_name.dart';
 import 'package:flutter_project_structure/bloc/my_app/localisation_bloc.dart';
+import 'package:flutter_project_structure/helper/pref_helper/shared_pref_helper.dart';
 import 'package:flutter_project_structure/helper/push_notification/notification_service.dart';
 import 'package:flutter_project_structure/routes/app_routes.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
 import 'package:flutter_project_structure/utils/app_enums.dart';
+import 'package:flutter_project_structure/utils/flavors.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -19,10 +21,12 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<LocalisationBloc, LocalisationState>(
         builder: (final BuildContext context, final LocalisationState state) {
       return MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: FlavorConfig.isStaging ? true : false,
+        title: FlavorConfig.title,
         navigatorKey: navigatorKey,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.color003366),
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: AppColors.colorPrimary500),
           useMaterial3: true,
         ),
         initialRoute: _getInitialRoute(),
@@ -38,6 +42,8 @@ class MyApp extends StatelessWidget {
               SupportedLangCode.english.countryCode),
           Locale(SupportedLangCode.arabic.langCode,
               SupportedLangCode.arabic.countryCode),
+          Locale(SupportedLangCode.gujarati.langCode,
+              SupportedLangCode.gujarati.countryCode),
           // Arabic (Saudi Arabia) or use 'ar_EG' for Egypt
         ],
         localeResolutionCallback:
@@ -62,6 +68,11 @@ class MyApp extends StatelessWidget {
         }
       },
     );
-    return RouteName.splashScreen;
+
+    if (SharedPreferenceHelper().isLoggedIn) {
+      return RouteName.tabNavigationView;
+    } else {
+      return RouteName.loginScreen;
+    }
   }
 }

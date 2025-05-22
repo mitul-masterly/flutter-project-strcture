@@ -28,7 +28,8 @@ List<BlocProvider<StateStreamableSource<Object?>>> getAppProviders() {
       ),
     ),
     BlocProvider(
-      create: (final BuildContext context) => ForgotPasswordBloc(),
+      create: (final BuildContext context) =>
+          ForgotPasswordBloc(authRepo: context.read<AuthRepo>()),
     ),
   ];
 }

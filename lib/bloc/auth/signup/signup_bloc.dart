@@ -1,10 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_project_structure/data/models/request_model/signup_request_model.dart';
-import 'package:flutter_project_structure/data/models/response_model/device_info_model.dart';
 import 'package:flutter_project_structure/data/repository/auth_repo.dart';
-import 'package:flutter_project_structure/utils/utils.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl_phone_field/countries.dart';
 
@@ -20,51 +17,51 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final FocusNode lNameFocus = FocusNode();
   final FocusNode emailFocus = FocusNode();
   final FocusNode mobileFocus = FocusNode();
-  final FocusNode passwordFocus = FocusNode();
-  final FocusNode cPasswordFocus = FocusNode();
+  final FocusNode addressFocus = FocusNode();
+
+  final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
 
   SignUpBloc({required this.authRepo}) : super(SignUpState.initial()) {
-    on<OnTapSubmit>(
-        (final OnTapSubmit event, final Emitter<SignUpState> emit) async {
-      if (event.formKey.currentState!.validate()) {
-        await callSignUpApi(emit);
-      }
-    });
-
     on<OnChangeCountry>(
         (final OnChangeCountry event, final Emitter<SignUpState> emit) {
-      emit(state.copyWith(
-          countryCode: event.selectedCountry.dialCode,
-          countryCodeISO2: event.selectedCountry.code));
+      emit(state.copyWith(countryCode: event.selectedCountry.dialCode));
+      emit(state.copyWith(countryISOCode: event.selectedCountry.code));
     });
-  }
 
-  Future<void> callSignUpApi(final Emitter<SignUpState> emit) async {
-    emit(state.copyWith(isSubmitting: true));
-    final DeviceInfoModel deviceData = await Utils.getDeviceInfo();
+    on<OnChangeFirstName>(
+        (final OnChangeFirstName event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(firstName: event.fName));
+    });
+    on<OnChangeLastName>(
+        (final OnChangeLastName event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(lastName: event.lName));
+    });
+    on<OnChangeEmail>(
+        (final OnChangeEmail event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(email: event.email));
+    });
 
-    try {
-      final SignupRequest request = SignupRequest(
-          firstName: state.txtFirstName.text,
-          lastName: state.txtLastName.text,
-          emailId: state.txtEmail.text,
-          contactNo: state.txtMobileNumber.text,
-          isdCode: state.countryCode,
-          userPassword: state.txtPassword.text,
-          countryCodeISO2: state.countryCodeISO2,
-          CreatedByDeviceName: deviceData.userDeviceName,
-          CreatedByDeviceTypeId: deviceData.deviceTypeID);
-
-      final int? statusCode = await authRepo.apiSignUp(requestParams: request);
-      if (statusCode == 200) {
-        emit(state.copyWith(isSubmitting: false, isSuccess: true));
-      } else {
-        emit(state.copyWith(isSubmitting: false, isSuccess: false));
-      }
-    } catch (e) {
-      final DioException error = e as DioException;
+    on<OnChangeMobileNumber>(
+        (final OnChangeMobileNumber event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(mobileNumber: event.mobileNumber));
+    });
+    on<OnChangeAddress>(
+        (final OnChangeAddress event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(address: event.address));
+    });
+    on<OnSelectBirthDate>(
+        (final OnSelectBirthDate event, final Emitter<SignUpState> emit) {
       emit(state.copyWith(
-          isSubmitting: false, errorMessage: error.message, isSuccess: false));
-    }
+        birthDate: event.birthDate,
+      ));
+    });
+    on<OnSelectGender>(
+        (final OnSelectGender event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(genderId: event.genderId));
+    });
+    on<OnSelectCountry>(
+        (final OnSelectCountry event, final Emitter<SignUpState> emit) {
+      emit(state.copyWith(countryId: event.countryId));
+    });
   }
 }

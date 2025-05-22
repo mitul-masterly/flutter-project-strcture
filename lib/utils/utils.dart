@@ -3,9 +3,15 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_structure/components/permission_dialog.dart';
 import 'package:flutter_project_structure/data/models/response_model/device_info_model.dart';
+import 'package:flutter_project_structure/helper/extension/localization_extension.dart';
 import 'package:flutter_project_structure/theme/app_colors.dart';
+import 'package:flutter_project_structure/utils/app_enums.dart';
+import 'package:flutter_project_structure/utils/constants.dart';
+import 'package:image_pickers/image_pickers.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Utils {
   static OutlineInputBorder inputBorder(final color) {
@@ -16,7 +22,7 @@ class Utils {
   }
 
   static BoxDecoration borderBox(
-      final dynamic color, final Color? borderColor, final double? radius) {
+      {final Color? color, final Color? borderColor, final double? radius}) {
     return BoxDecoration(
       color: color,
       border: Border.all(color: borderColor ?? AppColors.white),
@@ -40,10 +46,10 @@ class Utils {
         child: Platform.isIOS
             ? CupertinoActivityIndicator(
                 radius: 16.0,
-                color: AppColors.color003366,
+                color: AppColors.colorPrimary500,
               )
             : CircularProgressIndicator(
-                color: AppColors.color003366,
+                color: AppColors.colorPrimary500,
               ),
       );
 
@@ -73,6 +79,91 @@ class Utils {
     }
 
     return DeviceInfoModel.fromJson(allInfo);
+  }
+
+  static String formatDate(final DateTime date, final String format) {
+    if (date != DateTime.parse('0001-01-01T00:00:00')) {
+      final String newDate = DateFormat(format).format(date);
+      return newDate;
+    } else {
+      return '';
+    }
+  }
+
+  static Future<PermissionStatus> checkPhotosPermission(
+      final BuildContext context) async {
+    late PermissionStatus status;
+    late Permission permissionType;
+    if (Platform.isAndroid) {
+      final AndroidDeviceInfo androidInfo =
+          await DeviceInfoPlugin().androidInfo;
+      if (androidInfo.version.sdkInt <= 32) {
+        permissionType = Permission.storage;
+      } else {
+        permissionType = Permission.photos;
+      }
+    } else {
+      permissionType = Permission.photos;
+    }
+    status = await permissionType.status;
+
+    debugPrint('Photo Status $status');
+    if (status.isDenied) {
+      status = await permissionType.request();
+      debugPrint('New Photo Status $status');
+    } else if (status.isPermanentlyDenied) {
+      showDialog(
+        context: context,
+        builder: (final BuildContext context) => PermissionDialog(
+            message:
+                '${AppConstants.appName} ${'does not have access to your photos. To enable access, tap Settings and turn on Photos.'.tr(context)}'),
+      );
+    }
+
+    return status;
+  }
+
+  static Future<PermissionStatus> checkCameraPermission(
+      final BuildContext context) async {
+    PermissionStatus status = await Permission.camera.status;
+
+    debugPrint('Camera Status $status');
+    if (status.isDenied) {
+      status = await Permission.camera.request();
+      debugPrint('New Camera Status $status');
+    } else if (status.isPermanentlyDenied) {
+      showDialog(
+        context: context,
+        builder: (final BuildContext context) => PermissionDialog(
+            message:
+                '${AppConstants.appName} ${'does not have access to your camera. To enable access, tap Settings and turn on Camera.'.tr(context)}'),
+      );
+    }
+
+    return status;
+  }
+
+  static Future<Media?> pickImage(final PhotoPickerType photoPickerType) async {
+    try {
+      Media? media;
+      if (photoPickerType == PhotoPickerType.camera) {
+        media =
+            await ImagePickers.openCamera(cameraMimeType: CameraMimeType.photo);
+      } else {
+        final List<Media> medias = await ImagePickers.pickerPaths(
+          galleryMode: GalleryMode.image,
+          selectCount: 1,
+          showGif: false,
+        );
+        if (medias.isNotEmpty) {
+          media = medias.first;
+        }
+      }
+      return media;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
   }
 }
 

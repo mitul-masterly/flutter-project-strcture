@@ -26,7 +26,7 @@ void showSuccessSnackBar(final String message) {
     CustomSnackBar.success(
       message: message,
       textAlign: TextAlign.start,
-      textStyle: rubikW600.copyWith(color: Colors.black87),
+      textStyle: dMSansW600.copyWith(color: Colors.black87),
       backgroundColor: Colors.green,
     ),
   );
@@ -39,8 +39,8 @@ void showErrorSnackBar(final String message) {
     CustomSnackBar.error(
       message: message,
       textAlign: TextAlign.start,
-      textStyle: rubikW600.copyWith(color: Colors.black87),
-      backgroundColor: AppColors.colorF92814,
+      textStyle: dMSansW600.copyWith(color: Colors.black87),
+      backgroundColor: AppColors.colorError500,
     ),
   );
 }
@@ -51,7 +51,7 @@ void showInfSnackBar(final String message) {
     CustomSnackBar.success(
       message: message,
       textAlign: TextAlign.start,
-      textStyle: rubikW600.copyWith(color: Colors.black87),
+      textStyle: dMSansW600.copyWith(color: Colors.black87),
       backgroundColor: Colors.blue.shade300,
     ),
   );

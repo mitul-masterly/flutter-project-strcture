@@ -94,11 +94,19 @@ extension StringExt on String? {
     return false;
   }
 
-  String capitalize() {
-    if (this == null) {
+  String capitalizeFirst() {
+    if (this == null || this!.isEmpty) {
       return '';
     }
     return '${this![0].toUpperCase()}${this!.substring(1).toLowerCase()}';
+  }
+
+  String capitalize() {
+    if (this == null || this!.isEmpty) {
+      return '';
+    }
+    final List<String> str = this!.split(' ');
+    return str.map((final String e) => e.capitalizeFirst()).join(' ');
   }
 
   TimeOfDay? stringToTimeOfDay() {

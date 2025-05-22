@@ -1,49 +1,120 @@
 class SignupRequest {
-  String? firstName;
-  String? lastName;
-  String? emailId;
-  String? contactNo;
-  String? isdCode;
-  String? userPassword;
-  String? countryCodeISO2;
-  String? CreatedByDeviceName;
-  String? CreatedByDeviceTypeId;
+  final String? firstName;
+  final String? lastName;
+  final String? emailId;
+  final String? contactNo;
+  final String? isdCode;
+  final String? userPassword;
+  final String? countryCodeISO2;
+  final String? createdByDeviceName;
+  final String? createdByDeviceTypeId;
+  final String? dateOfBirth;
+  final String? gender;
+  final String? county;
+  final String? address;
+  final String? securityQuestion;
+  final String? securityAnswer;
+  bool? termsAndConditions;
+  bool? privacyPolicy;
 
   SignupRequest({
-    required this.firstName,
-    required this.lastName,
-    required this.emailId,
-    required this.contactNo,
-    required this.isdCode,
-    required this.userPassword,
-    required this.countryCodeISO2,
-    required this.CreatedByDeviceName,
-    required this.CreatedByDeviceTypeId,
+    this.firstName,
+    this.lastName,
+    this.emailId,
+    this.contactNo,
+    this.isdCode,
+    this.userPassword,
+    this.countryCodeISO2,
+    this.createdByDeviceName,
+    this.createdByDeviceTypeId,
+    this.dateOfBirth,
+    this.gender,
+    this.county,
+    this.address,
+    this.securityQuestion,
+    this.securityAnswer,
+    this.termsAndConditions,
+    this.privacyPolicy,
   });
 
-  SignupRequest.fromJson(final Map<String, dynamic> json) {
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    emailId = json['emailId'];
-    contactNo = json['contactNo'];
-    isdCode = json['isdCode'];
-    userPassword = json['userPassword'];
-    countryCodeISO2 = json['countryCodeISO2'];
-    CreatedByDeviceName = json['CreatedByDeviceName'];
-    CreatedByDeviceTypeId = json['CreatedByDeviceTypeId'];
-  }
+  SignupRequest copyWith({
+    final String? firstName,
+    final String? lastName,
+    final String? emailId,
+    final String? contactNo,
+    final String? isdCode,
+    final String? userPassword,
+    final String? countryCodeIso2,
+    final String? createdByDeviceName,
+    final String? createdByDeviceTypeId,
+    final String? dateOfBirth,
+    final String? gender,
+    final String? county,
+    final String? address,
+    final String? securityQuestion,
+    final String? securityAnswer,
+    final bool? termsAndConditions,
+    final bool? privacyPolicy,
+  }) =>
+      SignupRequest(
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        emailId: emailId ?? this.emailId,
+        contactNo: contactNo ?? this.contactNo,
+        isdCode: isdCode ?? this.isdCode,
+        userPassword: userPassword ?? this.userPassword,
+        countryCodeISO2: countryCodeIso2 ?? this.countryCodeISO2,
+        createdByDeviceName: createdByDeviceName ?? this.createdByDeviceName,
+        createdByDeviceTypeId:
+            createdByDeviceTypeId ?? this.createdByDeviceTypeId,
+        dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+        gender: gender ?? this.gender,
+        county: county ?? this.county,
+        address: address ?? this.address,
+        securityQuestion: securityQuestion ?? this.securityQuestion,
+        securityAnswer: securityAnswer ?? this.securityAnswer,
+        termsAndConditions: termsAndConditions ?? this.termsAndConditions,
+        privacyPolicy: privacyPolicy ?? this.privacyPolicy,
+      );
 
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'firstName': firstName,
-      'lastName': lastName,
-      'emailId': emailId,
-      'contactNo': contactNo,
-      'isdCode': isdCode,
-      'userPassword': userPassword,
-      'countryCodeISO2': countryCodeISO2,
-      'CreatedByDeviceName': CreatedByDeviceName,
-      'CreatedByDeviceTypeId': CreatedByDeviceTypeId,
-    };
-  }
+  factory SignupRequest.fromJson(final Map<String, dynamic> json) =>
+      SignupRequest(
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        emailId: json["emailId"],
+        contactNo: json["contactNo"],
+        isdCode: json["isdCode"],
+        userPassword: json["userPassword"],
+        countryCodeISO2: json["countryCodeISO2"],
+        createdByDeviceName: json["createdByDeviceName"],
+        createdByDeviceTypeId: json["createdByDeviceTypeId"],
+        dateOfBirth: json["dateOfBirth"],
+        gender: json["gender"],
+        county: json["county"],
+        address: json["address"],
+        securityQuestion: json["securityQuestion"],
+        securityAnswer: json["securityAnswer"],
+        termsAndConditions: json["termsAndConditions"],
+        privacyPolicy: json["privacyPolicy"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "firstName": firstName,
+        "lastName": lastName,
+        "emailId": emailId,
+        "contactNo": contactNo,
+        "isdCode": isdCode,
+        "userPassword": userPassword,
+        "countryCodeISO2": countryCodeISO2,
+        "createdByDeviceName": createdByDeviceName,
+        "createdByDeviceTypeId": createdByDeviceTypeId,
+        "dateOfBirth": dateOfBirth,
+        "gender": gender,
+        "county": county,
+        "address": address,
+        'securityQuestion': securityQuestion,
+        'securityAnswer': securityAnswer,
+        "termsAndConditions": termsAndConditions,
+        "privacyPolicy": privacyPolicy,
+      };
 }

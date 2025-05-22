@@ -1,3 +1,5 @@
+
+
 class AppStrings {
   static const String login = 'Login';
   static const String email = 'Email';
@@ -7,6 +9,11 @@ class AppStrings {
   static const String lastName = 'Last Name';
   static const String enterTxt = 'Enter your';
   static const String submit = 'Submit';
-  static const String isRequired = 'is Required';
   static const String mobileNumber = 'Mobile Number';
+  static const String globalErrorMessage = 'Something Went Wrong..!';
+  static const String next = 'Next';
+  static const String emailAddress = 'Email Address';
+  static const String address = 'Address';
+  static const String iReadAndAgreeTo  = 'I read and agree to ';
+
 }

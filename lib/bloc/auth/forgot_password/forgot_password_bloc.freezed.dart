@@ -37,9 +37,93 @@ class $ForgotPasswordEventCopyWith<$Res> {
 }
 
 /// @nodoc
+
+class OnTapSubmit implements ForgotPasswordEvent {
+  const OnTapSubmit();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is OnTapSubmit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'ForgotPasswordEvent.onTapSubmit()';
+  }
+}
+
+/// @nodoc
+
+class OnChangeEmail implements ForgotPasswordEvent {
+  const OnChangeEmail({required this.email});
+
+  final String email;
+
+  /// Create a copy of ForgotPasswordEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OnChangeEmailCopyWith<OnChangeEmail> get copyWith =>
+      _$OnChangeEmailCopyWithImpl<OnChangeEmail>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OnChangeEmail &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @override
+  String toString() {
+    return 'ForgotPasswordEvent.onChangeEmail(email: $email)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OnChangeEmailCopyWith<$Res>
+    implements $ForgotPasswordEventCopyWith<$Res> {
+  factory $OnChangeEmailCopyWith(
+          OnChangeEmail value, $Res Function(OnChangeEmail) _then) =
+      _$OnChangeEmailCopyWithImpl;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class _$OnChangeEmailCopyWithImpl<$Res>
+    implements $OnChangeEmailCopyWith<$Res> {
+  _$OnChangeEmailCopyWithImpl(this._self, this._then);
+
+  final OnChangeEmail _self;
+  final $Res Function(OnChangeEmail) _then;
+
+  /// Create a copy of ForgotPasswordEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(OnChangeEmail(
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$ForgotPasswordState {
-  bool? get isLoading;
-  TextEditingController get txtEmail;
+  CommonScreenState get status;
+  String? get email;
 
   /// Create a copy of ForgotPasswordState
   /// with the given fields replaced by the non-null parameter values.
@@ -54,18 +138,16 @@ mixin _$ForgotPasswordState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ForgotPasswordState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.txtEmail, txtEmail) ||
-                other.txtEmail == txtEmail));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, txtEmail);
+  int get hashCode => Object.hash(runtimeType, status, email);
 
   @override
   String toString() {
-    return 'ForgotPasswordState(isLoading: $isLoading, txtEmail: $txtEmail)';
+    return 'ForgotPasswordState(status: $status, email: $email)';
   }
 }
 
@@ -75,7 +157,7 @@ abstract mixin class $ForgotPasswordStateCopyWith<$Res> {
           ForgotPasswordState value, $Res Function(ForgotPasswordState) _then) =
       _$ForgotPasswordStateCopyWithImpl;
   @useResult
-  $Res call({bool? isLoading, TextEditingController txtEmail});
+  $Res call({CommonScreenState status, String? email});
 }
 
 /// @nodoc
@@ -91,18 +173,18 @@ class _$ForgotPasswordStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
-    Object? txtEmail = null,
+    Object? status = null,
+    Object? email = freezed,
   }) {
     return _then(_self.copyWith(
-      isLoading: freezed == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      txtEmail: null == txtEmail
-          ? _self.txtEmail
-          : txtEmail // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
+      email: freezed == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -110,12 +192,12 @@ class _$ForgotPasswordStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _ForgotPasswordState implements ForgotPasswordState {
-  const _ForgotPasswordState({this.isLoading, required this.txtEmail});
+  const _ForgotPasswordState({required this.status, this.email});
 
   @override
-  final bool? isLoading;
+  final CommonScreenState status;
   @override
-  final TextEditingController txtEmail;
+  final String? email;
 
   /// Create a copy of ForgotPasswordState
   /// with the given fields replaced by the non-null parameter values.
@@ -131,18 +213,16 @@ class _ForgotPasswordState implements ForgotPasswordState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ForgotPasswordState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.txtEmail, txtEmail) ||
-                other.txtEmail == txtEmail));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, txtEmail);
+  int get hashCode => Object.hash(runtimeType, status, email);
 
   @override
   String toString() {
-    return 'ForgotPasswordState(isLoading: $isLoading, txtEmail: $txtEmail)';
+    return 'ForgotPasswordState(status: $status, email: $email)';
   }
 }
 
@@ -154,7 +234,7 @@ abstract mixin class _$ForgotPasswordStateCopyWith<$Res>
       __$ForgotPasswordStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool? isLoading, TextEditingController txtEmail});
+  $Res call({CommonScreenState status, String? email});
 }
 
 /// @nodoc
@@ -170,18 +250,18 @@ class __$ForgotPasswordStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = freezed,
-    Object? txtEmail = null,
+    Object? status = null,
+    Object? email = freezed,
   }) {
     return _then(_ForgotPasswordState(
-      isLoading: freezed == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      txtEmail: null == txtEmail
-          ? _self.txtEmail
-          : txtEmail // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
+      email: freezed == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

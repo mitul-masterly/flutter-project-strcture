@@ -78,72 +78,117 @@ class OnTapLogout implements ProfileEvent {
 /// @nodoc
 
 class CallLogoutApi implements ProfileEvent {
-  const CallLogoutApi({required this.context});
+  const CallLogoutApi();
 
-  final BuildContext context;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is CallLogoutApi);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.callLogoutApi()';
+  }
+}
+
+/// @nodoc
+
+class OnTapEditProfilePhoto implements ProfileEvent {
+  const OnTapEditProfilePhoto();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is OnTapEditProfilePhoto);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.onTapEditProfilePhoto()';
+  }
+}
+
+/// @nodoc
+
+class OnSelectProfilePhoto implements ProfileEvent {
+  const OnSelectProfilePhoto({required this.imagePath});
+
+  final String imagePath;
 
   /// Create a copy of ProfileEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $CallLogoutApiCopyWith<CallLogoutApi> get copyWith =>
-      _$CallLogoutApiCopyWithImpl<CallLogoutApi>(this, _$identity);
+  $OnSelectProfilePhotoCopyWith<OnSelectProfilePhoto> get copyWith =>
+      _$OnSelectProfilePhotoCopyWithImpl<OnSelectProfilePhoto>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is CallLogoutApi &&
-            (identical(other.context, context) || other.context == context));
+            other is OnSelectProfilePhoto &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, context);
+  int get hashCode => Object.hash(runtimeType, imagePath);
 
   @override
   String toString() {
-    return 'ProfileEvent.callLogoutApi(context: $context)';
+    return 'ProfileEvent.onSelectProfilePhoto(imagePath: $imagePath)';
   }
 }
 
 /// @nodoc
-abstract mixin class $CallLogoutApiCopyWith<$Res>
+abstract mixin class $OnSelectProfilePhotoCopyWith<$Res>
     implements $ProfileEventCopyWith<$Res> {
-  factory $CallLogoutApiCopyWith(
-          CallLogoutApi value, $Res Function(CallLogoutApi) _then) =
-      _$CallLogoutApiCopyWithImpl;
+  factory $OnSelectProfilePhotoCopyWith(OnSelectProfilePhoto value,
+          $Res Function(OnSelectProfilePhoto) _then) =
+      _$OnSelectProfilePhotoCopyWithImpl;
   @useResult
-  $Res call({BuildContext context});
+  $Res call({String imagePath});
 }
 
 /// @nodoc
-class _$CallLogoutApiCopyWithImpl<$Res>
-    implements $CallLogoutApiCopyWith<$Res> {
-  _$CallLogoutApiCopyWithImpl(this._self, this._then);
+class _$OnSelectProfilePhotoCopyWithImpl<$Res>
+    implements $OnSelectProfilePhotoCopyWith<$Res> {
+  _$OnSelectProfilePhotoCopyWithImpl(this._self, this._then);
 
-  final CallLogoutApi _self;
-  final $Res Function(CallLogoutApi) _then;
+  final OnSelectProfilePhoto _self;
+  final $Res Function(OnSelectProfilePhoto) _then;
 
   /// Create a copy of ProfileEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? context = null,
+    Object? imagePath = null,
   }) {
-    return _then(CallLogoutApi(
-      context: null == context
-          ? _self.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
+    return _then(OnSelectProfilePhoto(
+      imagePath: null == imagePath
+          ? _self.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 mixin _$ProfileState {
-  bool get isLoading;
+  CommonScreenState get status;
   bool get showLogoutSheet;
+  bool get showProfilePhotoEditSheet;
   UserDataModel? get userData;
+  bool? get navigateToLogin;
+  String? get selectedImage;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -158,21 +203,27 @@ mixin _$ProfileState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ProfileState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.showLogoutSheet, showLogoutSheet) ||
                 other.showLogoutSheet == showLogoutSheet) &&
+            (identical(other.showProfilePhotoEditSheet,
+                    showProfilePhotoEditSheet) ||
+                other.showProfilePhotoEditSheet == showProfilePhotoEditSheet) &&
             (identical(other.userData, userData) ||
-                other.userData == userData));
+                other.userData == userData) &&
+            (identical(other.navigateToLogin, navigateToLogin) ||
+                other.navigateToLogin == navigateToLogin) &&
+            (identical(other.selectedImage, selectedImage) ||
+                other.selectedImage == selectedImage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, showLogoutSheet, userData);
+  int get hashCode => Object.hash(runtimeType, status, showLogoutSheet,
+      showProfilePhotoEditSheet, userData, navigateToLogin, selectedImage);
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, showLogoutSheet: $showLogoutSheet, userData: $userData)';
+    return 'ProfileState(status: $status, showLogoutSheet: $showLogoutSheet, showProfilePhotoEditSheet: $showProfilePhotoEditSheet, userData: $userData, navigateToLogin: $navigateToLogin, selectedImage: $selectedImage)';
   }
 }
 
@@ -182,7 +233,13 @@ abstract mixin class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) _then) =
       _$ProfileStateCopyWithImpl;
   @useResult
-  $Res call({bool isLoading, bool showLogoutSheet, UserDataModel? userData});
+  $Res call(
+      {CommonScreenState status,
+      bool showLogoutSheet,
+      bool showProfilePhotoEditSheet,
+      UserDataModel? userData,
+      bool? navigateToLogin,
+      String? selectedImage});
 }
 
 /// @nodoc
@@ -197,23 +254,38 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
+    Object? status = null,
     Object? showLogoutSheet = null,
+    Object? showProfilePhotoEditSheet = null,
     Object? userData = freezed,
+    Object? navigateToLogin = freezed,
+    Object? selectedImage = freezed,
   }) {
     return _then(_self.copyWith(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
       showLogoutSheet: null == showLogoutSheet
           ? _self.showLogoutSheet
           : showLogoutSheet // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showProfilePhotoEditSheet: null == showProfilePhotoEditSheet
+          ? _self.showProfilePhotoEditSheet
+          : showProfilePhotoEditSheet // ignore: cast_nullable_to_non_nullable
               as bool,
       userData: freezed == userData
           ? _self.userData
           : userData // ignore: cast_nullable_to_non_nullable
               as UserDataModel?,
+      navigateToLogin: freezed == navigateToLogin
+          ? _self.navigateToLogin
+          : navigateToLogin // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      selectedImage: freezed == selectedImage
+          ? _self.selectedImage
+          : selectedImage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -222,14 +294,25 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
 
 class _ProfileState implements ProfileState {
   _ProfileState(
-      {required this.isLoading, required this.showLogoutSheet, this.userData});
+      {required this.status,
+      required this.showLogoutSheet,
+      required this.showProfilePhotoEditSheet,
+      this.userData,
+      this.navigateToLogin,
+      this.selectedImage});
 
   @override
-  final bool isLoading;
+  final CommonScreenState status;
   @override
   final bool showLogoutSheet;
   @override
+  final bool showProfilePhotoEditSheet;
+  @override
   final UserDataModel? userData;
+  @override
+  final bool? navigateToLogin;
+  @override
+  final String? selectedImage;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -244,21 +327,27 @@ class _ProfileState implements ProfileState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ProfileState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.showLogoutSheet, showLogoutSheet) ||
                 other.showLogoutSheet == showLogoutSheet) &&
+            (identical(other.showProfilePhotoEditSheet,
+                    showProfilePhotoEditSheet) ||
+                other.showProfilePhotoEditSheet == showProfilePhotoEditSheet) &&
             (identical(other.userData, userData) ||
-                other.userData == userData));
+                other.userData == userData) &&
+            (identical(other.navigateToLogin, navigateToLogin) ||
+                other.navigateToLogin == navigateToLogin) &&
+            (identical(other.selectedImage, selectedImage) ||
+                other.selectedImage == selectedImage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, showLogoutSheet, userData);
+  int get hashCode => Object.hash(runtimeType, status, showLogoutSheet,
+      showProfilePhotoEditSheet, userData, navigateToLogin, selectedImage);
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, showLogoutSheet: $showLogoutSheet, userData: $userData)';
+    return 'ProfileState(status: $status, showLogoutSheet: $showLogoutSheet, showProfilePhotoEditSheet: $showProfilePhotoEditSheet, userData: $userData, navigateToLogin: $navigateToLogin, selectedImage: $selectedImage)';
   }
 }
 
@@ -270,7 +359,13 @@ abstract mixin class _$ProfileStateCopyWith<$Res>
       __$ProfileStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool isLoading, bool showLogoutSheet, UserDataModel? userData});
+  $Res call(
+      {CommonScreenState status,
+      bool showLogoutSheet,
+      bool showProfilePhotoEditSheet,
+      UserDataModel? userData,
+      bool? navigateToLogin,
+      String? selectedImage});
 }
 
 /// @nodoc
@@ -286,23 +381,38 @@ class __$ProfileStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = null,
+    Object? status = null,
     Object? showLogoutSheet = null,
+    Object? showProfilePhotoEditSheet = null,
     Object? userData = freezed,
+    Object? navigateToLogin = freezed,
+    Object? selectedImage = freezed,
   }) {
     return _then(_ProfileState(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CommonScreenState,
       showLogoutSheet: null == showLogoutSheet
           ? _self.showLogoutSheet
           : showLogoutSheet // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showProfilePhotoEditSheet: null == showProfilePhotoEditSheet
+          ? _self.showProfilePhotoEditSheet
+          : showProfilePhotoEditSheet // ignore: cast_nullable_to_non_nullable
               as bool,
       userData: freezed == userData
           ? _self.userData
           : userData // ignore: cast_nullable_to_non_nullable
               as UserDataModel?,
+      navigateToLogin: freezed == navigateToLogin
+          ? _self.navigateToLogin
+          : navigateToLogin // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      selectedImage: freezed == selectedImage
+          ? _self.selectedImage
+          : selectedImage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
